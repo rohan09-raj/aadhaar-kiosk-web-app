@@ -4,8 +4,8 @@ import styles from './Header.module.css'
 const Header = ({ subheading }) => {
   return (
     <header className={styles.header}>
-      <h1>AADHAAR</h1>
-      <h3>{subheading}</h3>
+      <h1 className={styles.header__heading}>AADHAAR</h1>
+      <h3 className={styles.header__subheading}>{subheading}</h3>
     </header>
   )
 }
