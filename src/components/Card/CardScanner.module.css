@@ -1,0 +1,26 @@
+@import '../../styles/GlobalVariables.css';
+
+.card {
+  height: 300px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid var(--color-black);
+  border-radius: 10px;
+  margin: 30px;
+  transition: 0.2s all;
+  cursor: pointer;
+  color: var(--color-black);
+  text-decoration-line: none;
+}
+
+.card:active {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px var(--color-shadow);
+}
+
+.card__title {
+  margin: 15px 0px;
+}
