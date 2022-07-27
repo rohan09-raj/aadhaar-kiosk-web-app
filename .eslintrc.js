@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    'indent': 'off'
   }
 }
