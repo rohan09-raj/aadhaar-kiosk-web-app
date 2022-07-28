@@ -1,4 +1,6 @@
 import React from 'react'
+import Input from '../../../components/Input/Input'
+import LabelCard from '../../../components/LabelCard/LabelCard'
 import styles from './FormOne.module.css'
 
 const FormOne = () => {
@@ -27,20 +29,41 @@ const FormOne = () => {
         </span>
       </div>
 
-      <div className={styles.formone__fullname}>
-        <label htmlFor="fullName">Full Name</label>
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          value="Full Name"
-          required
+      <Input type="text" id="fullName" label="Full Name" value="Full Name" />
+
+      <div className={styles.formone__gender}>
+        <LabelCard
+          id="male"
+          name="gender"
+          title="Male"
+          image={`${process.env.PUBLIC_URL}/assets/images/male.svg`}
+        />
+        <LabelCard
+          id="female"
+          name="gender"
+          value="female"
+          title="Female"
+          image={`${process.env.PUBLIC_URL}/assets/images/female.svg`}
+        />
+        <LabelCard
+          id="trans"
+          name="gender"
+          value="trans"
+          title="Transgender"
+          image={`${process.env.PUBLIC_URL}/assets/images/trans.svg`}
         />
       </div>
 
       <div className={styles.formone__dob}>
         <label htmlFor="dob">Date of Birth</label>
-        <input type="date" id="dob" name="dob" value="Date of Birth" required />
+        <input
+          className={styles.formone__dob_input}
+          type="date"
+          id="dob"
+          name="dob"
+          value="Date of Birth"
+          required
+        />
       </div>
     </div>
   )

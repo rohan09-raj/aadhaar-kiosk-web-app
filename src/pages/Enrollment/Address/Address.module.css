@@ -1,0 +1,8 @@
+.address {
+  display: flex;
+  justify-content: center;
+}
+
+.address__container {
+  margin: 0px 20px;
+}

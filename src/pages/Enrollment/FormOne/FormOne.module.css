@@ -22,12 +22,25 @@
   height: 1.5rem;
 }
 
-.formone__fullname {
+.formone__gender {
+  display: flex;
+}
+
+.formone__dob {
   display: flex;
   flex-direction: column;
 }
 
-#fullName {
-  margin: 10px;
-  padding: 20px 10px;
+.formone__dob input[type='date']::-webkit-calendar-picker-indicator {
+  width: 30px;
+  height: 30px;
+  margin: 0;
+}
+
+.formone__dob_input {
+  width: 300px;
+  margin: 10px 0px;
+  padding: 11px 10px;
+  border: 3px solid;
+  border-radius: 10px;
 }
