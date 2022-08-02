@@ -8,6 +8,10 @@ import PhotoCapture from '../pages/Enrollment/PhotoCapture/PhotoCapture'
 import DocumentScanner from '../pages/Enrollment/DocumentScanner/DocumentScanner'
 import FormTwo from '../pages/Enrollment/FormTwo/FormTwo'
 import Address from '../pages/Enrollment/Address/Address'
+import IrisScan from '../pages/Enrollment/IrisScan/IrisScan'
+import Fingerprint from '../pages/Enrollment/Fingerprint/Fingerprint'
+import Agreement from '../pages/Enrollment/Agreement/Agreement'
+import FinalSlip from '../pages/Enrollment/FinalSlip/FinalSlip'
 
 const Index = () => {
   return (
@@ -26,6 +30,18 @@ const Index = () => {
         </Route>
         <Route path="documents">
           <Route index element={<DocumentScanner />} />
+        </Route>
+        <Route path="irisscan">
+          <Route index element={<IrisScan />} />
+        </Route>
+        <Route path="fingerprint">
+          <Route index element={<Fingerprint />} />
+        </Route>
+        <Route path="agreement">
+          <Route index element={<Agreement />} />
+        </Route>
+        <Route path="finalslip">
+          <Route index element={<FinalSlip />} />
         </Route>
       </Route>
       <Route path="update">
