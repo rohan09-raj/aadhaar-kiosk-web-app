@@ -1,17 +1,44 @@
-import React from 'react'
+/* eslint-disable multiline-ternary */
+import React, { useState } from 'react'
+import Webcam from 'react-webcam'
+import { useNavigate } from 'react-router-dom'
 import Header from '../../../components/Header/Header'
-import CardScanner from '../../../components/Card/CardScanner'
+import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import styles from './PhotoCapture.module.css'
 import { Button, Grid, Typography } from '@mui/material'
 
 const PhotoCapture = () => {
+  const [photo, setPhoto] = useState()
+
+  const navigate = useNavigate()
+
+  const webcamRef = React.useRef(null)
+
+  const capture = React.useCallback(() => {
+    const imageSrc = webcamRef.current.getScreenshot()
+    setPhoto(imageSrc)
+  })
+
   return (
     <>
       <Header subheading="Enrollment" />
       <div className={styles.card__container}>
-        <CardScanner
-          image={`${process.env.PUBLIC_URL}/assets/images/capture.svg`}
-        />
+        {photo === '' ? (
+          <Webcam
+            audio={false}
+            height={300}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            width={500}
+            videoConstraints={{
+              height: 300,
+              width: 500,
+              facingMode: 'user'
+            }}
+          />
+        ) : (
+          <img src={photo} />
+        )}
       </div>
       <Grid container columnSpacing={10} justifyContent="center">
         <Grid item>
@@ -20,6 +47,10 @@ const PhotoCapture = () => {
             size="large"
             type="submit"
             variant="contained"
+            onClick={(e) => {
+              e.preventDefault()
+              capture()
+            }}
           >
             Capture
           </Button>
@@ -30,6 +61,10 @@ const PhotoCapture = () => {
             size="large"
             type="submit"
             variant="contained"
+            onClick={(e) => {
+              e.preventDefault()
+              setPhoto('')
+            }}
           >
             Reset
           </Button>
@@ -45,6 +80,7 @@ const PhotoCapture = () => {
           </Typography>
         </Grid>
       </div>
+      <SubmitButton onClick={() => navigate('/enrollment/documents')} />
     </>
   )
 }
