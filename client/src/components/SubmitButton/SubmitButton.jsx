@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './SubmitButton.module.css'
 
-const SubmitButton = ({ onClick }) => {
+const SubmitButton = () => {
   return (
     <>
-      <button onClick={onClick} className={styles.submit}>
+      <button className={styles.submit} type="submit">
         <img
           className={styles.submit__image}
           src={`${process.env.PUBLIC_URL}/assets/images/white-check.svg`}

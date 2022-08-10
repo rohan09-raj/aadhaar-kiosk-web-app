@@ -11,10 +11,14 @@ const Address = () => {
 
   const navigate = useNavigate()
 
+  const handleSubmit = () => {
+    navigate('/enrollment/photo')
+  }
+
   return (
     <>
       <Header subheading="Enrollment" />
-      <div className={styles.address}>
+      <form onSubmit={() => handleSubmit()} className={styles.address}>
         <div className={styles.address__container}>
           <Input
             id="houseNo"
@@ -76,16 +80,16 @@ const Address = () => {
             placeholder="Enter your area Pincode"
           />
         </div>
-      </div>
-      <Input
-        id="state"
-        label="State"
-        value={address}
-        type="text"
-        onChange={(e) => setAddress(e.target.value)}
-        placeholder="Enter your State"
-      />
-      <SubmitButton onClick={() => navigate('/enrollment/photo')} />
+        <Input
+          id="state"
+          label="State"
+          value={address}
+          type="text"
+          onChange={(e) => setAddress(e.target.value)}
+          placeholder="Enter your State"
+        />
+        <SubmitButton />
+      </form>
     </>
   )
 }

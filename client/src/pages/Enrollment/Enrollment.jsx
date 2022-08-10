@@ -6,11 +6,18 @@ import FormOne from './FormOne/FormOne'
 
 const Enrollment = () => {
   const navigate = useNavigate()
+
+  const handleSubmit = () => {
+    navigate('/enrollment/form2')
+  }
+
   return (
     <>
       <Header subheading="Enrollment" />
-      <FormOne />
-      <SubmitButton onClick={() => navigate('/enrollment/form2')} />
+      <form onSubmit={() => handleSubmit()}>
+        <FormOne />
+        <SubmitButton />
+      </form>
     </>
   )
 }
