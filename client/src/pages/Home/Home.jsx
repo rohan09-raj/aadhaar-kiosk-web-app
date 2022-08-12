@@ -5,17 +5,18 @@ import Card from '../../components/Card/Card'
 import Header from '../../components/Header/Header'
 import styles from './Home.module.css'
 
-const Home = () => {
+const Home = ({ page, setPage }) => {
   return (
     <>
       <Header subheading="Mera Aadhaar Meri Pehchan" />
       <div className={styles.card__container}>
-        <Link to="/enrollment">
           <Card
             title="Enrollment"
             image={`${process.env.PUBLIC_URL}/assets/images/enrollment.svg`}
+            onClick={(e) => {
+              setPage(0)
+            }}
           />
-        </Link>
         <Link to="/update">
           <Card
             title="Update"
