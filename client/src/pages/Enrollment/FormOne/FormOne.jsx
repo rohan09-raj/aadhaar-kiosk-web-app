@@ -47,6 +47,7 @@ const FormOne = () => {
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
         placeholder="Enter your full name"
+        pattern="[a-zA-z]+"
       />
 
       <div className={styles.formone__gender}>

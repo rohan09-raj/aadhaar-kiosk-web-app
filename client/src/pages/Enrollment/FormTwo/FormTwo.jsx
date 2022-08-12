@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Input from '../../../components/Input/Input'
 import Header from '../../../components/Header/Header'
@@ -10,8 +10,28 @@ const FormTwo = () => {
 
   const navigate = useNavigate()
 
+  const handleSubmit = () => {
+    navigate('/enrollment/address')
+  }
+
+  useEffect(() => {
+    const eMail = document.getElementById('email')
+    function emailValidator () {
+      if (eMail.validity.patternMismatch) {
+        eMail.setCustomValidity('Email must contain @')
+      } else {
+        eMail.setCustomValidity('')
+      }
+    }
+    console.log(eMail)
+    eMail.addEventListener('input', emailValidator)
+    return () => {
+      eMail.removeEventListener('input', emailValidator)
+    }
+  }, [])
+
   return (
-    <div className="formtwo">
+    <form onSubmit={() => handleSubmit()} className="formtwo">
       <Header subheading="Enrollment" />
       <Input
         id="mobile"
@@ -20,6 +40,9 @@ const FormTwo = () => {
         type="text"
         onChange={(e) => setMobileNumber(e.target.value)}
         placeholder="Enter your Mobile Number"
+        pattern="[0-9]+"
+        maxLength="10"
+        minLength="10"
       />
       <Input
         id="email"
@@ -28,9 +51,10 @@ const FormTwo = () => {
         type="email"
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your Email ID"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
       />
-      <SubmitButton onClick={() => navigate('/enrollment/address')} />
-    </div>
+      <SubmitButton />
+    </form>
   )
 }
 
