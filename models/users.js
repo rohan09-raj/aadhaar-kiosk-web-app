@@ -1,24 +1,20 @@
 import mongoose from 'mongoose';
 
 const userSchema = mongoose.Schema({
-  id: String,
-  aadhaarNumber: String,
-  indianResident: Boolean,
-  name: String,
-  gender: String,
-  dob: {
-    type: Date,
-  },
-  mobile: String,
-  email: String,
-  address: String,
-  photo: String,
-  documents: Object,
-  biometrics: Object,
-  createdAt: {
-    type: Date,
-    default: new Date(),
-  },
+  id: {type: String},
+  aadhaarNumber: {type: Number},
+  indianResident: {type: Boolean, required: true},
+  name: {type: String, required: true},
+  gender: {type: String, required: true},
+  dob: {type: String, required: true},
+  mobile: {type: String, required: true},
+  email: {type: String, required: true},
+  address: {type: String, required: true},
+  photo: {type: String, required: true},
+  documents: {type: Object, required: true},
+  biometrics: {type: Object, required: true},
+  createdAt: {type: Date, default: new Date()},
+  verified: {type: Boolean, default: false},
 });
 
 const UserDetails = mongoose.model('UserDetails', userSchema);
