@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import UserDetails from '../models/users';
 import sendOTP from '../services/twilio';
 
@@ -19,11 +18,9 @@ const createUser = async (req, res) => {
   try {
     const existingUser = await UserDetails.findOne({name, mobile, email});
     if (existingUser) {
-      sendOTP('+919696712475', 'Hi, I am Rohan Raj Gupta');
+      // sendOTP('+919696712475', 'Hi, I am Rohan Raj Gupta');
       return res.status(400).json({message: 'User already exists.'});
     }
-
-    console.log(req.body);
 
     const result = await UserDetails.create({
       indianResident,
@@ -36,14 +33,11 @@ const createUser = async (req, res) => {
       photo,
       documents,
       biometrics,
-      verified,
     });
-
-    console.log(result);
 
     const aadhaarNumber = 281943258754;
 
-    res.status(200).json({result, aadhaarNumber});
+    return res.status(200).json({result, aadhaarNumber});
   } catch (error) {
     res.status(500).json({message: 'Something went wrong.'});
   }
@@ -64,7 +58,7 @@ const getVerifiedUsers = async (req, res) => {
   try {
     const verifiedUsers = await UserDetails.find({verified: true});
 
-    res.status(200).json(verifiedUsers);
+    return res.status(200).json(verifiedUsers);
   } catch (error) {
     res.status(404).json({message: error.message});
   }
@@ -76,10 +70,42 @@ const getUnverifiedUsers = async (req, res) => {
 
     console.log(unverifiedUsers);
 
-    res.status(200).json(unverifiedUsers);
+    return res.status(200).json(unverifiedUsers);
   } catch (error) {
     res.status(404).json({message: error.message});
   }
 };
 
-export default {createUser, getUser, getVerifiedUsers, getUnverifiedUsers};
+const updateUser = async (req, res) => {
+  const {id} = req.params;
+
+  console.log(id, req.body);
+  try {
+    await UserDetails.findByIdAndUpdate(id, {$set: req.body}, {new: true});
+
+    res.status(200).json({message: 'User Updated Successfully'});
+  } catch (error) {
+    res.status(404).json({message: error.message});
+  }
+};
+
+const deleteUser = async (req, res) => {
+  const {id} = req.params;
+  try {
+    if (await UserDetails.findById(id)) {
+      const user = await UserDetails.findByIdAndDelete(id);
+      res.status(200).json({message: 'User Deleted Successfully'});
+    }
+  } catch (error) {
+    res.status(404).json({message: error.message});
+  }
+};
+
+export default {
+  createUser,
+  getUser,
+  getVerifiedUsers,
+  getUnverifiedUsers,
+  updateUser,
+  deleteUser,
+};
