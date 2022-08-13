@@ -1,21 +1,15 @@
 import React, { useState } from 'react'
-import Address from './Address/Address'
-import Agreement from './Agreement/Agreement'
-import DocumentScanner from './DocumentScanner/DocumentScanner'
-import FinalSlip from './FinalSlip/FinalSlip'
-import Fingerprint from './Fingerprint/Fingerprint'
-import FormTwo from './FormTwo/FormTwo'
-import IrisScan from './IrisScan/IrisScan'
-import PhotoCapture from './PhotoCapture/PhotoCapture'
-import SubmitButton from '../../components/SubmitButton/SubmitButton'
-import FormOne from './FormOne/FormOne'
-import { validEmail, validMobileNumber, validPincode } from '../../components/RegEx/RegEx'
+import Address from '../Address/Address'
+import DocumentScanner from '../DocumentScanner/DocumentScanner'
+import SubmitButton from '../../../components/SubmitButton/SubmitButton'
+import FormOne from '../FormOne/FormOne'
+import { validEmail, validMobileNumber, validPincode } from '../../../components/RegEx/RegEx'
+import UpdateSelect from '../UpdateSelect/UpdateSelect'
 
-const Enrollment = () => {
+const Demographic = () => {
   const [page, setPage] = useState(0)
 
   const [formData, setFormData] = useState({
-    indianResident: '',
     name: '',
     gender: '',
     dob: new Date().toISOString().slice(0, 10),
@@ -36,12 +30,18 @@ const Enrollment = () => {
 
   function handleSubmit () {
     if (page === 0) {
-      if (formData.indianResident === '') {
-        return alert('Please select your residency')
-      } else if (formData.name === '' || formData.name.length < 1) {
+        if (formData.name === '' || formData.name.length < 1) {
         return alert('Please enter your name')
       } else if (formData.gender === '') {
         return alert('Please select your gender')
+      } else if (formData.mobile === '') {
+        return alert('Please enter your mobile number')
+      } else if (!validMobileNumber.test(formData.mobile)) {
+        return alert('Please enter valid mobile number')
+      } else if (formData.email === '') {
+        return alert('Please enter your email')
+      } else if (!validEmail.test(formData.email)) {
+        return alert('Please enter valid email')
       } else {
         setPage(page + 1)
       }
@@ -89,18 +89,6 @@ const Enrollment = () => {
       }
     } else if (page === 3) {
       setPage(page + 1)
-    } else if (page === 4) {
-      setPage(page + 1)
-    } else if (page === 5) {
-      setPage(page + 1)
-    } else if (page === 6) {
-      setPage(page + 1)
-    } else if (page === 7) {
-      setPage(page + 1)
-    } else if (page === 8) {
-      setPage(page + 1)
-    } else if (page === 9) {
-      setPage(page + 1)
     } else setPage(page + 1)
   }
 
@@ -109,23 +97,11 @@ const Enrollment = () => {
       case 0:
         return <FormOne formData={formData} setFormData={setFormData} />
       case 1:
-        return <FormTwo formData={formData} setFormData={setFormData} />
-      case 2:
         return <Address formData={formData} setFormData={setFormData} />
-      case 3:
+      case 2:
         return <DocumentScanner formData={formData} setFormData={setFormData} />
-      case 4:
-        return <PhotoCapture formData={formData} setFormData={setFormData} />
-      case 5:
-        return <IrisScan formData={formData} setFormData={setFormData} />
-      case 6:
-        return <Fingerprint formData={formData} setFormData={setFormData} />
-      case 7:
-        return <Agreement formData={formData} setFormData={setFormData} />
-      case 8:
-        return <FinalSlip formData={formData} setFormData={setFormData} />
       default:
-        return <FormOne formData={formData} setFormData={setFormData} />
+        return <UpdateSelect />
     }
   }
 
@@ -143,30 +119,6 @@ const Enrollment = () => {
         return <SubmitButton onClick={handleSubmit}>
             Next
           </SubmitButton>
-      case 3:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
-      case 4:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
-      case 5:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
-      case 6:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
-      case 7:
-        return <SubmitButton onClick={handleSubmit}>
-            Submit
-          </SubmitButton>
-      case 8:
-        return <SubmitButton onClick={handleSubmit}>
-            Exit
-          </SubmitButton>
       default:
         return <SubmitButton onClick={handleSubmit}>
             Next
@@ -181,4 +133,4 @@ const Enrollment = () => {
   )
 }
 
-export default Enrollment
+export default Demographic

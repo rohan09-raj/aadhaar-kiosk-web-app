@@ -10,13 +10,12 @@ const Home = ({ page, setPage }) => {
     <>
       <Header subheading="Mera Aadhaar Meri Pehchan" />
       <div className={styles.card__container}>
+      <Link to="/enrollment">
           <Card
             title="Enrollment"
             image={`${process.env.PUBLIC_URL}/assets/images/enrollment.svg`}
-            onClick={(e) => {
-              setPage(0)
-            }}
           />
+          </Link>
         <Link to="/update">
           <Card
             title="Update"
