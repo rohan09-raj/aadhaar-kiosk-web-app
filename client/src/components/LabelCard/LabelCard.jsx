@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './LabelCard.module.css'
 
-const LabelCard = ({ id, name, value, title, image, onChange }) => {
+const LabelCard = ({ id, name, value, title, image, onChange, readOnly }) => {
   return (
     <div className={styles.labelcard}>
       <label htmlFor={id} className={styles.card}>
@@ -16,6 +16,7 @@ const LabelCard = ({ id, name, value, title, image, onChange }) => {
         value={value}
         required
         onChange={onChange}
+        disabled={readOnly}
       />
     </div>
   )
