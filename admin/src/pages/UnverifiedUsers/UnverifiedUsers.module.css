@@ -1,0 +1,21 @@
+.unverified_users {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.unverified_users__heading {
+  text-align: center;
+}
+
+.unverified_users__accordion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+.unverified_users__nodata {
+  margin: 20px;
+  text-align: center;
+}

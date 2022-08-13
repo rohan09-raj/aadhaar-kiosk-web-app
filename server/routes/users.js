@@ -8,4 +8,7 @@ router.get('/user/:id', users.getUser);
 router.get('/verifiedusers', users.getVerifiedUsers);
 router.get('/unverifiedusers', users.getUnverifiedUsers);
 
+router.patch('/user/:id', users.updateUser);
+router.delete('/user/:id', users.deleteUser);
+
 export default router;

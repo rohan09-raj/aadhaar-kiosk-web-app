@@ -1,0 +1,14 @@
+.verified_users {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.verified_users__heading {
+  text-align: center;
+}
+
+.verified_users__nodata {
+  margin: 20px;
+  text-align: center;
+}
