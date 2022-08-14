@@ -43,8 +43,8 @@ const DocumentScanner = ({ formData, setFormData }) => {
   })
 
   const handleNext = () => {
-    if (activeStep === steps.length) {
-      setFormData({ ...formData, documents })
+    if (activeStep === steps.length - 1) {
+      setFormData({ ...formData, documents: documents })
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
   }

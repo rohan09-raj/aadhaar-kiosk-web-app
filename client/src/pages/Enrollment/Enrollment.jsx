@@ -6,7 +6,7 @@ import FinalSlip from './FinalSlip/FinalSlip'
 import Fingerprint from './Fingerprint/Fingerprint'
 import FormTwo from './FormTwo/FormTwo'
 import IrisScan from './IrisScan/IrisScan'
-// import { useMutation } from 'react-query'
+import { useMutation } from 'react-query'
 import PhotoCapture from './PhotoCapture/PhotoCapture'
 import SubmitButton from '../../components/SubmitButton/SubmitButton'
 import FormOne from './FormOne/FormOne'
@@ -16,7 +16,7 @@ import {
   validMobileNumber,
   validPincode
 } from '../../components/RegEx/RegEx'
-// import { createUser } from '../../services/apiservice'
+import { createUser } from '../../services/apiservice'
 
 const Enrollment = () => {
   const [page, setPage] = useState(0)
@@ -47,7 +47,7 @@ const Enrollment = () => {
     }
   })
 
-  // const { mutate } = useMutation((payload) => createUser(payload))
+  const { mutate } = useMutation((payload) => createUser(payload))
 
   const handleSubmit = () => {
     if (page === 0) {
@@ -113,7 +113,21 @@ const Enrollment = () => {
     } else if (page === 7) {
       setPage(page + 1)
     } else if (page === 8) {
-      console.log(formData)
+      mutate({
+        indianResident: formData.indianResident,
+        name: formData.name,
+        gender: formData.gender,
+        dob: formData.dob,
+        mobile: formData.mobile,
+        email: formData.email,
+        address: formData.address,
+        photo: formData.photo,
+        documents: {
+          POI: formData.documents.POI,
+          POA: formData.documents.POA,
+          DOB: formData.documents.DOB
+        }
+      })
       setPage(page + 1)
     }
   }
@@ -121,7 +135,7 @@ const Enrollment = () => {
   const conditionalComponent = () => {
     switch (page) {
       case 0:
-        return <DocumentScanner formData={formData} setFormData={setFormData} />
+        return <FormOne formData={formData} setFormData={setFormData} />
       case 1:
         return <FormTwo formData={formData} setFormData={setFormData} />
       case 2:
@@ -129,7 +143,7 @@ const Enrollment = () => {
       case 3:
         return <PhotoCapture formData={formData} setFormData={setFormData} />
       case 4:
-        return <FormOne formData={formData} setFormData={setFormData} />
+        return <DocumentScanner formData={formData} setFormData={setFormData} />
       case 5:
         return <IrisScan formData={formData} setFormData={setFormData} />
       case 6:
