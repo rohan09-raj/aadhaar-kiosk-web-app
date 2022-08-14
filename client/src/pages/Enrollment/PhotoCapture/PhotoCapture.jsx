@@ -1,5 +1,5 @@
 /* eslint-disable multiline-ternary */
-import React, { useState } from 'react'
+import React from 'react'
 import Webcam from 'react-webcam'
 import { useNavigate } from 'react-router-dom'
 import Header from '../../../components/Header/Header'
@@ -7,37 +7,35 @@ import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import styles from './PhotoCapture.module.css'
 import { Button, Grid, Typography } from '@mui/material'
 
-const PhotoCapture = () => {
-  const [photo, setPhoto] = useState()
-
+const PhotoCapture = ({ formData, setFormData }) => {
   const navigate = useNavigate()
 
   const webcamRef = React.useRef(null)
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot()
-    setPhoto(imageSrc)
+    setFormData({ ...formData, photo: imageSrc })
   })
 
   return (
     <>
       <Header subheading="Enrollment" />
       <div className={styles.card__container}>
-        {photo === '' ? (
+        {formData.photo === '' ? (
           <Webcam
             audio={false}
-            height={300}
+            height={400}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            width={500}
+            width={600}
             videoConstraints={{
-              height: 300,
-              width: 500,
+              height: 400,
+              width: 600,
               facingMode: 'user'
             }}
           />
         ) : (
-          <img src={photo} />
+          <img src={formData.photo} />
         )}
       </div>
       <Grid container columnSpacing={10} justifyContent="center">
@@ -63,7 +61,7 @@ const PhotoCapture = () => {
             variant="contained"
             onClick={(e) => {
               e.preventDefault()
-              setPhoto('')
+              setFormData({ ...formData, photo: '' })
             }}
           >
             Reset

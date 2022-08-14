@@ -6,10 +6,17 @@ import FinalSlip from './FinalSlip/FinalSlip'
 import Fingerprint from './Fingerprint/Fingerprint'
 import FormTwo from './FormTwo/FormTwo'
 import IrisScan from './IrisScan/IrisScan'
+// import { useMutation } from 'react-query'
 import PhotoCapture from './PhotoCapture/PhotoCapture'
 import SubmitButton from '../../components/SubmitButton/SubmitButton'
 import FormOne from './FormOne/FormOne'
-import { validEmail, validMobileNumber, validPincode } from '../../components/RegEx/RegEx'
+import Home from '../Home/Home'
+import {
+  validEmail,
+  validMobileNumber,
+  validPincode
+} from '../../components/RegEx/RegEx'
+// import { createUser } from '../../services/apiservice'
 
 const Enrollment = () => {
   const [page, setPage] = useState(0)
@@ -31,10 +38,18 @@ const Enrollment = () => {
     postOffice: '',
     landmark: '',
     pincode: '',
-    address: ''
+    address: '',
+    photo: '',
+    documents: {
+      POI: '',
+      POA: '',
+      DOB: ''
+    }
   })
 
-  function handleSubmit () {
+  // const { mutate } = useMutation((payload) => createUser(payload))
+
+  const handleSubmit = () => {
     if (page === 0) {
       if (formData.indianResident === '') {
         return alert('Please select your residency')
@@ -98,24 +113,23 @@ const Enrollment = () => {
     } else if (page === 7) {
       setPage(page + 1)
     } else if (page === 8) {
+      console.log(formData)
       setPage(page + 1)
-    } else if (page === 9) {
-      setPage(page + 1)
-    } else setPage(page + 1)
+    }
   }
 
   const conditionalComponent = () => {
     switch (page) {
       case 0:
-        return <FormOne formData={formData} setFormData={setFormData} />
+        return <DocumentScanner formData={formData} setFormData={setFormData} />
       case 1:
         return <FormTwo formData={formData} setFormData={setFormData} />
       case 2:
         return <Address formData={formData} setFormData={setFormData} />
       case 3:
-        return <DocumentScanner formData={formData} setFormData={setFormData} />
-      case 4:
         return <PhotoCapture formData={formData} setFormData={setFormData} />
+      case 4:
+        return <FormOne formData={formData} setFormData={setFormData} />
       case 5:
         return <IrisScan formData={formData} setFormData={setFormData} />
       case 6:
@@ -125,52 +139,32 @@ const Enrollment = () => {
       case 8:
         return <FinalSlip formData={formData} setFormData={setFormData} />
       default:
-        return <FormOne formData={formData} setFormData={setFormData} />
+        return <Home />
     }
   }
 
   const conditionalButton = () => {
     switch (page) {
       case 0:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
+        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 1:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
+        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 2:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
+        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 3:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
+        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 4:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
+        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 5:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
+        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 6:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
+        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 7:
-        return <SubmitButton onClick={handleSubmit}>
-            Submit
-          </SubmitButton>
+        return <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
       case 8:
-        return <SubmitButton onClick={handleSubmit}>
-            Exit
-          </SubmitButton>
+        return <SubmitButton onClick={handleSubmit}>Exit</SubmitButton>
       default:
-        return <SubmitButton onClick={handleSubmit}>
-            Next
-          </SubmitButton>
+        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
     }
   }
   return (
