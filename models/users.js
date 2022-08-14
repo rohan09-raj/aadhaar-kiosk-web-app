@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({
   address: {type: String, required: true},
   photo: {type: String, required: true},
   documents: {type: Object, required: true},
-  biometrics: {type: Object, required: true},
+  biometrics: {type: Object, required: false},
   createdAt: {type: Date, default: new Date()},
   verified: {type: Boolean, default: false},
 });
