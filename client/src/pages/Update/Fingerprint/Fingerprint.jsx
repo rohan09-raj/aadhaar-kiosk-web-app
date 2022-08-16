@@ -4,11 +4,13 @@ import CardBiometrics from '../../../components/Card/CardBiometrics'
 import styles from './Fingerprint.module.css'
 import { Button, Grid, Typography } from '@mui/material'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
+import { useTranslation } from 'react-i18next'
 
 const Fingerprint = () => {
+  const { t } = useTranslation()
   return (
     <>
-      <Header subheading="Enrollment" />
+      <Header subheading={t('UPDATE')} />
       <div className={styles.card__container}>
         <CardBiometrics
           image={`${process.env.PUBLIC_URL}/assets/images/fingerprint.svg`}
@@ -25,7 +27,7 @@ const Fingerprint = () => {
             type="submit"
             variant="contained"
           >
-            Scan
+            {t('SCAN')}
           </Button>
         </Grid>
         <Grid item>
@@ -35,7 +37,7 @@ const Fingerprint = () => {
             type="submit"
             variant="contained"
           >
-            Reset
+            {t('RESET')}
           </Button>
         </Grid>
       </Grid>
@@ -43,9 +45,9 @@ const Fingerprint = () => {
       <div>
         <Grid container justifyContent="center">
           <Typography align="center">
-            Please put your eyes inside the iris scanner.
+            {t('PLEASE_PUT_YOUR_FINGERS_ON_THE_FINGERPRINT_SCANNER')}
             <br />
-            Wait for prompt and beep sound to remove your eyes
+            {t('WAIT_FOR_PROMPT_AND_BEEP_SOUND_TO_REMOVE_YOUR_FINGERS')}
           </Typography>
         </Grid>
       </div>

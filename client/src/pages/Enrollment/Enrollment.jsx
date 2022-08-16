@@ -14,11 +14,14 @@ import Home from '../Home/Home'
 import {
   validEmail,
   validMobileNumber,
-  validPincode
+  validPincode,
+  validString
 } from '../../components/RegEx/RegEx'
 import { createUser } from '../../services/apiservice'
+import { useTranslation } from 'react-i18next'
 
 const Enrollment = () => {
+  const { t } = useTranslation()
   const [page, setPage] = useState(0)
 
   const [formData, setFormData] = useState({
@@ -52,49 +55,51 @@ const Enrollment = () => {
   const handleSubmit = () => {
     if (page === 0) {
       if (formData.indianResident === '') {
-        return alert('Please select your residency')
+        return alert(t('PLEASE_SELECT_YOUR_RESIDENCY'))
       } else if (formData.name === '' || formData.name.length < 1) {
-        return alert('Please enter your name')
+        return alert(t('PLEASE_ENTER_YOUR_NAME'))
+      } else if (!validString.test(formData.name)) {
+        return alert(t('PLEASE_ENTER_VALID_NAME'))
       } else if (formData.gender === '') {
-        return alert('Please select your gender')
+        return alert(t('PLEASE_SELECT_YOUR_GENDER'))
       } else {
         setPage(page + 1)
       }
     } else if (page === 1) {
       if (formData.mobile === '') {
-        return alert('Please enter your mobile number')
+        return alert(t('PLEASE_ENTER_YOUR_MOBILE_NUMBER'))
       } else if (!validMobileNumber.test(formData.mobile)) {
-        return alert('Please enter valid mobile number')
+        return alert(t('PLEASE_ENTER_VALID_MOBILE_NUMBER'))
       } else if (formData.email === '') {
-        return alert('Please enter your email')
+        return alert(t('PLEASE_ENTER_YOUR_EMAIL'))
       } else if (!validEmail.test(formData.email)) {
-        return alert('Please enter valid email')
+        return alert(t('PLEASE_ENTER_VALID_EMAIL'))
       } else {
         setPage(page + 1)
       }
     } else if (page === 2) {
       if (formData.country === '') {
-        return alert('Please select your country')
+        return alert(t('PLEASE_SELECT_YOUR_COUNTRY'))
       } else if (formData.state === '') {
-        return alert('Please select your state')
+        return alert(t('PLEASE_SELECT_YOUR_STATE'))
       } else if (formData.district === '') {
-        return alert('Please select your district')
+        return alert(t('PLEASE_SELECT_YOUR_DISTRICT'))
       } else if (formData.village === '') {
-        return alert('Please enter your village')
+        return alert(t('PLEASE_ENTER_YOUR_VILLAGE'))
       } else if (formData.houseNo === '') {
-        return alert('Please enter your house number')
+        return alert(t('PLEASE_ENTER_YOUR_HOUSE_NUMBER'))
       } else if (formData.street === '') {
-        return alert('Please enter your street')
+        return alert(t('PLEASE_ENTER_YOUR_STREET'))
       } else if (formData.locality === '') {
-        return alert('Please enter your locality')
+        return alert(t('PLEASE_ENTER_YOUR_LOCALITY'))
       } else if (formData.postOffice === '') {
-        return alert('Please enter your post office')
+        return alert(t('PLEASE_ENTER_YOUR_AREA_POST_OFFICE'))
       } else if (formData.landmark === '') {
-        return alert('Please enter your landmark')
+        return alert(t('PLEASE_ENTER_NEAREST_LANDMARK'))
       } else if (formData.pincode === '') {
-        return alert('Please enter your pincode')
+        return alert(t('PLEASE_ENTER_YOUR_AREA_PINCODE'))
       } else if (!validPincode.test(formData.pincode)) {
-        return alert('Please enter valid pincode')
+        return alert(t('PLEASE_ENTER_VALID_PINCODE'))
       } else {
         setFormData({
           ...formData,

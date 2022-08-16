@@ -1,3 +1,4 @@
+import { t } from 'i18next'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -9,22 +10,22 @@ import styles from './UpdateSelect.module.css'
 const UpdateSelect = () => {
   return (
     <>
-      <Header subheading="Mera Aadhaar Meri Pehchan" />
+      <Header subheading={t('MERA_AADHAAR_MERI_PEHCHAN')} />
       <div className={styles.card__container}>
-      <Link to="/update/demographic">
+        <Link to="/update/demographic">
           <Card
-            title="Demographic"
+            title={t('DEMOGRAPHIC')}
             image={`${process.env.PUBLIC_URL}/assets/images/enrollment.svg`}
           />
-          </Link>
+        </Link>
         <Link to="/update/biometric">
           <Card
-            title="Biometric"
+            title={t('BIOMETRIC')}
             image={`${process.env.PUBLIC_URL}/assets/images/update.svg`}
           />
         </Link>
         <Link to="/update/agreement">
-        <SubmitButton />
+          <SubmitButton />
         </Link>
       </div>
     </>

@@ -2,15 +2,17 @@ import React from 'react'
 import Input from '../../../components/Input/Input'
 import Header from '../../../components/Header/Header'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
+import { useTranslation } from 'react-i18next'
 
 const FormTwo = ({ formData, setFormData }) => {
+  const { t } = useTranslation()
   return (
     <div className="formtwo">
-      <Header subheading="Enrollment" />
+      <Header subheading={t('ENROLLMENT')} />
       <Input
         id="mobile"
         value={formData.mobile}
-        label="Mobile"
+        label={t('MOBILE')}
         type="text"
         onChange={(e) => {
           setFormData({
@@ -18,7 +20,7 @@ const FormTwo = ({ formData, setFormData }) => {
             mobile: e.target.value
           })
         }}
-        placeholder="Enter your Mobile Number"
+        placeholder={t('ENTER_YOUR_MOBILE_NUMBER')}
         pattern="[0-9]+"
         maxLength="10"
         minLength="10"
@@ -26,7 +28,7 @@ const FormTwo = ({ formData, setFormData }) => {
       <Input
         id="email"
         value={formData.email}
-        label="Email"
+        label={t('EMAIL')}
         type="email"
         onChange={(e) => {
           setFormData({
@@ -34,7 +36,7 @@ const FormTwo = ({ formData, setFormData }) => {
             email: e.target.value
           })
         }}
-        placeholder="Enter your Email ID"
+        placeholder={t('ENTER_YOUR_EMAIL_ID')}
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
       />
       <SubmitButton />

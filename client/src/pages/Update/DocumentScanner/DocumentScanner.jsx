@@ -4,8 +4,10 @@ import CardScanner from '../../../components/Card/CardScanner'
 import styles from './DocumentScanner.module.css'
 import { Button, Grid, Typography } from '@mui/material'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
+import { useTranslation } from 'react-i18next'
 
 const DocumentScanner = () => {
+  const { t } = useTranslation()
   return (
     <>
       <Header subheading="Update" />
@@ -22,7 +24,7 @@ const DocumentScanner = () => {
             type="submit"
             variant="contained"
           >
-            Scan
+            {t('SCAN')}
           </Button>
         </Grid>
         <Grid item>
@@ -32,7 +34,7 @@ const DocumentScanner = () => {
             type="submit"
             variant="contained"
           >
-            Reset
+            {t('RESET')}
           </Button>
         </Grid>
       </Grid>
@@ -40,11 +42,7 @@ const DocumentScanner = () => {
       <div>
         <Grid container justifyContent="center">
           <Typography align="center">
-            Please place your document on the scanner.
-            <br />
-            Close the lid.
-            <br />
-            Wait for prompt to remove your document
+            {t('KINDLY_CLICK_THE_PICTURE_OF_YOUR_DOCUMENTS')}
           </Typography>
         </Grid>
       </div>

@@ -13,14 +13,15 @@ import {
   Box
 } from '@mui/material'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
-
-const steps = [
-  'Proof of Identity',
-  'Proof of Address',
-  'Proof of Date of Birth'
-]
+import { useTranslation } from 'react-i18next'
 
 const DocumentScanner = ({ formData, setFormData }) => {
+  const { t } = useTranslation()
+  const steps = [
+    t('PROOF_OF_IDENTITY'),
+    t('PROOF_OF_ADDRESS'),
+    t('PROOF_OF_DOB')
+  ]
   const [documents, setDocuments] = useState({ POI: '', POA: '', DOB: '' })
   const [activeStep, setActiveStep] = React.useState(0)
 
@@ -53,10 +54,7 @@ const DocumentScanner = ({ formData, setFormData }) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
   }
 
-  // setDocuments({ ...documents, POI: '' })
-
   const WebcamComponent = ({ doc }) => {
-    console.log(doc)
     return (
       <>
         <div className={styles.card__container}>
@@ -89,7 +87,7 @@ const DocumentScanner = ({ formData, setFormData }) => {
                 capture(doc)
               }}
             >
-              Scan
+              {t('SCAN')}
             </Button>
           </Grid>
           <Grid item>
@@ -109,7 +107,7 @@ const DocumentScanner = ({ formData, setFormData }) => {
                 })
               }}
             >
-              Reset
+              {t('RESET')}
             </Button>
           </Grid>
         </Grid>
@@ -117,7 +115,7 @@ const DocumentScanner = ({ formData, setFormData }) => {
         <div>
           <Grid container justifyContent="center">
             <Typography align="center">
-              Kindly click the picture of your documents
+              {t('KINDLY_CLICK_THE_PICTURE_OF_YOUR_DOCUMENTS')}
             </Typography>
           </Grid>
         </div>
@@ -127,7 +125,7 @@ const DocumentScanner = ({ formData, setFormData }) => {
 
   return (
     <>
-      <Header subheading="Enrollment" />
+      <Header subheading={t('ENROLLMENT')} />
       <SubmitButton />
       <Box sx={{ width: '100%' }}>
         <Stepper activeStep={activeStep}>
@@ -144,7 +142,7 @@ const DocumentScanner = ({ formData, setFormData }) => {
         {activeStep === steps.length ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>
-              All steps completed - you&apos;re finished
+              {t('ALL_STEPS_COMPLETED')}
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
@@ -166,11 +164,11 @@ const DocumentScanner = ({ formData, setFormData }) => {
                 onClick={handleBack}
                 sx={{ mr: 1 }}
               >
-                Back
+                {t('BACK')}
               </Button>
               <Box sx={{ flex: '1 1 auto' }} />
               <Button onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                {activeStep === steps.length - 1 ? t('FINISH') : t('NEXT')}
               </Button>
             </Box>
           </React.Fragment>

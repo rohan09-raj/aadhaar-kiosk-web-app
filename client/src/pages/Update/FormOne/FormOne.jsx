@@ -4,10 +4,10 @@ import UpdateInput from '../../../components/UpdateInput/UpdateInput'
 import styles from './FormOne.module.css'
 import EditButton from '../../../components/EditButton/EditButton'
 import Gender from '../../../components/Gender/Gender'
+import { useTranslation } from 'react-i18next'
 
 const FormOne = ({ formData, setFormData }) => {
-  const handleSubmit = () => {
-  }
+  const { t } = useTranslation()
 
   const [editable, setEditable] = React.useState(true)
 
@@ -16,12 +16,13 @@ const FormOne = ({ formData, setFormData }) => {
   }
 
   return (
-    <><Header subheading="Update" /><form onSubmit={() => handleSubmit()}>
+    <>
+      <Header subheading={t('UPDATE')} />
       <div className={styles.formone}>
         <UpdateInput
           type="text"
           id="fullName"
-          label="Full Name"
+          label={t('FULL_NAME')}
           value={formData.name}
           onChange={(e) => {
             setFormData({
@@ -29,63 +30,62 @@ const FormOne = ({ formData, setFormData }) => {
               name: e.target.value
             })
           }}
-          placeholder="Enter your full name" />
+          placeholder={t('ENTER_YOUR_FULL_NAME')}
+        />
 
-      <UpdateInput
-        id="mobile"
-        value={formData.mobile}
-        label="Mobile"
-        type="text"
-        onChange={(e) => {
-          setFormData({
-            ...formData,
-            mobile: e.target.value
-          })
-        }}
-        placeholder="Enter your Mobile Number" />
+        <UpdateInput
+          id="mobile"
+          value={formData.mobile}
+          label={t('MOBILE')}
+          type="text"
+          onChange={(e) => {
+            setFormData({
+              ...formData,
+              mobile: e.target.value
+            })
+          }}
+          placeholder={t('ENTER_YOUR_MOBILE_NUMBER')}
+        />
 
         <div className={styles.formone__dob}>
-          <label htmlFor="dob">Date of Birth</label>
+          <label htmlFor="dob">{t('DATE_OF_BIRTH')}</label>
           <div className={styles.input__edit}>
-          <input
-            className={styles.formone__dob_input}
-            type="date"
-            id="dob"
-            name="dob"
-            value={formData.dob}
-            readOnly={editable}
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                dob: e.target.value
-              })
-            }}
-            required />
-          <EditButton
-          onClick={handleEdit}
-          enabled={!editable ? '1' : '0' } />
+            <input
+              className={styles.formone__dob_input}
+              type="date"
+              id="dob"
+              name="dob"
+              value={formData.dob}
+              readOnly={editable}
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  dob: e.target.value
+                })
+              }}
+              required
+            />
+            <EditButton onClick={handleEdit} enabled={!editable ? '1' : '0'} />
           </div>
         </div>
 
-      <UpdateInput
-        id="email"
-        value={formData.email}
-        label="Email"
-        type="email"
-        onChange={(e) => {
-          setFormData({
-            ...formData,
-            email: e.target.value
-          })
-        }}
-        placeholder="Enter your Email ID" />
+        <UpdateInput
+          id="email"
+          value={formData.email}
+          label={t('EMAIL')}
+          type="email"
+          onChange={(e) => {
+            setFormData({
+              ...formData,
+              email: e.target.value
+            })
+          }}
+          placeholder={t('ENTER_YOUR_EMAIL_ID')}
+        />
 
-      <Gender
-      formData={formData}
-      setFormData={setFormData} />
-
+        <Gender formData={formData} setFormData={setFormData} />
       </div>
-    </form></>
+    </>
   )
 }
 

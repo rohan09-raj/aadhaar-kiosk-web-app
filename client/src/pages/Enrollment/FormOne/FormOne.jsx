@@ -1,17 +1,16 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input/Input'
 import LabelCard from '../../../components/LabelCard/LabelCard'
 import styles from './FormOne.module.css'
 
 const FormOne = ({ formData, setFormData }) => {
-  console.log(formData.indianResident, formData.name, formData.dob, formData.gender)
-
-  const handleSubmit = () => {
-  }
+  const { t } = useTranslation()
 
   return (
-    <><Header subheading="Enrollment" /><form onSubmit={() => handleSubmit()}>
+    <>
+      <Header subheading={t('ENROLLMENT')} />
       <div className={styles.formone}>
         <div className={styles.formone__radio}>
           <span className={styles.formone__resident}>
@@ -26,8 +25,9 @@ const FormOne = ({ formData, setFormData }) => {
                   indianResident: true
                 })
               }}
-              required />
-            <label htmlFor="indian">Indian Resident</label>
+              required
+            />
+            <label htmlFor="indian">{t('INDIAN_RESIDENT')}</label>
           </span>
           <span className={styles.formone__resident}>
             <input
@@ -41,15 +41,16 @@ const FormOne = ({ formData, setFormData }) => {
                   indianResident: false
                 })
               }}
-              required />
-            <label htmlFor="indian">Non-Residential Indian</label>
+              required
+            />
+            <label htmlFor="indian">{t('NON_RESIDENTIAL_INDIAN')}</label>
           </span>
         </div>
 
         <Input
           type="text"
           id="fullName"
-          label="Full Name"
+          label={t('FULL_NAME')}
           value={formData.name}
           onChange={(e) => {
             setFormData({
@@ -57,14 +58,15 @@ const FormOne = ({ formData, setFormData }) => {
               name: e.target.value
             })
           }}
-          placeholder="Enter your full name"
-          pattern="[a-zA-z]+" />
+          placeholder={t('ENTER_YOUR_FULL_NAME')}
+          pattern="[a-zA-z]+"
+        />
 
         <div className={styles.formone__gender}>
           <LabelCard
             id="male"
             name="gender"
-            title="Male"
+            title={t('MALE')}
             value={formData.gender}
             onChange={() => {
               setFormData({
@@ -72,35 +74,38 @@ const FormOne = ({ formData, setFormData }) => {
                 gender: 'Male'
               })
             }}
-            image={`${process.env.PUBLIC_URL}/assets/images/male.svg`} />
+            image={`${process.env.PUBLIC_URL}/assets/images/male.svg`}
+          />
           <LabelCard
             id="female"
             name="gender"
             value={formData.gender}
-            title="Female"
+            title={t('FEMALE')}
             onChange={() => {
               setFormData({
                 ...formData,
                 gender: 'Female'
               })
             }}
-            image={`${process.env.PUBLIC_URL}/assets/images/female.svg`} />
+            image={`${process.env.PUBLIC_URL}/assets/images/female.svg`}
+          />
           <LabelCard
             id="trans"
             name="gender"
             value={formData.gender}
-            title="Transgender"
+            title={t('OTHER')}
             onChange={() => {
               setFormData({
                 ...formData,
-                gender: 'Transgender'
+                gender: 'Other'
               })
             }}
-            image={`${process.env.PUBLIC_URL}/assets/images/trans.svg`} />
+            image={`${process.env.PUBLIC_URL}/assets/images/trans.svg`}
+          />
         </div>
 
         <div className={styles.formone__dob}>
-          <label htmlFor="dob">Date of Birth</label>
+          <label htmlFor="dob">{t('DATE_OF_BIRTH')}</label>
           <input
             className={styles.formone__dob_input}
             type="date"
@@ -113,10 +118,11 @@ const FormOne = ({ formData, setFormData }) => {
                 dob: e.target.value
               })
             }}
-            required />
+            required
+          />
         </div>
       </div>
-    </form></>
+    </>
   )
 }
 

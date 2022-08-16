@@ -8,3 +8,8 @@ export const createUser = async (payload) => {
   const response = await apiClient.post('/user', payload)
   return response
 }
+
+export const getUserByAadhaar = async (aadhaarNumber) => {
+  const response = await apiClient.get(`/user/aadhaar/${aadhaarNumber}`)
+  return response
+}

@@ -6,6 +6,7 @@ import Header from '../../../components/Header/Header'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import styles from './PhotoCapture.module.css'
 import { Button, Grid, Typography } from '@mui/material'
+import { t } from 'i18next'
 
 const PhotoCapture = ({ formData, setFormData }) => {
   const navigate = useNavigate()
@@ -19,7 +20,7 @@ const PhotoCapture = ({ formData, setFormData }) => {
 
   return (
     <>
-      <Header subheading="Enrollment" />
+      <Header subheading={t('ENROLLMENT')} />
       <div className={styles.card__container}>
         {formData.photo === '' ? (
           <Webcam
@@ -50,7 +51,7 @@ const PhotoCapture = ({ formData, setFormData }) => {
               capture()
             }}
           >
-            Capture
+            {t('CAPTURE')}
           </Button>
         </Grid>
         <Grid item>
@@ -64,7 +65,7 @@ const PhotoCapture = ({ formData, setFormData }) => {
               setFormData({ ...formData, photo: '' })
             }}
           >
-            Reset
+            {t('RESET')}
           </Button>
         </Grid>
       </Grid>
@@ -72,9 +73,11 @@ const PhotoCapture = ({ formData, setFormData }) => {
       <div>
         <Grid container justifyContent="center">
           <Typography align="center">
-            Please look into the camera<br></br>
-            Click Capture to Capture the photo<br></br>
-            Click Reset the remove the captured photo
+            {t('PLEASE_LOOK_INTO_THE_CAMERA')}
+            <br></br>
+            {t('CLICK_CAPTURE_TO_CAPTURE_THE_PHOTO')}
+            <br></br>
+            {t('CLICK_RESET_TO_REMOVE_THE_CAPTURED_PHOTO')}
           </Typography>
         </Grid>
       </div>

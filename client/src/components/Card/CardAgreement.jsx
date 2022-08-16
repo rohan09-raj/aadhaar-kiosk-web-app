@@ -2,14 +2,16 @@ import React from 'react'
 import styles from './CardAgreement.module.css'
 import SubmitButton from '../SubmitButton/SubmitButton'
 import { Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 const CardAgreement = ({ title, image }) => {
+  const { t } = useTranslation()
   return (
     <>
       <div className={styles.card}>
         <img className={styles.card__image} src={image} alt="" />
         <Typography>
-        I hereby confirm the identity and address of ___________ as being true, correct and accurate.
+          {t('I_HEREBY_CONFIRM_THE_IDENTITY_AND_ADDRESS')}
         </Typography>
       </div>
       <SubmitButton />

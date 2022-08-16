@@ -4,21 +4,23 @@ import CardAgreement from '../../../components/Card/CardAgreement'
 import styles from './Agreement.module.css'
 import Input from '../../../components/Input/Input'
 import { Grid, Button } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 const Agreement = () => {
+  const { t } = useTranslation()
   return (
     <>
-      <Header subheading="Enrollment" />
+      <Header subheading={t('ENROLLMENT')} />
       <div className={styles.card__container}>
         <CardAgreement
           image={`${process.env.PUBLIC_URL}/assets/images/agreement.svg`}
         />
       </div>
-        <Input
+      <Input
         type="text"
         id="otp"
-        label="Please verify your identity by receiving the OTP on your registered mobile number xxxxxxxx15"
-        placeholder="XXXX"
+        label={t('PLEASE_VERIFY_YOUR_IDENTITY')}
+        placeholder="XXXXXX"
       />
       <Grid container columnSpacing={10} justifyContent="center">
         <Grid item>
@@ -28,7 +30,7 @@ const Agreement = () => {
             type="submit"
             variant="contained"
           >
-            Send OTP
+            {t('SEND_OTP')}
           </Button>
         </Grid>
         <Grid item>
@@ -38,7 +40,7 @@ const Agreement = () => {
             type="submit"
             variant="contained"
           >
-            Resend
+            {t('RESEND')}
           </Button>
         </Grid>
       </Grid>
