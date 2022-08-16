@@ -16,7 +16,7 @@ import {
   validMobileNumber,
   validPincode,
   validString
-} from '../../components/RegEx/RegEx'
+} from '../../constants/RegEx'
 import { createUser } from '../../services/apiservice'
 import { useTranslation } from 'react-i18next'
 

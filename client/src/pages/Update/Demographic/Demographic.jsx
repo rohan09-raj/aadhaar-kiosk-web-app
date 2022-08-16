@@ -8,7 +8,7 @@ import {
   validMobileNumber,
   validPincode,
   validString
-} from '../../../components/RegEx/RegEx'
+} from '../../../constants/RegEx'
 import UpdateSelect from '../UpdateSelect/UpdateSelect'
 import { useTranslation } from 'react-i18next'
 
