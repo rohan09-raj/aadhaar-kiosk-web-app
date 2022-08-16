@@ -1,5 +1,6 @@
 import UserDetails from '../models/users';
 import sendOTP from '../services/twilio';
+import generateAadhaar from '../utils/aadhaar';
 
 const createUser = async (req, res) => {
   const {
@@ -54,6 +55,17 @@ const getUser = async (req, res) => {
   }
 };
 
+const getUserByAadhaarNumber = async (req, res) => {
+  const {aadhaar} = req.params;
+  const aadhaarNumber = Number(aadhaar);
+  try {
+    const user = await UserDetails.findOne({aadhaarNumber});
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({message: error});
+  }
+};
+
 const getVerifiedUsers = async (req, res) => {
   try {
     const verifiedUsers = await UserDetails.find({verified: true});
@@ -81,7 +93,17 @@ const updateUser = async (req, res) => {
 
   console.log(id, req.body);
   try {
-    await UserDetails.findByIdAndUpdate(id, {$set: req.body}, {new: true});
+    const user = await UserDetails.findByIdAndUpdate(
+      id,
+      {$set: req.body},
+      {new: true}
+    );
+
+    if (!user.aadhaarNumber) {
+      await UserDetails.findByIdAndUpdate(id, {
+        $set: {aadhaarNumber: generateAadhaar()},
+      });
+    }
 
     res.status(200).json({message: 'User Updated Successfully'});
   } catch (error) {
@@ -104,6 +126,7 @@ const deleteUser = async (req, res) => {
 export default {
   createUser,
   getUser,
+  getUserByAadhaarNumber,
   getVerifiedUsers,
   getUnverifiedUsers,
   updateUser,
