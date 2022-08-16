@@ -206,7 +206,6 @@ const Address = ({ formData, setFormData }) => {
               })
             }}
             placeholder={t('ENTER_YOUR_AREA_PINCODE')}
-            pattern="[0-9]+"
           />
         </div>
       </div>

@@ -21,9 +21,6 @@ const FormTwo = ({ formData, setFormData }) => {
           })
         }}
         placeholder={t('ENTER_YOUR_MOBILE_NUMBER')}
-        pattern="[0-9]+"
-        maxLength="10"
-        minLength="10"
       />
       <Input
         id="email"
@@ -37,7 +34,6 @@ const FormTwo = ({ formData, setFormData }) => {
           })
         }}
         placeholder={t('ENTER_YOUR_EMAIL_ID')}
-        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
       />
       <SubmitButton />
     </div>

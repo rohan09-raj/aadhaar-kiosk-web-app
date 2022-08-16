@@ -59,7 +59,6 @@ const FormOne = ({ formData, setFormData }) => {
             })
           }}
           placeholder={t('ENTER_YOUR_FULL_NAME')}
-          pattern="[a-zA-z]+"
         />
 
         <div className={styles.formone__gender}>
