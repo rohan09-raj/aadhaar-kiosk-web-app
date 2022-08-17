@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useQuery } from 'react-query'
+import { getUserByAadhaar } from '../../../services/apiservice'
 import Address from '../Address/Address'
 import DocumentScanner from '../DocumentScanner/DocumentScanner'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
@@ -11,15 +13,22 @@ import {
 } from '../../../constants/RegEx'
 import UpdateSelect from '../UpdateSelect/UpdateSelect'
 import { useTranslation } from 'react-i18next'
+import { userContext } from '../../../context/User'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Demographic = () => {
   const { t } = useTranslation()
+  const { aadhaarNumber, userData, setUserData } = userContext()
+
   const [page, setPage] = useState(0)
+
+  const isLongEnough = aadhaarNumber?.toString().length > 11
 
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
-    dob: new Date().toISOString().slice(0, 10),
+    dob: '',
     mobile: '',
     email: '',
     country: '',
@@ -31,52 +40,94 @@ const Demographic = () => {
     locality: '',
     postOffice: '',
     landmark: '',
-    pincode: '',
-    address: ''
+    pincode: ''
+    // address: userData?.address
   })
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      ...userData
+    })
+  }, [userData])
+
+// Make api call using the provided aadhaar number and set the user data in the context if the api call is successful. Set form data to the user data if the api call is successful and prevent too many re-renders.
+  const { isLoading, isError, data } = useQuery(
+    'user',
+    async () => {
+      if (isLongEnough) {
+        const response = await getUserByAadhaar(aadhaarNumber)
+        return response
+      }
+    }
+  )
+
+  if (isLoading) {
+    return <div>{t('loading')}</div>
+  }
+
+  if (isError) {
+    return <div>{t('error')}</div>
+  }
+
+  if (data) {
+    setUserData(data?.data)
+  }
+
+  const address = userData?.address
+  console.log(address)
+
+  console.log(
+    'Aadhaar: ',
+    aadhaarNumber,
+    'Islong: ',
+    isLongEnough,
+    'User: ',
+    userData
+  )
 
   const handleSubmit = () => {
     if (page === 0) {
       if (formData.name === '' || formData.name.length < 1) {
-        return alert(t('PLEASE_ENTER_YOUR_NAME'))
+        toast.error(t('PLEASE_ENTER_YOUR_NAME'))
       } else if (!validString.test(formData.name)) {
-        return alert(t('PLEASE_ENTER_VALID_NAME'))
+        toast.error(t('PLEASE_ENTER_VALID_NAME'))
       } else if (formData.gender === '') {
-        return alert(t('PLEASE_SELECT_YOUR_GENDER'))
+        toast.error(t('PLEASE_SELECT_YOUR_GENDER'))
       } else if (formData.mobile === '') {
-        return alert(t('PLEASE_ENTER_YOUR_MOBILE_NUMBER'))
+        toast.error(t('PLEASE_ENTER_YOUR_MOBILE_NUMBER'))
       } else if (!validMobileNumber.test(formData.mobile)) {
-        return alert(t('PLEASE_ENTER_VALID_MOBILE_NUMBER'))
+        toast.error(t('PLEASE_ENTER_VALID_MOBILE_NUMBER'))
       } else if (formData.email === '') {
-        return alert(t('PLEASE_ENTER_YOUR_EMAIL'))
+        toast.error(t('PLEASE_ENTER_YOUR_EMAIL'))
       } else if (!validEmail.test(formData.email)) {
-        return alert(t('PLEASE_ENTER_VALID_EMAIL'))
+        toast.error(t('PLEASE_ENTER_VALID_EMAIL'))
       } else {
         setPage(page + 1)
       }
     } else if (page === 1) {
       if (formData.country === '') {
-        return alert(t('PLEASE_SELECT_YOUR_COUNTRY'))
+        toast.error(t('PLEASE_SELECT_YOUR_COUNTRY'))
       } else if (formData.state === '') {
-        return alert(t('PLEASE_SELECT_YOUR_STATE'))
+        toast.error(t('PLEASE_SELECT_YOUR_STATE'))
       } else if (formData.district === '') {
-        return alert(t('PLEASE_SELECT_YOUR_DISTRICT'))
+        toast.error(t('PLEASE_SELECT_YOUR_DISTRICT'))
       } else if (formData.village === '') {
-        return alert(t('PLEASE_ENTER_YOUR_VILLAGE'))
+        toast.error(t('PLEASE_ENTER_YOUR_VILLAGE'))
       } else if (formData.houseNo === '') {
-        return alert(t('PLEASE_ENTER_YOUR_HOUSE_NUMBER'))
+        toast.error(t('PLEASE_ENTER_YOUR_HOUSE_NUMBER'))
       } else if (formData.street === '') {
-        return alert(t('PLEASE_ENTER_YOUR_STREET'))
+        toast.error(t('PLEASE_ENTER_YOUR_STREET'))
       } else if (formData.locality === '') {
-        return alert(t('PLEASE_ENTER_YOUR_LOCALITY'))
+        toast.error(t('PLEASE_ENTER_YOUR_LOCALITY'))
       } else if (formData.postOffice === '') {
-        return alert(t('PLEASE_ENTER_YOUR_AREA_POST_OFFICE'))
+        toast.error(t('PLEASE_ENTER_YOUR_AREA_POST_OFFICE'))
       } else if (formData.landmark === '') {
-        return alert(t('PLEASE_ENTER_NEAREST_LANDMARK'))
+        toast.error(t('PLEASE_ENTER_NEAREST_LANDMARK'))
       } else if (formData.pincode === '') {
-        return alert(t('PLEASE_ENTER_YOUR_AREA_PINCODE'))
+        toast.error(t('PLEASE_ENTER_YOUR_AREA_PINCODE'))
       } else if (!validPincode.test(formData.pincode)) {
-        return alert(t('PLEASE_ENTER_VALID_PINCODE'))
+        toast.error(t('PLEASE_ENTER_VALID_PINCODE'))
       } else {
         setFormData({
           ...formData,
@@ -116,6 +167,7 @@ const Demographic = () => {
   }
   return (
     <>
+      <ToastContainer autoClose={1000} hideProgressBar={true} theme={'colored'} />
       {conditionalComponent()}
       {conditionalButton()}
     </>

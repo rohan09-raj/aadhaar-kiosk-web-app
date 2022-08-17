@@ -1,23 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import styles from './Update.module.css'
 import Input from '../../components/Input/Input'
-// import { useQuery } from 'react-query'
 import { Grid, Button } from '@mui/material'
-// import { getUserByAadhaar } from '../../services/apiservice'
-// import { validAadhaar } from '../../components/RegEx/RegEx'
+import { userContext } from '../../context/User'
 
 const Update = () => {
-  const [aadhaarNumber, setAadhaarNumber] = useState()
+  const { aadhaarNumber, setAadhaarNumber } = userContext()
   const navigate = useNavigate()
-
-  // console.log(aadhaarNumber)
-  // const user = useQuery(['user', aadhaarNumber], () =>
-  //   getUserByAadhaar(aadhaarNumber)
-  // )
-
-  // console.log(user.data.data)
 
   return (
     <>
