@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import { getUserByAadhaar } from '../../../services/apiservice'
 import Address from '../Address/Address'
@@ -25,29 +25,6 @@ const Demographic = () => {
 
   const isLongEnough = aadhaarNumber?.toString().length > 11
 
-  const { data } = useQuery(
-    ['user', aadhaarNumber],
-    () => getUserByAadhaar(aadhaarNumber),
-    {
-      enabled: isLongEnough,
-      retry: 1,
-      onSuccess: () => {
-        while (!data?.data?.name) {
-          console.log(formData.name)
-          console.log('success')
-          setUserData(data?.data)
-          console.log(data?.data)
-          console.log(userData?.name)
-          console.log(data?.data?.name)
-          setFormData({
-            ...formData,
-            name: userData?.name
-          })
-        }
-      }
-    }
-  )
-
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
@@ -66,6 +43,36 @@ const Demographic = () => {
     pincode: ''
     // address: userData?.address
   })
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      ...userData
+    })
+  }, [userData])
+
+// Make api call using the provided aadhaar number and set the user data in the context if the api call is successful. Set form data to the user data if the api call is successful and prevent too many re-renders.
+  const { isLoading, isError, data } = useQuery(
+    'user',
+    async () => {
+      if (isLongEnough) {
+        const response = await getUserByAadhaar(aadhaarNumber)
+        return response
+      }
+    }
+  )
+
+  if (isLoading) {
+    return <div>{t('loading')}</div>
+  }
+
+  if (isError) {
+    return <div>{t('error')}</div>
+  }
+
+  if (data) {
+    setUserData(data?.data)
+  }
 
   const address = userData?.address
   console.log(address)
