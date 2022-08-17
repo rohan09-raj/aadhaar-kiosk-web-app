@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import './index.css'
 import App from './App'
 import './i18nextInit'
+import { Context } from './context/User'
 
 const queryClient = new QueryClient()
 
@@ -13,7 +14,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <App />
+        <Context>
+          <App />
+        </Context>
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>

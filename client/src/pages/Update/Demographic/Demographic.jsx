@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useQuery } from 'react-query'
+import { getUserByAadhaar } from '../../../services/apiservice'
 import Address from '../Address/Address'
 import DocumentScanner from '../DocumentScanner/DocumentScanner'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
@@ -11,15 +13,43 @@ import {
 } from '../../../components/RegEx/RegEx'
 import UpdateSelect from '../UpdateSelect/UpdateSelect'
 import { useTranslation } from 'react-i18next'
+import { userContext } from '../../../context/User'
 
 const Demographic = () => {
   const { t } = useTranslation()
+  const { aadhaarNumber, userData, setUserData } = userContext()
+
   const [page, setPage] = useState(0)
+
+  const isLongEnough = aadhaarNumber?.toString().length > 11
+
+  const { data } = useQuery(
+    ['user', aadhaarNumber],
+    () => getUserByAadhaar(aadhaarNumber),
+    {
+      enabled: isLongEnough,
+      retry: 1,
+      onSuccess: () => {
+        while (!data?.data?.name) {
+          console.log(formData.name)
+          console.log('success')
+          setUserData(data?.data)
+          console.log(data?.data)
+          console.log(userData?.name)
+          console.log(data?.data?.name)
+          setFormData({
+            ...formData,
+            name: userData?.name
+          })
+        }
+      }
+    }
+  )
 
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
-    dob: new Date().toISOString().slice(0, 10),
+    dob: '',
     mobile: '',
     email: '',
     country: '',
@@ -31,9 +61,21 @@ const Demographic = () => {
     locality: '',
     postOffice: '',
     landmark: '',
-    pincode: '',
-    address: ''
+    pincode: ''
+    // address: userData?.address
   })
+
+  const address = userData?.address
+  console.log(address)
+
+  console.log(
+    'Aadhaar: ',
+    aadhaarNumber,
+    'Islong: ',
+    isLongEnough,
+    'User: ',
+    userData
+  )
 
   const handleSubmit = () => {
     if (page === 0) {
