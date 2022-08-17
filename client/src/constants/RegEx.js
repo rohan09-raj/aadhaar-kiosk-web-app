@@ -1,4 +1,4 @@
-export const validString = /^[a-zA-Z ?]+$/
+export const validString = /^[a-zA-Z]+$/
 
 export const validMobileNumber = /^[0-9]{10}$/
 
