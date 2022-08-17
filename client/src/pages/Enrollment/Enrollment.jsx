@@ -19,6 +19,8 @@ import {
 } from '../../constants/RegEx'
 import { createUser } from '../../services/apiservice'
 import { useTranslation } from 'react-i18next'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Enrollment = () => {
   const { t } = useTranslation()
@@ -55,51 +57,51 @@ const Enrollment = () => {
   const handleSubmit = () => {
     if (page === 0) {
       if (formData.indianResident === '') {
-        return alert(t('PLEASE_SELECT_YOUR_RESIDENCY'))
+        toast.error(t('PLEASE_SELECT_YOUR_RESIDENCY'))
       } else if (formData.name === '' || formData.name.length < 1) {
-        return alert(t('PLEASE_ENTER_YOUR_NAME'))
+        toast.error(t('PLEASE_ENTER_YOUR_NAME'))
       } else if (!validString.test(formData.name)) {
-        return alert(t('PLEASE_ENTER_VALID_NAME'))
+        toast.error(t('PLEASE_ENTER_VALID_NAME'))
       } else if (formData.gender === '') {
-        return alert(t('PLEASE_SELECT_YOUR_GENDER'))
+        toast.error(t('PLEASE_SELECT_YOUR_GENDER'))
       } else {
         setPage(page + 1)
       }
     } else if (page === 1) {
       if (formData.mobile === '') {
-        return alert(t('PLEASE_ENTER_YOUR_MOBILE_NUMBER'))
+        toast.error(t('PLEASE_ENTER_YOUR_MOBILE_NUMBER'))
       } else if (!validMobileNumber.test(formData.mobile)) {
-        return alert(t('PLEASE_ENTER_VALID_MOBILE_NUMBER'))
+        toast.error(t('PLEASE_ENTER_VALID_MOBILE_NUMBER'))
       } else if (formData.email === '') {
-        return alert(t('PLEASE_ENTER_YOUR_EMAIL'))
+        toast.error(t('PLEASE_ENTER_YOUR_EMAIL'))
       } else if (!validEmail.test(formData.email)) {
-        return alert(t('PLEASE_ENTER_VALID_EMAIL'))
+        toast.error(t('PLEASE_ENTER_VALID_EMAIL'))
       } else {
         setPage(page + 1)
       }
     } else if (page === 2) {
       if (formData.country === '') {
-        return alert(t('PLEASE_SELECT_YOUR_COUNTRY'))
+        toast.error(t('PLEASE_SELECT_YOUR_COUNTRY'))
       } else if (formData.state === '') {
-        return alert(t('PLEASE_SELECT_YOUR_STATE'))
+        toast.error(t('PLEASE_SELECT_YOUR_STATE'))
       } else if (formData.district === '') {
-        return alert(t('PLEASE_SELECT_YOUR_DISTRICT'))
+        toast.error(t('PLEASE_SELECT_YOUR_DISTRICT'))
       } else if (formData.village === '') {
-        return alert(t('PLEASE_ENTER_YOUR_VILLAGE'))
+        toast.error(t('PLEASE_ENTER_YOUR_VILLAGE'))
       } else if (formData.houseNo === '') {
-        return alert(t('PLEASE_ENTER_YOUR_HOUSE_NUMBER'))
+        toast.error(t('PLEASE_ENTER_YOUR_HOUSE_NUMBER'))
       } else if (formData.street === '') {
-        return alert(t('PLEASE_ENTER_YOUR_STREET'))
+        toast.error(t('PLEASE_ENTER_YOUR_STREET'))
       } else if (formData.locality === '') {
-        return alert(t('PLEASE_ENTER_YOUR_LOCALITY'))
+        toast.error(t('PLEASE_ENTER_YOUR_LOCALITY'))
       } else if (formData.postOffice === '') {
-        return alert(t('PLEASE_ENTER_YOUR_AREA_POST_OFFICE'))
+        toast.error(t('PLEASE_ENTER_YOUR_AREA_POST_OFFICE'))
       } else if (formData.landmark === '') {
-        return alert(t('PLEASE_ENTER_NEAREST_LANDMARK'))
+        toast.error(t('PLEASE_ENTER_NEAREST_LANDMARK'))
       } else if (formData.pincode === '') {
-        return alert(t('PLEASE_ENTER_YOUR_AREA_PINCODE'))
+        toast.error(t('PLEASE_ENTER_YOUR_AREA_PINCODE'))
       } else if (!validPincode.test(formData.pincode)) {
-        return alert(t('PLEASE_ENTER_VALID_PINCODE'))
+        toast.error(t('PLEASE_ENTER_VALID_PINCODE'))
       } else {
         setFormData({
           ...formData,
@@ -188,6 +190,7 @@ const Enrollment = () => {
   }
   return (
     <>
+      <ToastContainer autoClose={1000} hideProgressBar={true} theme={'colored'} />
       {conditionalComponent()}
       {conditionalButton()}
     </>
