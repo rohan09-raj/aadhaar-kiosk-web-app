@@ -33,17 +33,27 @@ const Enrollment = () => {
     dob: new Date().toISOString().slice(0, 10),
     mobile: '',
     email: '',
-    country: '',
-    state: '',
-    district: '',
-    village: '',
-    houseNo: '',
-    street: '',
-    locality: '',
-    postOffice: '',
-    landmark: '',
-    pincode: '',
-    address: '',
+    address: {
+      houseNo: '',
+      street: '',
+      locality: '',
+      landmark: '',
+      village: '',
+      district: {
+        name: '',
+        code: ''
+      },
+      state: {
+        name: '',
+        code: ''
+      },
+      country: {
+        name: '',
+        code: ''
+      },
+      postOffice: '',
+      pincode: ''
+    },
     photo: '',
     documents: {
       POI: '',
@@ -105,7 +115,7 @@ const Enrollment = () => {
       } else {
         setFormData({
           ...formData,
-          address: `${formData.houseNo} ${formData.street}, ${formData.locality}, ${formData.landmark}, ${formData.village}, ${formData.district.label}, ${formData.country.label} ${formData.pincode}`
+          address: `${formData.houseNo}, ${formData.street}, ${formData.locality}, ${formData.landmark}, ${formData.village}, ${formData.district.label}, ${formData.state.label}, ${formData.country.label}, ${formData.postOffice}, ${formData.pincode}`
         })
         setPage(page + 1)
       }
@@ -190,7 +200,11 @@ const Enrollment = () => {
   }
   return (
     <>
-      <ToastContainer autoClose={1000} hideProgressBar={true} theme={'colored'} />
+      <ToastContainer
+        autoClose={1000}
+        hideProgressBar={true}
+        theme={'colored'}
+      />
       {conditionalComponent()}
       {conditionalButton()}
     </>

@@ -45,22 +45,32 @@ const Demographic = () => {
   })
 
   useEffect(() => {
+    const address = userData?.address?.split(',')
+    const addressObj = {
+      houseNo: address[0],
+      street: address[1],
+      locality: address[2],
+      landmark: address[3],
+      village: address[4],
+      district: address[5],
+      country: address[6],
+      pincode: address[7]
+    }
+
     setFormData({
       ...formData,
-      ...userData
+      ...userData,
+      ...addressObj
     })
   }, [userData])
 
-// Make api call using the provided aadhaar number and set the user data in the context if the api call is successful. Set form data to the user data if the api call is successful and prevent too many re-renders.
-  const { isLoading, isError, data } = useQuery(
-    'user',
-    async () => {
-      if (isLongEnough) {
-        const response = await getUserByAadhaar(aadhaarNumber)
-        return response
-      }
+  // Make api call using the provided aadhaar number and set the user data in the context if the api call is successful. Set form data to the user data if the api call is successful and prevent too many re-renders.
+  const { isLoading, isError, data } = useQuery('user', async () => {
+    if (isLongEnough) {
+      const response = await getUserByAadhaar(aadhaarNumber)
+      return response
     }
-  )
+  })
 
   if (isLoading) {
     return <div>{t('loading')}</div>
@@ -77,14 +87,7 @@ const Demographic = () => {
   const address = userData?.address
   console.log(address)
 
-  console.log(
-    'Aadhaar: ',
-    aadhaarNumber,
-    'Islong: ',
-    isLongEnough,
-    'User: ',
-    userData
-  )
+  console.log('Form Data: ', formData, userData)
 
   const handleSubmit = () => {
     if (page === 0) {
@@ -131,7 +134,7 @@ const Demographic = () => {
       } else {
         setFormData({
           ...formData,
-          address: `${formData.houseNo} ${formData.street}, ${formData.locality}, ${formData.landmark}, ${formData.village}, ${formData.district.label}, ${formData.country.label} ${formData.pincode}`
+          address: `${formData.houseNo}, ${formData.street}, ${formData.locality}, ${formData.landmark}, ${formData.village}, ${formData.district.label}, ${formData.country.label}, ${formData.pincode}`
         })
         setPage(page + 1)
       }
@@ -167,7 +170,11 @@ const Demographic = () => {
   }
   return (
     <>
-      <ToastContainer autoClose={1000} hideProgressBar={true} theme={'colored'} />
+      <ToastContainer
+        autoClose={1000}
+        hideProgressBar={true}
+        theme={'colored'}
+      />
       {conditionalComponent()}
       {conditionalButton()}
     </>

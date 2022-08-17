@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input/Input'
 import { Country, State, City } from 'country-state-city'
@@ -8,8 +8,35 @@ import styles from './Address.module.css'
 import { useTranslation } from 'react-i18next'
 
 const Address = ({ formData, setFormData }) => {
+  const [tempData, setTempData] = useState({
+    country: '',
+    state: '',
+    district: ''
+  })
   const { t } = useTranslation()
   const countries = Country.getAllCountries()
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      address: {
+        country: {
+          name: tempData.country.label,
+          code: tempData.country.isoCode
+        },
+        state: {
+          name: tempData.state.label,
+          code: tempData.state.isoCode
+        },
+        district: {
+          name: tempData.district.label,
+          code: tempData.district.isoCode
+        }
+      }
+    })
+  }, [tempData])
+
+  console.log('Form Data: ', formData.address)
 
   const updatedCountries = countries.map((country) => ({
     label: country.name,
@@ -62,10 +89,10 @@ const Address = ({ formData, setFormData }) => {
                 name="country"
                 label="country"
                 options={updatedCountries}
-                value={formData.country}
+                value={tempData.country}
                 onChange={(e) => {
-                  setFormData({
-                    ...formData,
+                  setTempData({
+                    ...tempData,
                     country: e
                   })
                 }}
@@ -79,11 +106,11 @@ const Address = ({ formData, setFormData }) => {
               <Select
                 id="state"
                 name="state"
-                options={updatedStates(formData.country.isoCode)}
-                value={formData.state}
+                options={updatedStates(tempData.country.isoCode)}
+                value={tempData.state}
                 onChange={(e) => {
-                  setFormData({
-                    ...formData,
+                  setTempData({
+                    ...tempData,
                     state: e
                   })
                 }}
@@ -98,13 +125,13 @@ const Address = ({ formData, setFormData }) => {
                 id="city"
                 name="city"
                 options={updatedCities(
-                  formData.country.isoCode,
-                  formData.state.isoCode
+                  tempData.country.isoCode,
+                  tempData.state.isoCode
                 )}
-                value={formData.district}
+                value={tempData.district}
                 onChange={(e) => {
-                  setFormData({
-                    ...formData,
+                  setTempData({
+                    ...tempData,
                     district: e
                   })
                 }}
@@ -135,7 +162,9 @@ const Address = ({ formData, setFormData }) => {
             onChange={(e) => {
               setFormData({
                 ...formData,
-                houseNo: e.target.value
+                address: {
+                  houseNo: e.target.value
+                }
               })
             }}
             placeholder={t('ENTER_YOUR_HOUSE_NUMBER_APARTMENT')}
@@ -148,7 +177,9 @@ const Address = ({ formData, setFormData }) => {
             onChange={(e) => {
               setFormData({
                 ...formData,
-                street: e.target.value
+                address: {
+                  street: e.target.value
+                }
               })
             }}
             placeholder={t('ENTER_YOUR_STREET_ROAD')}
@@ -161,7 +192,9 @@ const Address = ({ formData, setFormData }) => {
             onChange={(e) => {
               setFormData({
                 ...formData,
-                locality: e.target.value
+                address: {
+                  locality: e.target.value
+                }
               })
             }}
             placeholder={t('ENTER_YOUR_AREA_LOCALITY')}
@@ -174,7 +207,9 @@ const Address = ({ formData, setFormData }) => {
             onChange={(e) => {
               setFormData({
                 ...formData,
-                postOffice: e.target.value
+                address: {
+                  postOffice: e.target.value
+                }
               })
             }}
             placeholder={t('ENTER_YOUR_AREA_POST_OFFICE')}
@@ -189,7 +224,9 @@ const Address = ({ formData, setFormData }) => {
             onChange={(e) => {
               setFormData({
                 ...formData,
-                landmark: e.target.value
+                address: {
+                  landmark: e.target.value
+                }
               })
             }}
             placeholder={t('ENTER_ANY_NEAREST_LANDMARK')}
@@ -202,7 +239,9 @@ const Address = ({ formData, setFormData }) => {
             onChange={(e) => {
               setFormData({
                 ...formData,
-                pincode: e.target.value
+                address: {
+                  pincode: e.target.value
+                }
               })
             }}
             placeholder={t('ENTER_YOUR_AREA_PINCODE')}
