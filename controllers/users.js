@@ -1,5 +1,4 @@
 import UserDetails from '../models/users';
-import sendOTP from '../services/twilio';
 import generateAadhaar from '../utils/aadhaar';
 
 const createUser = async (req, res) => {
@@ -19,7 +18,6 @@ const createUser = async (req, res) => {
   try {
     const existingUser = await UserDetails.findOne({name, mobile, email});
     if (existingUser) {
-      // sendOTP('+919696712475', 'Hi, I am Rohan Raj Gupta');
       return res.status(400).json({message: 'User already exists.'});
     }
 
