@@ -18,3 +18,8 @@ export const updateUser = async (id, payload) => {
   const response = await apiClient.patch(`/user/${id}`, payload)
   return response
 }
+
+export const sendOTP = async (payload) => {
+  const response = await apiClient.post('/otp', payload)
+  return response
+}

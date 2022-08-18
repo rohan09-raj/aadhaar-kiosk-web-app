@@ -3,7 +3,7 @@ import twilio from 'twilio';
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 
-const sendOTP = (phone, message) => {
+const sendMessage = (phone, message) => {
   const client = twilio(accountSid, authToken);
   client.messages
     .create({
@@ -14,4 +14,4 @@ const sendOTP = (phone, message) => {
     .then((message) => console.log(message.sid));
 };
 
-export default sendOTP;
+export default sendMessage;
