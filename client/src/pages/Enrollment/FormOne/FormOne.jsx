@@ -4,9 +4,11 @@ import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input/Input'
 import LabelCard from '../../../components/LabelCard/LabelCard'
 import styles from './FormOne.module.css'
+import { userContext } from '../../../context/User'
 
-const FormOne = ({ formData, setFormData }) => {
+const FormOne = () => {
   const { t } = useTranslation()
+  const { userData, setUserData } = userContext()
 
   return (
     <>
@@ -18,10 +20,10 @@ const FormOne = ({ formData, setFormData }) => {
               type="radio"
               id="indian"
               name="resident"
-              value={formData.indianResident}
+              value={userData.indianResident}
               onChange={() => {
-                setFormData({
-                  ...formData,
+                setUserData({
+                  ...userData,
                   indianResident: true
                 })
               }}
@@ -34,10 +36,10 @@ const FormOne = ({ formData, setFormData }) => {
               type="radio"
               id="indian"
               name="resident"
-              value={formData.indianResident}
+              value={userData.indianResident}
               onChange={() => {
-                setFormData({
-                  ...formData,
+                setUserData({
+                  ...userData,
                   indianResident: false
                 })
               }}
@@ -51,10 +53,10 @@ const FormOne = ({ formData, setFormData }) => {
           type="text"
           id="fullName"
           label={t('FULL_NAME')}
-          value={formData.name}
+          value={userData.name}
           onChange={(e) => {
-            setFormData({
-              ...formData,
+            setUserData({
+              ...userData,
               name: e.target.value
             })
           }}
@@ -66,10 +68,10 @@ const FormOne = ({ formData, setFormData }) => {
             id="male"
             name="gender"
             title={t('MALE')}
-            value={formData.gender}
+            value={userData.gender}
             onChange={() => {
-              setFormData({
-                ...formData,
+              setUserData({
+                ...userData,
                 gender: 'Male'
               })
             }}
@@ -78,11 +80,11 @@ const FormOne = ({ formData, setFormData }) => {
           <LabelCard
             id="female"
             name="gender"
-            value={formData.gender}
+            value={userData.gender}
             title={t('FEMALE')}
             onChange={() => {
-              setFormData({
-                ...formData,
+              setUserData({
+                ...userData,
                 gender: 'Female'
               })
             }}
@@ -91,11 +93,11 @@ const FormOne = ({ formData, setFormData }) => {
           <LabelCard
             id="trans"
             name="gender"
-            value={formData.gender}
+            value={userData.gender}
             title={t('OTHER')}
             onChange={() => {
-              setFormData({
-                ...formData,
+              setUserData({
+                ...userData,
                 gender: 'Other'
               })
             }}
@@ -110,10 +112,10 @@ const FormOne = ({ formData, setFormData }) => {
             type="date"
             id="dob"
             name="dob"
-            value={formData.dob}
+            value={userData.dob}
             onChange={(e) => {
-              setFormData({
-                ...formData,
+              setUserData({
+                ...userData,
                 dob: e.target.value
               })
             }}

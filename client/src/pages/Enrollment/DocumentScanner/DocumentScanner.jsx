@@ -14,9 +14,11 @@ import {
 } from '@mui/material'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import { useTranslation } from 'react-i18next'
+import { userContext } from '../../../context/User'
 
-const DocumentScanner = ({ formData, setFormData }) => {
+const DocumentScanner = () => {
   const { t } = useTranslation()
+  const { userData, setUserData } = userContext()
   const steps = [
     t('PROOF_OF_IDENTITY'),
     t('PROOF_OF_ADDRESS'),
@@ -45,7 +47,7 @@ const DocumentScanner = ({ formData, setFormData }) => {
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
-      setFormData({ ...formData, documents: documents })
+      setUserData({ ...userData, documents: documents })
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
   }

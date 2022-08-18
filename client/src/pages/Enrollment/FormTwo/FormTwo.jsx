@@ -3,20 +3,22 @@ import Input from '../../../components/Input/Input'
 import Header from '../../../components/Header/Header'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import { useTranslation } from 'react-i18next'
+import { userContext } from '../../../context/User'
 
-const FormTwo = ({ formData, setFormData }) => {
+const FormTwo = () => {
   const { t } = useTranslation()
+  const { userData, setUserData } = userContext()
   return (
     <div className="formtwo">
       <Header subheading={t('ENROLLMENT')} />
       <Input
         id="mobile"
-        value={formData.mobile}
+        value={userData.mobile}
         label={t('MOBILE')}
         type="text"
         onChange={(e) => {
-          setFormData({
-            ...formData,
+          setUserData({
+            ...userData,
             mobile: e.target.value
           })
         }}
@@ -24,12 +26,12 @@ const FormTwo = ({ formData, setFormData }) => {
       />
       <Input
         id="email"
-        value={formData.email}
+        value={userData.email}
         label={t('EMAIL')}
         type="email"
         onChange={(e) => {
-          setFormData({
-            ...formData,
+          setUserData({
+            ...userData,
             email: e.target.value
           })
         }}
