@@ -4,8 +4,56 @@ export const UserContext = createContext()
 
 export const Context = ({ children }) => {
   const [aadhaarNumber, setAadhaarNumber] = useState(null)
-  const [userData, setUserData] = useState({})
-  const [oriUserData, setOriUserData] = useState({})
+  const [userData, setUserData] = useState({
+    indianResident: '',
+    name: '',
+    gender: '',
+    dob: new Date().toISOString().slice(0, 10),
+    mobile: '',
+    email: '',
+    address: {
+      houseNo: '',
+      street: '',
+      locality: '',
+      landmark: '',
+      village: '',
+      district: {},
+      state: {},
+      postOffice: '',
+      pincode: ''
+    },
+    photo: '',
+    documents: {
+      POI: '',
+      POA: '',
+      DOB: ''
+    }
+  })
+  const [oriUserData, setOriUserData] = useState({
+    indianResident: '',
+    name: '',
+    gender: '',
+    dob: new Date().toISOString().slice(0, 10),
+    mobile: '',
+    email: '',
+    address: {
+      houseNo: '',
+      street: '',
+      locality: '',
+      landmark: '',
+      village: '',
+      district: {},
+      state: {},
+      postOffice: '',
+      pincode: ''
+    },
+    photo: '',
+    documents: {
+      POI: '',
+      POA: '',
+      DOB: ''
+    }
+  })
 
   const initialUser = {
     aadhaarNumber,

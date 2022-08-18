@@ -3,12 +3,14 @@ import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input/Input'
 import { State, City } from 'country-state-city'
 import Select from 'react-select'
+import { userContext } from '../../../context/User'
 
 import styles from './Address.module.css'
 import { useTranslation } from 'react-i18next'
 
-const Address = ({ formData, setFormData }) => {
+const Address = () => {
   const { t } = useTranslation()
+  const { userData, setUserData } = userContext()
 
   const updatedStates = (countryId) =>
     State.getStatesOfCountry(countryId).map((state) => ({
@@ -54,12 +56,12 @@ const Address = ({ formData, setFormData }) => {
                 id="state"
                 name="state"
                 options={updatedStates('IN')}
-                value={formData.address?.state}
+                value={userData.address?.state}
                 onChange={(e) => {
-                  setFormData({
-                    ...formData,
+                  setUserData({
+                    ...userData,
                     address: {
-                      ...formData.address,
+                      ...userData.address,
                       state: e
                     }
                   })
@@ -74,13 +76,13 @@ const Address = ({ formData, setFormData }) => {
               <Select
                 id="city"
                 name="city"
-                options={updatedCities('IN', formData.address?.state?.isoCode)}
-                value={formData.address?.district}
+                options={updatedCities('IN', userData.address?.state?.isoCode)}
+                value={userData.address?.district}
                 onChange={(e) => {
-                  setFormData({
-                    ...formData,
+                  setUserData({
+                    ...userData,
                     address: {
-                      ...formData.address,
+                      ...userData.address,
                       district: e
                     }
                   })
@@ -92,13 +94,13 @@ const Address = ({ formData, setFormData }) => {
           <Input
             id="town"
             label={t('VILLAGE_TOWN')}
-            value={formData.village}
+            value={userData.village}
             type="text"
             onChange={(e) => {
-              setFormData({
-                ...formData,
+              setUserData({
+                ...userData,
                 address: {
-                  ...formData.address,
+                  ...userData.address,
                   village: e.target.value
                 }
               })
@@ -110,13 +112,13 @@ const Address = ({ formData, setFormData }) => {
           <Input
             id="houseNo"
             label={t('HOUSE_NUMBER_APARTMENT')}
-            value={formData.houseNo}
+            value={userData.houseNo}
             type="text"
             onChange={(e) => {
-              setFormData({
-                ...formData,
+              setUserData({
+                ...userData,
                 address: {
-                  ...formData.address,
+                  ...userData.address,
                   houseNo: e.target.value
                 }
               })
@@ -126,13 +128,13 @@ const Address = ({ formData, setFormData }) => {
           <Input
             id="street"
             label={t('STREET_ROAD')}
-            value={formData.street}
+            value={userData.street}
             type="text"
             onChange={(e) => {
-              setFormData({
-                ...formData,
+              setUserData({
+                ...userData,
                 address: {
-                  ...formData.address,
+                  ...userData.address,
                   street: e.target.value
                 }
               })
@@ -142,13 +144,13 @@ const Address = ({ formData, setFormData }) => {
           <Input
             id="locality"
             label={t('AREA_LOCALITY')}
-            value={formData.locality}
+            value={userData.locality}
             type="text"
             onChange={(e) => {
-              setFormData({
-                ...formData,
+              setUserData({
+                ...userData,
                 address: {
-                  ...formData.address,
+                  ...userData.address,
                   locality: e.target.value
                 }
               })
@@ -158,13 +160,13 @@ const Address = ({ formData, setFormData }) => {
           <Input
             id="postOffice"
             label={t('POST_OFFICE')}
-            value={formData.postOffice}
+            value={userData.postOffice}
             type="text"
             onChange={(e) => {
-              setFormData({
-                ...formData,
+              setUserData({
+                ...userData,
                 address: {
-                  ...formData.address,
+                  ...userData.address,
                   postOffice: e.target.value
                 }
               })
@@ -176,13 +178,13 @@ const Address = ({ formData, setFormData }) => {
           <Input
             id="landmark"
             label={t('LANDMARK')}
-            value={formData.landmark}
+            value={userData.landmark}
             type="text"
             onChange={(e) => {
-              setFormData({
-                ...formData,
+              setUserData({
+                ...userData,
                 address: {
-                  ...formData.address,
+                  ...userData.address,
                   landmark: e.target.value
                 }
               })
@@ -192,13 +194,13 @@ const Address = ({ formData, setFormData }) => {
           <Input
             id="pincode"
             label={t('PINCODE')}
-            value={formData.pincode}
+            value={userData.pincode}
             type="text"
             onChange={(e) => {
-              setFormData({
-                ...formData,
+              setUserData({
+                ...userData,
                 address: {
-                  ...formData.address,
+                  ...userData.address,
                   pincode: e.target.value
                 }
               })

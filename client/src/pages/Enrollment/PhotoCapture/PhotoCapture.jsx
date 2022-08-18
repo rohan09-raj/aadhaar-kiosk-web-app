@@ -7,22 +7,23 @@ import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import styles from './PhotoCapture.module.css'
 import { Button, Grid, Typography } from '@mui/material'
 import { t } from 'i18next'
+import { userContext } from '../../../context/User'
 
-const PhotoCapture = ({ formData, setFormData }) => {
+const PhotoCapture = () => {
   const navigate = useNavigate()
-
+  const { userData, setUserData } = userContext()
   const webcamRef = React.useRef(null)
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot()
-    setFormData({ ...formData, photo: imageSrc })
+    setUserData({ ...userData, photo: imageSrc })
   })
 
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
       <div className={styles.card__container}>
-        {formData.photo === '' ? (
+        {!userData.photo ? (
           <Webcam
             audio={false}
             height={400}
@@ -36,7 +37,7 @@ const PhotoCapture = ({ formData, setFormData }) => {
             }}
           />
         ) : (
-          <img src={formData.photo} />
+          <img src={userData.photo} />
         )}
       </div>
       <Grid container columnSpacing={10} justifyContent="center">
@@ -62,7 +63,7 @@ const PhotoCapture = ({ formData, setFormData }) => {
             variant="contained"
             onClick={(e) => {
               e.preventDefault()
-              setFormData({ ...formData, photo: '' })
+              setUserData({ ...userData, photo: '' })
             }}
           >
             {t('RESET')}
