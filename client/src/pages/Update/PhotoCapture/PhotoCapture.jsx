@@ -1,5 +1,5 @@
 /* eslint-disable multiline-ternary */
-import React, { useState } from 'react'
+import React from 'react'
 import Webcam from 'react-webcam'
 import { useNavigate } from 'react-router-dom'
 import Header from '../../../components/Header/Header'
@@ -7,10 +7,11 @@ import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import styles from './PhotoCapture.module.css'
 import { Button, Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import { userContext } from '../../../context/User'
 
 const PhotoCapture = () => {
   const { t } = useTranslation()
-  const [photo, setPhoto] = useState()
+  const { userData, setUserData, oriUserData } = userContext()
 
   const navigate = useNavigate()
 
@@ -18,14 +19,25 @@ const PhotoCapture = () => {
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot()
-    setPhoto(imageSrc)
+    setUserData({ ...userData, photo: imageSrc })
   })
+
+  console.log(oriUserData.photo)
+
+  const handleSubmit = () => {
+    console.log(userData.photo)
+    if (userData.photo) {
+      navigate('/enrollment/documents')
+    }
+  }
+
+  console.log(userData?.photo)
 
   return (
     <>
       <Header subheading={t('UPDATE')} />
       <div className={styles.card__container}>
-        {photo === '' ? (
+        {userData?.photo === '' ? (
           <Webcam
             audio={false}
             height={300}
@@ -39,7 +51,7 @@ const PhotoCapture = () => {
             }}
           />
         ) : (
-          <img src={photo} />
+          <img src={userData?.photo} />
         )}
       </div>
       <Grid container columnSpacing={10} justifyContent="center">
@@ -65,7 +77,7 @@ const PhotoCapture = () => {
             variant="contained"
             onClick={(e) => {
               e.preventDefault()
-              setPhoto('')
+              setUserData({ ...userData, photo: '' })
             }}
           >
             {t('RESET')}
@@ -84,7 +96,7 @@ const PhotoCapture = () => {
           </Typography>
         </Grid>
       </div>
-      <SubmitButton onClick={() => navigate('/enrollment/documents')} />
+      <SubmitButton onClick={() => handleSubmit} />
     </>
   )
 }

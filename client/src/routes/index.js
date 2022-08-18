@@ -9,6 +9,7 @@ import UpdateSelect from '../pages/Update/UpdateSelect/UpdateSelect'
 import Biometric from '../pages/Update/Biometric/Biometric'
 import Agreement from '../pages/Update/Agreement/Agreement'
 import FinalSlip from '../pages/Update/FinalSlip/FinalSlip'
+import Otp from '../pages/Update/Otp/Otp'
 
 const Index = () => {
   return (
@@ -19,6 +20,7 @@ const Index = () => {
       </Route>
       <Route path="update">
         <Route index element={<Update />} />
+        <Route path="otp" element={<Otp />} />
         <Route path="select-update" element={<UpdateSelect />} />
         <Route path="demographic" element={<Demographic />} />
         <Route path="biometric" element={<Biometric />} />

@@ -13,7 +13,7 @@ import { updateUser } from '../../../services/apiservice'
 
 const Agreement = () => {
   const { userData } = userContext()
-  const updateUse = useMutation(() => updateUser(userData._id, ...userData))
+  const updateUse = useMutation(() => updateUser(userData._id, { ...userData }))
 
   const { t } = useTranslation()
   return (

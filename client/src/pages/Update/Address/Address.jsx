@@ -55,6 +55,8 @@ const Address = () => {
     setEditable2(!editable2)
   }
 
+  console.log(userData.address.village)
+
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
@@ -68,7 +70,7 @@ const Address = () => {
                   id="state"
                   name="state"
                   options={updatedStates('IN')}
-                  value={userData.address.state}
+                  defaultValue={userData.address.state}
                   isDisabled={editable1}
                   isSearchable={!editable1}
                   onChange={(e) => {
@@ -97,7 +99,7 @@ const Address = () => {
                   id="city"
                   name="city"
                   options={updatedCities('IN', userData.address.state.isoCode)}
-                  value={userData.address.district}
+                  defaultValue={userData.address.district}
                   isDisabled={editable2}
                   isSearchable={!editable2}
                   onChange={(e) => {
@@ -121,7 +123,7 @@ const Address = () => {
           <UpdateInput
             id="town"
             label={t('VILLAGE_TOWN')}
-            value={userData.address.village}
+            defaultValue={userData.address.village}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -139,7 +141,7 @@ const Address = () => {
           <UpdateInput
             id="houseNo"
             label={t('HOUSE_NUMBER_APARTMENT')}
-            value={userData.address.houseNo}
+            defaultValue={userData.address.houseNo}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -155,7 +157,7 @@ const Address = () => {
           <UpdateInput
             id="street"
             label={t('STREET_ROAD')}
-            value={userData.address.street}
+            defaultValue={userData.address.street}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -171,7 +173,7 @@ const Address = () => {
           <UpdateInput
             id="locality"
             label={t('AREA_LOCALITY')}
-            value={userData.address.locality}
+            defaultValue={userData.address.locality}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -187,7 +189,7 @@ const Address = () => {
           <UpdateInput
             id="postOffice"
             label={t('POST_OFFICE')}
-            value={userData.address.postOffice}
+            defaultValue={userData.address.postOffice}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -205,7 +207,7 @@ const Address = () => {
           <UpdateInput
             id="landmark"
             label={t('LANDMARK')}
-            value={userData.address.landmark}
+            defaultValue={userData.address.landmark}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -221,7 +223,7 @@ const Address = () => {
           <UpdateInput
             id="pincode"
             label={t('PINCODE')}
-            value={userData.address.pincode}
+            defaultValue={userData.address.pincode}
             type="text"
             onChange={(e) => {
               setUserData({

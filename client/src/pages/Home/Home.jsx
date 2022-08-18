@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Card from '../../components/Card/Card'
 import Header from '../../components/Header/Header'
 import LanguageSelect from '../../components/LanguageSelect/LanguageSelect'
+import PopUpModal from '../../components/Modal/Modal'
 import styles from './Home.module.css'
 
 const Home = ({ page, setPage }) => {
@@ -11,6 +12,7 @@ const Home = ({ page, setPage }) => {
   return (
     <>
       <Header subheading={t('MERA_AADHAAR_MERI_PEHCHAN')} />
+      <PopUpModal />
       <LanguageSelect />
       <div className={styles.card__container}>
         <Link to="/enrollment">

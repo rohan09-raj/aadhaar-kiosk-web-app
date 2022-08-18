@@ -5,12 +5,15 @@ export const UserContext = createContext()
 export const Context = ({ children }) => {
   const [aadhaarNumber, setAadhaarNumber] = useState(null)
   const [userData, setUserData] = useState({})
+  const [oriUserData, setOriUserData] = useState({})
 
   const initialUser = {
     aadhaarNumber,
     setAadhaarNumber,
     userData,
-    setUserData
+    setUserData,
+    oriUserData,
+    setOriUserData
   }
 
   return (
