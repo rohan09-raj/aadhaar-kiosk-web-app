@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { useQuery } from 'react-query'
-import { getUserByAadhaar } from '../../../services/apiservice'
 import Address from '../Address/Address'
 import DocumentScanner from '../DocumentScanner/DocumentScanner'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
@@ -19,31 +17,9 @@ import 'react-toastify/dist/ReactToastify.css'
 
 const Demographic = () => {
   const { t } = useTranslation()
-  const { aadhaarNumber, userData, setUserData } = userContext()
+  const { userData } = userContext()
 
   const [page, setPage] = useState(0)
-
-  const isLongEnough = aadhaarNumber?.toString().length > 11
-
-  // Make api call using the provided aadhaar number and set the user data in the context if the api call is successful. Set form data to the user data if the api call is successful and prevent too many re-renders.
-  const { isLoading, isError, data } = useQuery('user', async () => {
-    if (isLongEnough) {
-      const response = await getUserByAadhaar(aadhaarNumber)
-      return response
-    }
-  })
-
-  if (isLoading) {
-    return <div>{t('loading')}</div>
-  }
-
-  if (isError) {
-    return <div>{t('error')}</div>
-  }
-
-  if (data) {
-    setUserData(data?.data)
-  }
 
   const handleSubmit = () => {
     if (page === 0) {

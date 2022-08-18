@@ -17,13 +17,55 @@ import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
 
 const DocumentScanner = () => {
-  const { userData, setUserData } = userContext()
+  const { userData, oriUserData, setUserData } = userContext()
   const { t } = useTranslation()
-  const steps = [
-    t('PROOF_OF_IDENTITY'),
-    t('PROOF_OF_ADDRESS'),
-    t('PROOF_OF_DOB')
-  ]
+
+  // JSON.stringify(oriUserData?.address) ===
+  let steps
+
+  // use conditional statements to compare userData and oriUserData to determine the steps
+  // 1st case: if only address is changed, then step=['POA']
+  // 2nd case: if only either name or gender is changed, then step=['POI']
+  // 3rd case: if only dob is changed, then step=['DOB']
+  // 4th case: If only address and name or gender is changed, then step=['POA', 'POI']
+  // 5th case: If only address and dob is changed, then step=['POA', 'DOB']
+  // 6th case: If only name or gender and dob is changed, then step=['POI', 'DOB']
+  // 7th case: If everything is changed, then step=['POA', 'POI', 'DOB']
+  if (
+    (userData.address !== oriUserData.address &&
+      userData.dob !== oriUserData.dob &&
+      userData.name !== oriUserData.name) ||
+    userData.gender !== oriUserData.gender
+  ) {
+    steps = ['POA', 'POI', 'DOB']
+  } else {
+    if (userData.address !== oriUserData.address) {
+      if (
+        userData.name !== oriUserData.name ||
+        userData.gender !== oriUserData.gender
+      ) {
+        steps = ['POA', 'POI']
+      } else if (userData.dob !== oriUserData.dob) {
+        steps = ['POA', 'DOB']
+      } else {
+        steps = ['POA']
+      }
+    } else if (
+      userData.name !== oriUserData.name ||
+      userData.gender !== oriUserData.gender
+    ) {
+      if (userData.dob !== oriUserData.dob) {
+        steps = ['POI', 'DOB']
+      } else {
+        steps = ['POI']
+      }
+    } else if (userData.dob !== oriUserData.dob) {
+      steps = ['DOB']
+    } else {
+      steps = []
+    }
+  }
+
   const [documents, setDocuments] = useState({ POI: '', POA: '', DOB: '' })
   const [activeStep, setActiveStep] = React.useState(0)
 
