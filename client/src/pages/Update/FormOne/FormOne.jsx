@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../../../components/Header/Header'
 import UpdateInput from '../../../components/UpdateInput/UpdateInput'
 import styles from './FormOne.module.css'
@@ -16,6 +16,11 @@ const FormOne = () => {
   const handleEdit = () => {
     setEditable(!editable)
   }
+
+  useEffect(() => {
+    console.log(userData.gender)
+    document.getElementById(`${userData.gender}`).checked = 'checked'
+  }, [userData.gender])
 
   return (
     <>
