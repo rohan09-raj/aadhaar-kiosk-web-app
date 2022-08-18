@@ -22,11 +22,13 @@ import { useTranslation } from 'react-i18next'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { userContext } from '../../context/User'
+import { useNavigate } from 'react-router-dom'
 
 const Enrollment = () => {
   const { t } = useTranslation()
   const [page, setPage] = useState(0)
-  const { userData } = userContext()
+  const { userData, setUserData } = userContext()
+  const navigate = useNavigate()
 
   const { mutate } = useMutation((payload) => createUser(payload))
 
@@ -98,26 +100,33 @@ const Enrollment = () => {
     } else if (page === 7) {
       setPage(page + 1)
     } else if (page === 8) {
-      mutate({
-        indianResident: userData.indianResident,
-        name: userData.name,
-        gender: userData.gender,
-        dob: userData.dob,
-        mobile: userData.mobile,
-        email: userData.email,
-        address: userData.address,
-        photo: userData.photo,
-        documents: {
-          POI: userData.documents.POI,
-          POA: userData.documents.POA,
-          DOB: userData.documents.DOB
+      mutate(
+        {
+          indianResident: userData.indianResident,
+          name: userData.name,
+          gender: userData.gender,
+          dob: userData.dob,
+          mobile: userData.mobile,
+          email: userData.email,
+          address: userData.address,
+          photo: userData.photo,
+          documents: {
+            POI: userData.documents.POI,
+            POA: userData.documents.POA,
+            DOB: userData.documents.DOB
+          }
+        },
+        {
+          onSuccess: () => {
+            setUserData(null)
+            navigate('/')
+          }
         }
-      })
-      setPage(page + 1)
+      )
     }
   }
 
-console.log(userData)
+  console.log(userData)
 
   const conditionalComponent = () => {
     switch (page) {
