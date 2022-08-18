@@ -17,7 +17,7 @@ const Gender = ({ formData, setFormData }) => {
         id="male"
         name="gender"
         title={t('MALE')}
-        value={formData.gender}
+        value={formData?.gender}
         readOnly={editable}
         onChange={() => {
           setFormData({
@@ -30,7 +30,7 @@ const Gender = ({ formData, setFormData }) => {
       <LabelCard
         id="female"
         name="gender"
-        value={formData.gender}
+        value={formData?.gender}
         title={t('FEMALE')}
         readOnly={editable}
         onChange={() => {
@@ -44,7 +44,7 @@ const Gender = ({ formData, setFormData }) => {
       <LabelCard
         id="trans"
         name="gender"
-        value={formData.gender}
+        value={formData?.gender}
         title={t('OTHER')}
         readOnly={editable}
         onChange={() => {

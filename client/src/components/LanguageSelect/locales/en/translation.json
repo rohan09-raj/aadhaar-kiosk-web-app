@@ -79,5 +79,8 @@
   "FINGERPRINT_SCAN": "Fingerprint Scan",
   "IRIS_SCAN": "Iris Scan",
   "DEMOGRAPHIC": "Demographic",
-  "BIOMETRIC": "Biometric"
+  "BIOMETRIC": "Biometric",
+  "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_IDENTITY": "Please take the picture of the Proof of Identity",
+  "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_ADDRESS": "Please take the picture of the Proof of Identity",
+  "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_DATE_OF_BIRTH": "Please take the picture of the Proof of Date of Birth"
 }

@@ -39,18 +39,8 @@ const Enrollment = () => {
       locality: '',
       landmark: '',
       village: '',
-      district: {
-        name: '',
-        code: ''
-      },
-      state: {
-        name: '',
-        code: ''
-      },
-      country: {
-        name: '',
-        code: ''
-      },
+      district: {},
+      state: {},
       postOffice: '',
       pincode: ''
     },
@@ -90,39 +80,41 @@ const Enrollment = () => {
         setPage(page + 1)
       }
     } else if (page === 2) {
-      if (formData.country === '') {
-        toast.error(t('PLEASE_SELECT_YOUR_COUNTRY'))
-      } else if (formData.state === '') {
+      if (formData.address.state.name === '') {
         toast.error(t('PLEASE_SELECT_YOUR_STATE'))
-      } else if (formData.district === '') {
+      } else if (formData.address.district.name === '') {
         toast.error(t('PLEASE_SELECT_YOUR_DISTRICT'))
-      } else if (formData.village === '') {
+      } else if (formData.address.village === '') {
         toast.error(t('PLEASE_ENTER_YOUR_VILLAGE'))
-      } else if (formData.houseNo === '') {
+      } else if (formData.address.houseNo === '') {
         toast.error(t('PLEASE_ENTER_YOUR_HOUSE_NUMBER'))
-      } else if (formData.street === '') {
+      } else if (formData.address.street === '') {
         toast.error(t('PLEASE_ENTER_YOUR_STREET'))
-      } else if (formData.locality === '') {
+      } else if (formData.address.locality === '') {
         toast.error(t('PLEASE_ENTER_YOUR_LOCALITY'))
-      } else if (formData.postOffice === '') {
+      } else if (formData.address.postOffice === '') {
         toast.error(t('PLEASE_ENTER_YOUR_AREA_POST_OFFICE'))
-      } else if (formData.landmark === '') {
+      } else if (formData.address.landmark === '') {
         toast.error(t('PLEASE_ENTER_NEAREST_LANDMARK'))
-      } else if (formData.pincode === '') {
+      } else if (formData.address.pincode === '') {
         toast.error(t('PLEASE_ENTER_YOUR_AREA_PINCODE'))
-      } else if (!validPincode.test(formData.pincode)) {
+      } else if (!validPincode.test(formData.address.pincode)) {
         toast.error(t('PLEASE_ENTER_VALID_PINCODE'))
       } else {
-        setFormData({
-          ...formData,
-          address: `${formData.houseNo}, ${formData.street}, ${formData.locality}, ${formData.landmark}, ${formData.village}, ${formData.district.label}, ${formData.state.label}, ${formData.country.label}, ${formData.postOffice}, ${formData.pincode}`
-        })
         setPage(page + 1)
       }
     } else if (page === 3) {
       setPage(page + 1)
     } else if (page === 4) {
-      setPage(page + 1)
+      if (formData.documents.POI === '') {
+        toast.error(t('PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_IDENTITY'))
+      } else if (formData.documents.POA === '') {
+        toast.error(t('PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_ADDRESS'))
+      } else if (formData.documents.DOB === '') {
+        toast.error(t('PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_DATE_OF_BIRTH'))
+      } else {
+        setPage(page + 1)
+      }
     } else if (page === 5) {
       setPage(page + 1)
     } else if (page === 6) {

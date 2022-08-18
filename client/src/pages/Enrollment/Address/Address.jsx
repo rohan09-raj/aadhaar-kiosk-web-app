@@ -1,48 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input/Input'
-import { Country, State, City } from 'country-state-city'
+import { State, City } from 'country-state-city'
 import Select from 'react-select'
 
 import styles from './Address.module.css'
 import { useTranslation } from 'react-i18next'
 
 const Address = ({ formData, setFormData }) => {
-  const [tempData, setTempData] = useState({
-    country: '',
-    state: '',
-    district: ''
-  })
   const { t } = useTranslation()
-  const countries = Country.getAllCountries()
-
-  useEffect(() => {
-    setFormData({
-      ...formData,
-      address: {
-        country: {
-          name: tempData.country.label,
-          code: tempData.country.isoCode
-        },
-        state: {
-          name: tempData.state.label,
-          code: tempData.state.isoCode
-        },
-        district: {
-          name: tempData.district.label,
-          code: tempData.district.isoCode
-        }
-      }
-    })
-  }, [tempData])
-
-  console.log('Form Data: ', formData.address)
-
-  const updatedCountries = countries.map((country) => ({
-    label: country.name,
-    value: country.id,
-    ...country
-  }))
 
   const updatedStates = (countryId) =>
     State.getStatesOfCountry(countryId).map((state) => ({
@@ -83,35 +49,19 @@ const Address = ({ formData, setFormData }) => {
         <div className={styles.address__container}>
           <div className={styles.input}>
             <div className={styles.input__container}>
-              <label htmlFor="country">{t('COUNTRY')}</label>
-              <Select
-                id="country"
-                name="country"
-                label="country"
-                options={updatedCountries}
-                value={tempData.country}
-                onChange={(e) => {
-                  setTempData({
-                    ...tempData,
-                    country: e
-                  })
-                }}
-                styles={customStyles}
-              />
-            </div>
-          </div>
-          <div className={styles.input}>
-            <div className={styles.input__container}>
               <label htmlFor="state">{t('STATE')}</label>
               <Select
                 id="state"
                 name="state"
-                options={updatedStates(tempData.country.isoCode)}
-                value={tempData.state}
+                options={updatedStates('IN')}
+                value={formData.address?.state}
                 onChange={(e) => {
-                  setTempData({
-                    ...tempData,
-                    state: e
+                  setFormData({
+                    ...formData,
+                    address: {
+                      ...formData.address,
+                      state: e
+                    }
                   })
                 }}
                 styles={customStyles}
@@ -124,15 +74,15 @@ const Address = ({ formData, setFormData }) => {
               <Select
                 id="city"
                 name="city"
-                options={updatedCities(
-                  tempData.country.isoCode,
-                  tempData.state.isoCode
-                )}
-                value={tempData.district}
+                options={updatedCities('IN', formData.address?.state?.isoCode)}
+                value={formData.address?.district}
                 onChange={(e) => {
-                  setTempData({
-                    ...tempData,
-                    district: e
+                  setFormData({
+                    ...formData,
+                    address: {
+                      ...formData.address,
+                      district: e
+                    }
                   })
                 }}
                 styles={customStyles}
@@ -147,7 +97,10 @@ const Address = ({ formData, setFormData }) => {
             onChange={(e) => {
               setFormData({
                 ...formData,
-                village: e.target.value
+                address: {
+                  ...formData.address,
+                  village: e.target.value
+                }
               })
             }}
             placeholder={t('ENTER_YOUR_VILLAGE_TOWN')}
@@ -163,6 +116,7 @@ const Address = ({ formData, setFormData }) => {
               setFormData({
                 ...formData,
                 address: {
+                  ...formData.address,
                   houseNo: e.target.value
                 }
               })
@@ -178,6 +132,7 @@ const Address = ({ formData, setFormData }) => {
               setFormData({
                 ...formData,
                 address: {
+                  ...formData.address,
                   street: e.target.value
                 }
               })
@@ -193,6 +148,7 @@ const Address = ({ formData, setFormData }) => {
               setFormData({
                 ...formData,
                 address: {
+                  ...formData.address,
                   locality: e.target.value
                 }
               })
@@ -208,6 +164,7 @@ const Address = ({ formData, setFormData }) => {
               setFormData({
                 ...formData,
                 address: {
+                  ...formData.address,
                   postOffice: e.target.value
                 }
               })
@@ -225,6 +182,7 @@ const Address = ({ formData, setFormData }) => {
               setFormData({
                 ...formData,
                 address: {
+                  ...formData.address,
                   landmark: e.target.value
                 }
               })
@@ -240,6 +198,7 @@ const Address = ({ formData, setFormData }) => {
               setFormData({
                 ...formData,
                 address: {
+                  ...formData.address,
                   pincode: e.target.value
                 }
               })

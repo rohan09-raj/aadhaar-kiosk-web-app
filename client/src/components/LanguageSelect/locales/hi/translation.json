@@ -73,5 +73,8 @@
   "FINGERPRINT_SCAN": "फिंगरप्रिंट स्कैन",
   "IRIS_SCAN": "आइरिस स्कैन",
   "DEMOGRAPHIC": "जनसांख्यिकीय",
-  "BIOMETRIC": "बायोमेट्रिक"
+  "BIOMETRIC": "बायोमेट्रिक",
+  "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_IDENTITY": "कृपया पहचान प्रमाण पत्र की तस्वीर लें",
+  "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_ADDRESS": "कृपया पते के प्रमाण की तस्वीर लें",
+  "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_DATE_OF_BIRTH": "कृपया जन्मतिथि के प्रमाण की तस्वीर लें"
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import { getUserByAadhaar } from '../../../services/apiservice'
 import Address from '../Address/Address'
@@ -25,45 +25,6 @@ const Demographic = () => {
 
   const isLongEnough = aadhaarNumber?.toString().length > 11
 
-  const [formData, setFormData] = useState({
-    name: '',
-    gender: '',
-    dob: '',
-    mobile: '',
-    email: '',
-    country: '',
-    state: '',
-    district: '',
-    village: '',
-    houseNo: '',
-    street: '',
-    locality: '',
-    postOffice: '',
-    landmark: '',
-    pincode: ''
-    // address: userData?.address
-  })
-
-  useEffect(() => {
-    const address = userData?.address?.split(',')
-    const addressObj = {
-      houseNo: address[0],
-      street: address[1],
-      locality: address[2],
-      landmark: address[3],
-      village: address[4],
-      district: address[5],
-      country: address[6],
-      pincode: address[7]
-    }
-
-    setFormData({
-      ...formData,
-      ...userData,
-      ...addressObj
-    })
-  }, [userData])
-
   // Make api call using the provided aadhaar number and set the user data in the context if the api call is successful. Set form data to the user data if the api call is successful and prevent too many re-renders.
   const { isLoading, isError, data } = useQuery('user', async () => {
     if (isLongEnough) {
@@ -84,58 +45,49 @@ const Demographic = () => {
     setUserData(data?.data)
   }
 
-  const address = userData?.address
-  console.log(address)
-
-  console.log('Form Data: ', formData, userData)
-
   const handleSubmit = () => {
     if (page === 0) {
-      if (formData.name === '' || formData.name.length < 1) {
+      if (userData.name === '' || userData.name.length < 1) {
         toast.error(t('PLEASE_ENTER_YOUR_NAME'))
-      } else if (!validString.test(formData.name)) {
+      } else if (!validString.test(userData.name)) {
         toast.error(t('PLEASE_ENTER_VALID_NAME'))
-      } else if (formData.gender === '') {
+      } else if (userData.gender === '') {
         toast.error(t('PLEASE_SELECT_YOUR_GENDER'))
-      } else if (formData.mobile === '') {
+      } else if (userData.mobile === '') {
         toast.error(t('PLEASE_ENTER_YOUR_MOBILE_NUMBER'))
-      } else if (!validMobileNumber.test(formData.mobile)) {
+      } else if (!validMobileNumber.test(userData.mobile)) {
         toast.error(t('PLEASE_ENTER_VALID_MOBILE_NUMBER'))
-      } else if (formData.email === '') {
+      } else if (userData.email === '') {
         toast.error(t('PLEASE_ENTER_YOUR_EMAIL'))
-      } else if (!validEmail.test(formData.email)) {
+      } else if (!validEmail.test(userData.email)) {
         toast.error(t('PLEASE_ENTER_VALID_EMAIL'))
       } else {
         setPage(page + 1)
       }
     } else if (page === 1) {
-      if (formData.country === '') {
+      if (userData.country === '') {
         toast.error(t('PLEASE_SELECT_YOUR_COUNTRY'))
-      } else if (formData.state === '') {
+      } else if (userData.address.state.name === '') {
         toast.error(t('PLEASE_SELECT_YOUR_STATE'))
-      } else if (formData.district === '') {
+      } else if (userData.address.district.name === '') {
         toast.error(t('PLEASE_SELECT_YOUR_DISTRICT'))
-      } else if (formData.village === '') {
+      } else if (userData.address.village === '') {
         toast.error(t('PLEASE_ENTER_YOUR_VILLAGE'))
-      } else if (formData.houseNo === '') {
+      } else if (userData.address.houseNo === '') {
         toast.error(t('PLEASE_ENTER_YOUR_HOUSE_NUMBER'))
-      } else if (formData.street === '') {
+      } else if (userData.address.street === '') {
         toast.error(t('PLEASE_ENTER_YOUR_STREET'))
-      } else if (formData.locality === '') {
+      } else if (userData.address.locality === '') {
         toast.error(t('PLEASE_ENTER_YOUR_LOCALITY'))
-      } else if (formData.postOffice === '') {
+      } else if (userData.address.postOffice === '') {
         toast.error(t('PLEASE_ENTER_YOUR_AREA_POST_OFFICE'))
-      } else if (formData.landmark === '') {
+      } else if (userData.address.landmark === '') {
         toast.error(t('PLEASE_ENTER_NEAREST_LANDMARK'))
-      } else if (formData.pincode === '') {
+      } else if (userData.address.pincode === '') {
         toast.error(t('PLEASE_ENTER_YOUR_AREA_PINCODE'))
-      } else if (!validPincode.test(formData.pincode)) {
+      } else if (!validPincode.test(userData.address.pincode)) {
         toast.error(t('PLEASE_ENTER_VALID_PINCODE'))
       } else {
-        setFormData({
-          ...formData,
-          address: `${formData.houseNo}, ${formData.street}, ${formData.locality}, ${formData.landmark}, ${formData.village}, ${formData.district.label}, ${formData.country.label}, ${formData.pincode}`
-        })
         setPage(page + 1)
       }
     } else if (page === 3) {
@@ -146,11 +98,11 @@ const Demographic = () => {
   const conditionalComponent = () => {
     switch (page) {
       case 0:
-        return <FormOne formData={formData} setFormData={setFormData} />
+        return <FormOne />
       case 1:
-        return <Address formData={formData} setFormData={setFormData} />
+        return <Address />
       case 2:
-        return <DocumentScanner formData={formData} setFormData={setFormData} />
+        return <DocumentScanner />
       default:
         return <UpdateSelect />
     }

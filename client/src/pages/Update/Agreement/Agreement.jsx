@@ -7,8 +7,14 @@ import { Grid, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import { useTranslation } from 'react-i18next'
+import { userContext } from '../../../context/User'
+import { useMutation } from 'react-query'
+import { updateUser } from '../../../services/apiservice'
 
 const Agreement = () => {
+  const { userData } = userContext()
+  const updateUse = useMutation(() => updateUser(userData._id, ...userData))
+
   const { t } = useTranslation()
   return (
     <>
@@ -47,7 +53,7 @@ const Agreement = () => {
         </Grid>
       </Grid>
       <Link to="/update/final-slip">
-        <SubmitButton />
+        <SubmitButton onClick={() => updateUse.mutate()} />
       </Link>
     </>
   )

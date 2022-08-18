@@ -5,8 +5,10 @@ import styles from './FormOne.module.css'
 import EditButton from '../../../components/EditButton/EditButton'
 import Gender from '../../../components/Gender/Gender'
 import { useTranslation } from 'react-i18next'
+import { userContext } from '../../../context/User'
 
-const FormOne = ({ formData, setFormData }) => {
+const FormOne = () => {
+  const { userData, setUserData } = userContext()
   const { t } = useTranslation()
 
   const [editable, setEditable] = React.useState(true)
@@ -23,10 +25,10 @@ const FormOne = ({ formData, setFormData }) => {
           type="text"
           id="fullName"
           label={t('FULL_NAME')}
-          value={formData.name}
+          value={userData?.name}
           onChange={(e) => {
-            setFormData({
-              ...formData,
+            setUserData({
+              ...userData,
               name: e.target.value
             })
           }}
@@ -35,12 +37,12 @@ const FormOne = ({ formData, setFormData }) => {
 
         <UpdateInput
           id="mobile"
-          value={formData.mobile}
+          value={userData?.mobile}
           label={t('MOBILE')}
           type="text"
           onChange={(e) => {
-            setFormData({
-              ...formData,
+            setUserData({
+              ...userData,
               mobile: e.target.value
             })
           }}
@@ -55,11 +57,11 @@ const FormOne = ({ formData, setFormData }) => {
               type="date"
               id="dob"
               name="dob"
-              value={formData.dob}
+              value={userData?.dob}
               readOnly={editable}
               onChange={(e) => {
-                setFormData({
-                  ...formData,
+                setUserData({
+                  ...userData,
                   dob: e.target.value
                 })
               }}
@@ -71,19 +73,19 @@ const FormOne = ({ formData, setFormData }) => {
 
         <UpdateInput
           id="email"
-          value={formData.email}
+          value={userData?.email}
           label={t('EMAIL')}
           type="email"
           onChange={(e) => {
-            setFormData({
-              ...formData,
+            setUserData({
+              ...userData,
               email: e.target.value
             })
           }}
           placeholder={t('ENTER_YOUR_EMAIL_ID')}
         />
 
-        <Gender formData={formData} setFormData={setFormData} />
+        <Gender formData={userData} setFormData={setUserData} />
       </div>
     </>
   )
