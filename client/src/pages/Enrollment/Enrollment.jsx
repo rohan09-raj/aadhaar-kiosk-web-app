@@ -58,9 +58,9 @@ const Enrollment = () => {
         setPage(page + 1)
       }
     } else if (page === 2) {
-      if (userData.address.state.name === '') {
+      if (!userData.address.state.name) {
         toast.error(t('PLEASE_SELECT_YOUR_STATE'))
-      } else if (userData.address.district.name === '') {
+      } else if (!userData.address.district.name) {
         toast.error(t('PLEASE_SELECT_YOUR_DISTRICT'))
       } else if (userData.address.village === '') {
         toast.error(t('PLEASE_ENTER_YOUR_VILLAGE'))
