@@ -33,7 +33,9 @@ const Enrollment = () => {
   const navigate = useNavigate()
   const [unverified, setUnverified] = useState(true)
 
-  const { mutate } = useMutation((payload) => createUser(payload))
+  const pushUser = useMutation((payload) => createUser(payload))
+
+  // const setConfirm = useMutation((payload) => sendMessage(payload))
 
   const handleSubmit = () => {
     if (page === 0) {
@@ -107,9 +109,7 @@ const Enrollment = () => {
     } else if (page === 6) {
       setPage(page + 1)
     } else if (page === 7) {
-      setPage(page + 1)
-    } else if (page === 8) {
-      mutate(
+      pushUser.mutate(
         {
           indianResident: userData.indianResident,
           name: userData.name,
@@ -127,11 +127,17 @@ const Enrollment = () => {
         },
         {
           onSuccess: () => {
-            setUserData(initialUserData)
-            navigate('/')
+            // setConfirm.mutate({
+            //   mobile: `+91${userData.mobile}`,
+            //   id: pushUser.data._id
+            // })
+            setPage(page + 1)
           }
         }
       )
+    } else if (page === 8) {
+      setUserData(initialUserData)
+      navigate('/')
     }
   }
 

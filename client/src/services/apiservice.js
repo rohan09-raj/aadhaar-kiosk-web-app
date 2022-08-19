@@ -23,3 +23,8 @@ export const sendOTP = async (payload) => {
   const response = await apiClient.post('/otp', payload)
   return response
 }
+
+export const sendMessage = async (payload) => {
+  const response = await apiClient.post('/message', payload)
+  return response
+}
