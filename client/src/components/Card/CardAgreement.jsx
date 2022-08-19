@@ -10,7 +10,7 @@ const CardAgreement = ({ title, image }) => {
     <>
       <div className={styles.card}>
         <img className={styles.card__image} src={image} alt="" />
-        <Typography>
+        <Typography align='center'>
           {t('I_HEREBY_CONFIRM_THE_IDENTITY_AND_ADDRESS')}
         </Typography>
       </div>
