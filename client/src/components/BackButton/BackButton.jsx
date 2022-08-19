@@ -12,7 +12,7 @@ const BackButton = ({ onClick, onChange }) => {
       >
         <img
           className={styles.submit__image}
-          src={`${process.env.PUBLIC_URL}/assets/images/next_icon.svg`}
+          src={`${process.env.PUBLIC_URL}/assets/images/back.svg`}
           alt=""
         />
       </button>

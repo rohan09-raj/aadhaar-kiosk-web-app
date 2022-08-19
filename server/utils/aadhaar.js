@@ -1,4 +1,4 @@
-import {ELEVEN_TIMES_NINE} from '../constants/aadhaar';
+import {ONE_TEN_TIMES_ZERO, NINE_TEN_TIMES_ZERO} from '../constants/numbers';
 
 // const generateCheckSumDigit = (randomNumberArray) => {
 //   const d = [
@@ -93,7 +93,7 @@ function generate(array) {
 
 function generateAadhaar() {
   const aadhaarArray = [];
-  let x = Math.floor(Math.random() * ELEVEN_TIMES_NINE + 1);
+  let x = Math.floor(ONE_TEN_TIMES_ZERO + Math.random() * NINE_TEN_TIMES_ZERO);
 
   while (x != 0) {
     const digit = x % 10;

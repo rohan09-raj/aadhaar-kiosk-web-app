@@ -1,5 +1,10 @@
 .card__container {
-    display: flex;
-    justify-content: center;
-  }
-  
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.stepper__container {
+  display: flex;
+  justify-content: center;
+}

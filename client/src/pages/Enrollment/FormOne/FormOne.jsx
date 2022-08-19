@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input/Input'
@@ -9,6 +9,26 @@ import { userContext } from '../../../context/User'
 const FormOne = () => {
   const { t } = useTranslation()
   const { userData, setUserData } = userContext()
+
+  useEffect(() => {
+    switch (userData.gender) {
+      case 'Male':
+        document.getElementById('male').checked = 'checked'
+        break
+      case 'Female':
+        document.getElementById('female').checked = 'checked'
+        break
+      case 'Other':
+        document.getElementById('other').checked = 'checked'
+        break
+    }
+
+    if (userData.indianResident === true) {
+      document.getElementById('indian').checked = 'checked'
+    } else if (userData.indianResident === false) {
+      document.getElementById('non-resident-indian').checked = 'checked'
+    }
+  }, [userData.gender])
 
   return (
     <>
@@ -34,7 +54,7 @@ const FormOne = () => {
           <span className={styles.formone__resident}>
             <input
               type="radio"
-              id="indian"
+              id="non-resident-indian"
               name="resident"
               value={userData.indianResident}
               onChange={() => {
@@ -91,7 +111,7 @@ const FormOne = () => {
             image={`${process.env.PUBLIC_URL}/assets/images/female.svg`}
           />
           <LabelCard
-            id="trans"
+            id="other"
             name="gender"
             value={userData.gender}
             title={t('OTHER')}

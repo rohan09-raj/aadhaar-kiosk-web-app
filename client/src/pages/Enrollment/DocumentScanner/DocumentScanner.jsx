@@ -15,6 +15,8 @@ import {
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
+import { toast } from 'react-toastify'
+import { useStyles } from './styles'
 
 const DocumentScanner = () => {
   const { t } = useTranslation()
@@ -27,10 +29,9 @@ const DocumentScanner = () => {
   const [documents, setDocuments] = useState({ POI: '', POA: '', DOB: '' })
   const [activeStep, setActiveStep] = React.useState(0)
 
-  // eslint-disable-next-line no-unused-vars
-  const [doccu, setDoccu] = useState({ POI: '', POA: '', DOB: '' })
+  const [doccu] = useState({ POI: '', POA: '', DOB: '' })
 
-  console.log(documents)
+  const classes = useStyles()
 
   const webcamRef = React.useRef(null)
 
@@ -49,7 +50,15 @@ const DocumentScanner = () => {
     if (activeStep === steps.length - 1) {
       setUserData({ ...userData, documents: documents })
     }
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    if (
+      !userData.documents.POI ||
+      !userData.documents.POA ||
+      !userData.documents.DOB
+    ) {
+      toast.error(t('SCAN_YOUR_DOCUMENT'))
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    }
   }
 
   const handleBack = () => {
@@ -78,7 +87,7 @@ const DocumentScanner = () => {
           )}
         </div>
         <Grid container columnSpacing={10} justifyContent="center">
-          <Grid item>
+          <Grid item sx={{}}>
             <Button
               color="primary"
               size="large"
@@ -129,53 +138,60 @@ const DocumentScanner = () => {
     <>
       <Header subheading={t('ENROLLMENT')} />
       <SubmitButton />
-      <Box sx={{ width: '100%' }}>
-        <Stepper activeStep={activeStep}>
-          {steps.map((label, index) => {
-            const stepProps = {}
-            const labelProps = {}
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
-              </Step>
-            )
-          })}
-        </Stepper>
-        {activeStep === steps.length ? (
-          <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              {t('ALL_STEPS_COMPLETED')}
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Box sx={{ flex: '1 1 auto' }} />
-            </Box>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            {activeStep === 0 ? (
-              <WebcamComponent doc="POI" />
-            ) : activeStep === 1 ? (
-              <WebcamComponent doc="POA" />
-            ) : (
-              activeStep === 2 && <WebcamComponent doc="DOB" />
-            )}
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                {t('BACK')}
-              </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext}>
-                {activeStep === steps.length - 1 ? t('FINISH') : t('NEXT')}
-              </Button>
-            </Box>
-          </React.Fragment>
-        )}
-      </Box>
+      <div className={styles.stepper__container}>
+        <Box sx={{ width: '60%', fontSize: '100px !important' }}>
+          <Stepper activeStep={activeStep}>
+            {steps.map((label, index) => {
+              const stepProps = {}
+              const labelProps = {}
+              return (
+                <Step key={label} {...stepProps}>
+                  <StepLabel
+                    {...labelProps}
+                    classes={{ label: classes.stepLabel }}
+                  >
+                    {label}
+                  </StepLabel>
+                </Step>
+              )
+            })}
+          </Stepper>
+          {activeStep === steps.length ? (
+            <React.Fragment>
+              <Typography sx={{ mt: 2, mb: 1 }}>
+                {t('ALL_STEPS_COMPLETED')}
+              </Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                <Box sx={{ flex: '1 1 auto' }} />
+              </Box>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              {activeStep === 0 ? (
+                <WebcamComponent doc="POI" />
+              ) : activeStep === 1 ? (
+                <WebcamComponent doc="POA" />
+              ) : (
+                activeStep === 2 && <WebcamComponent doc="DOB" />
+              )}
+              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                <Button
+                  color="inherit"
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                >
+                  {t('BACK')}
+                </Button>
+                <Box sx={{ flex: '1 1 auto' }} />
+                <Button onClick={handleNext}>
+                  {activeStep === steps.length - 1 ? t('FINISH') : t('NEXT')}
+                </Button>
+              </Box>
+            </React.Fragment>
+          )}
+        </Box>
+      </div>
     </>
   )
 }

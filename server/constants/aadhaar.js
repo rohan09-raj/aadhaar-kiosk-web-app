@@ -1,2 +1,0 @@
-export const ELEVEN_TIMES_NINE = 99999999999;
-export const SIX_TIMES_NINE = 999999;

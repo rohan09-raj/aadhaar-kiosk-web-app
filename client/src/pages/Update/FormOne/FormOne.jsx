@@ -18,7 +18,6 @@ const FormOne = () => {
   }
 
   useEffect(() => {
-    console.log(userData.gender)
     document.getElementById(`${userData.gender}`).checked = 'checked'
   }, [userData.gender])
 

@@ -23,12 +23,15 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { userContext } from '../../context/User'
 import { useNavigate } from 'react-router-dom'
+import BackButton from '../../components/BackButton/BackButton'
+import { initialUserData } from '../../constants/userData'
 
 const Enrollment = () => {
   const { t } = useTranslation()
   const [page, setPage] = useState(0)
   const { userData, setUserData } = userContext()
   const navigate = useNavigate()
+  const [unverified, setUnverified] = useState(true)
 
   const { mutate } = useMutation((payload) => createUser(payload))
 
@@ -42,6 +45,8 @@ const Enrollment = () => {
         toast.error(t('PLEASE_ENTER_VALID_NAME'))
       } else if (userData.gender === '') {
         toast.error(t('PLEASE_SELECT_YOUR_GENDER'))
+      } else if (userData.dob === '') {
+        toast.error(t('PLEASE_SELECT_YOUR_DOB'))
       } else {
         setPage(page + 1)
       }
@@ -82,13 +87,17 @@ const Enrollment = () => {
         setPage(page + 1)
       }
     } else if (page === 3) {
-      setPage(page + 1)
+      if (!userData.photo) {
+        toast.error(t('PLEASE_CAPTURE_PHOTOGRAPH'))
+      } else {
+        setPage(page + 1)
+      }
     } else if (page === 4) {
-      if (userData.documents.POI === '') {
+      if (!userData.documents.POI) {
         toast.error(t('PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_IDENTITY'))
-      } else if (userData.documents.POA === '') {
+      } else if (!userData.documents.POA) {
         toast.error(t('PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_ADDRESS'))
-      } else if (userData.documents.DOB === '') {
+      } else if (!userData.documents.DOB) {
         toast.error(t('PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_DATE_OF_BIRTH'))
       } else {
         setPage(page + 1)
@@ -118,7 +127,7 @@ const Enrollment = () => {
         },
         {
           onSuccess: () => {
-            setUserData(null)
+            setUserData(initialUserData)
             navigate('/')
           }
         }
@@ -145,7 +154,9 @@ const Enrollment = () => {
       case 6:
         return <Fingerprint />
       case 7:
-        return <Agreement />
+        return (
+          <Agreement unverified={unverified} setUnverified={setUnverified} />
+        )
       case 8:
         return <FinalSlip />
       default:
@@ -156,25 +167,39 @@ const Enrollment = () => {
   const conditionalButton = () => {
     switch (page) {
       case 0:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
+        return (
+          <>
+            <SubmitButton onClick={handleSubmit} />
+            <BackButton
+              onClick={() => {
+                setUserData(initialUserData)
+                navigate('/')
+              }}
+            />
+          </>
+        )
       case 1:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 2:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 3:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 4:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 5:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
       case 6:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
+        return (
+          <>
+            <SubmitButton onClick={handleSubmit} />
+            <BackButton onClick={() => setPage(page - 1)} />
+          </>
+        )
       case 7:
-        return <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+        return (
+          <>
+            <SubmitButton onClick={handleSubmit} disabled={unverified} />
+            <BackButton onClick={() => setPage(page - 1)} />
+          </>
+        )
       case 8:
-        return <SubmitButton onClick={handleSubmit}>Exit</SubmitButton>
       default:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
+        return <SubmitButton onClick={handleSubmit} />
     }
   }
   return (
