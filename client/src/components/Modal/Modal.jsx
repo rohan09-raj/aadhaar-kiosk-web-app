@@ -1,7 +1,9 @@
 import React from 'react'
-import { Modal, Typography, Box, Button } from '@mui/material'
+import { Modal, Box, Button } from '@mui/material'
+import styles from './Modal.module.css'
+import { Container } from '@mui/system'
 
-const PopUpModal = () => {
+const PopUpModal = ({ title, description, image }) => {
   const style = {
     position: 'absolute',
     top: '50%',
@@ -18,8 +20,14 @@ const PopUpModal = () => {
   const handleClose = () => setOpen(false)
 
   return (
-    <>
-      <Button onClick={handleOpen}>Open modal</Button>
+    <div className={styles.modal}>
+      <Button onClick={handleOpen} sx={{ borderRadius: '50%' }}>
+        <img
+          src={`${process.env.PUBLIC_URL}/assets/images/help.svg`}
+          height="65px"
+          width="65px"
+        />
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -27,15 +35,21 @@ const PopUpModal = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <h1 id="modal-modal-title" className={styles.modal__title}>
+            {title}
+          </h1>
+          <Container sx={{ display: 'flex' }}>
+            <img
+              src={image}
+              height="200px"
+              width="200px"
+              className={styles.modal__image}
+            />
+            <p className={styles.modal__content}>{description}</p>
+          </Container>
         </Box>
       </Modal>
-    </>
+    </div>
   )
 }
 

@@ -81,10 +81,11 @@ const Agreement = ({ unverified, setUnverified }) => {
         {show && (
           <>
             <Input
-              type="number"
+              type="text"
               id="otp"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
+              maxLength="6"
               placeholder="XXXXXX"
             />
             <Button

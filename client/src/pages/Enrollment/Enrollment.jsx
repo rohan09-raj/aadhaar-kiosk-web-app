@@ -33,19 +33,28 @@ const Enrollment = () => {
   const navigate = useNavigate()
   const [unverified, setUnverified] = useState(true)
 
-  const pushUser = useMutation((payload) => createUser(payload), {
-    onSuccess: () => {
-      console.log('Before mutate')
+  const { mutate } = useMutation((payload) => createUser(payload), {
+    onSuccess: (data) => {
       setConfirm.mutate({
         mobile: `+91${userData.mobile}`,
-        id: pushUser.data._id
+        id: data?.data?.result?._id
       })
-      console.log('After mutate')
       setPage(page + 1)
+    },
+    onError: (error) => {
+      console.log(error)
+      if (error?.response?.data?.message === 'User already exists.') {
+        setUserData(initialUserData)
+        navigate('/error')
+      } else {
+        toast.error(t('SOMETHING_WENT_WRONG'))
+      }
     }
   })
 
-  const setConfirm = useMutation((payload) => sendMessage(payload))
+  const setConfirm = useMutation((payload) => {
+    sendMessage(payload)
+  })
 
   const handleSubmit = () => {
     if (page === 0) {
@@ -75,26 +84,26 @@ const Enrollment = () => {
         setPage(page + 1)
       }
     } else if (page === 2) {
-      if (!userData.address.state.name) {
-        toast.error(t('PLEASE_SELECT_YOUR_STATE'))
-      } else if (!userData.address.district.name) {
-        toast.error(t('PLEASE_SELECT_YOUR_DISTRICT'))
-      } else if (userData.address.village === '') {
-        toast.error(t('PLEASE_ENTER_YOUR_VILLAGE'))
-      } else if (userData.address.houseNo === '') {
+      if (userData.address.houseNo === '') {
         toast.error(t('PLEASE_ENTER_YOUR_HOUSE_NUMBER'))
       } else if (userData.address.street === '') {
         toast.error(t('PLEASE_ENTER_YOUR_STREET'))
       } else if (userData.address.locality === '') {
         toast.error(t('PLEASE_ENTER_YOUR_LOCALITY'))
+      } else if (userData.address.village === '') {
+        toast.error(t('PLEASE_ENTER_YOUR_VILLAGE'))
       } else if (userData.address.postOffice === '') {
         toast.error(t('PLEASE_ENTER_YOUR_AREA_POST_OFFICE'))
-      } else if (userData.address.landmark === '') {
-        toast.error(t('PLEASE_ENTER_NEAREST_LANDMARK'))
       } else if (userData.address.pincode === '') {
         toast.error(t('PLEASE_ENTER_YOUR_AREA_PINCODE'))
       } else if (!validPincode.test(userData.address.pincode)) {
         toast.error(t('PLEASE_ENTER_VALID_PINCODE'))
+      } else if (!userData.address.state.name) {
+        toast.error(t('PLEASE_SELECT_YOUR_STATE'))
+      } else if (!userData.address.district.name) {
+        toast.error(t('PLEASE_SELECT_YOUR_DISTRICT'))
+      } else if (userData.address.landmark === '') {
+        toast.error(t('PLEASE_ENTER_NEAREST_LANDMARK'))
       } else {
         setPage(page + 1)
       }
@@ -106,11 +115,7 @@ const Enrollment = () => {
       }
     } else if (page === 4) {
       if (!userData.documents.POI) {
-        toast.error(t('PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_IDENTITY'))
-      } else if (!userData.documents.POA) {
-        toast.error(t('PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_ADDRESS'))
-      } else if (!userData.documents.DOB) {
-        toast.error(t('PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_DATE_OF_BIRTH'))
+        toast.error(t('SCAN_YOUR_DOCUMENT'))
       } else {
         setPage(page + 1)
       }
@@ -119,21 +124,25 @@ const Enrollment = () => {
     } else if (page === 6) {
       setPage(page + 1)
     } else if (page === 7) {
-      pushUser.mutate({
-        indianResident: userData.indianResident,
-        name: userData.name,
-        gender: userData.gender,
-        dob: userData.dob,
-        mobile: userData.mobile,
-        email: userData.email,
-        address: userData.address,
-        photo: userData.photo,
-        documents: {
-          POI: userData.documents.POI,
-          POA: userData.documents.POA,
-          DOB: userData.documents.DOB
-        }
-      })
+      if (unverified) {
+        toast.error(t('PLEASE_VERIFY_OTP'))
+      } else {
+        mutate({
+          indianResident: userData.indianResident,
+          name: userData.name,
+          gender: userData.gender,
+          dob: userData.dob,
+          mobile: userData.mobile,
+          email: userData.email,
+          address: userData.address,
+          photo: userData.photo,
+          documents: {
+            POI: userData.documents.POI,
+            POA: userData.documents.POA,
+            DOB: userData.documents.DOB
+          }
+        })
+      }
     } else if (page === 8) {
       setUserData(initialUserData)
       navigate('/')
@@ -198,7 +207,7 @@ const Enrollment = () => {
       case 7:
         return (
           <>
-            <SubmitButton onClick={handleSubmit} disabled={unverified} />
+            <SubmitButton onClick={handleSubmit} />
             <BackButton onClick={() => setPage(page - 1)} />
           </>
         )

@@ -1,0 +1,16 @@
+.modal {
+  margin: 0px 15px;
+}
+
+.modal__title {
+  text-align: center;
+  margin: 20px 0px 40px;
+}
+
+.modal__image {
+  width: 40%;
+}
+
+.modal__content {
+  width: 60%;
+}

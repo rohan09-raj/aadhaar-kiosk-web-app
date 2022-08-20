@@ -15,15 +15,22 @@
   display: flex;
   align-items: center;
   margin: 15px;
+  cursor: pointer;
 }
 
 .formone__resident input[type='radio'] {
   width: 1.5rem;
   height: 1.5rem;
+  cursor: pointer;
+}
+
+.formone__resident label {
+  margin-left: 10px;
 }
 
 .formone__gender {
   display: flex;
+  margin-bottom: 10px;
 }
 
 .formone__dob {

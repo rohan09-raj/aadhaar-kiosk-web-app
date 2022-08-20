@@ -1,13 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
+import { Button, Popover, List, ListItem, ListSubheader } from '@mui/material'
 
-import ArrowDropDown from '@mui/icons-material/ArrowDropDown'
-import Button from '@mui/material/Button'
-import Popover from '@mui/material/Popover'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListSubheader from '@mui/material/ListSubheader'
+import styles from './LanguageSelect.module.css'
 
 const languageMap = {
   en: { label: 'English', dir: 'ltr', active: true },
@@ -18,16 +14,22 @@ const LanguageSelect = () => {
   const selected = localStorage.getItem('i18nextLng') || 'en'
   const { t } = useTranslation()
 
-  const [menuAnchor, setMenuAnchor] = React.useState(null)
-  React.useEffect(() => {
+  const [menuAnchor, setMenuAnchor] = useState(null)
+  useEffect(() => {
     document.body.dir = languageMap[selected]?.dir
   }, [menuAnchor, selected])
 
   return (
-    <div className="d-flex justify-content-end align-items-center language-select-root">
-      <Button onClick={({ currentTarget }) => setMenuAnchor(currentTarget)}>
-        {languageMap[selected]?.label}
-        <ArrowDropDown fontSize="small" />
+    <div className={styles.language}>
+      <Button
+        onClick={({ currentTarget }) => setMenuAnchor(currentTarget)}
+        sx={{ margin: '0px 15px', padding: '0px' }}
+      >
+        <img
+          src={`${process.env.PUBLIC_URL}/assets/images/language.svg`}
+          height="80px"
+          width="80px"
+        />
       </Button>
       <Popover
         open={!!menuAnchor}
@@ -44,7 +46,7 @@ const LanguageSelect = () => {
       >
         <div>
           <List>
-            <ListSubheader>{t('select_language')}</ListSubheader>
+            <ListSubheader>{t('SELECT_LANGUAGE')}</ListSubheader>
             {Object.keys(languageMap)?.map((item) => (
               <ListItem
                 button

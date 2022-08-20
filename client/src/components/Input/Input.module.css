@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   font-family: 'Barlow';
+  margin: 15px 0px;
   font-size: var(--font-medium-s);
 }
 
@@ -11,7 +12,7 @@
 }
 
 .input__field {
-  width: 300px;
+  width: 330px;
   margin: 10px 0px;
   padding: 18px 10px;
   border: 3px solid;
