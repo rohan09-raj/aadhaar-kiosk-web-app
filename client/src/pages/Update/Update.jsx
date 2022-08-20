@@ -5,23 +5,25 @@ import Input from '../../components/Input/Input'
 import { Grid, Button } from '@mui/material'
 import { userContext } from '../../context/User'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const Update = () => {
   const { aadhaarNumber, setAadhaarNumber } = userContext()
 
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   return (
     <>
-      <Header subheading="Update" />
+      <Header subheading={`${t('UPDATE')}`} />
       <div className={styles.subheading__container}>
-        <h3 className={styles.subheading}> Provide Aadhaar Number (UID): </h3>
+        <h3 className={styles.subheading}> {t('PROVIDE_AADHAAR_NUMBER')} </h3>
         <Input
           type="text"
           id="aadhaarNumber"
           value={aadhaarNumber}
           onChange={(e) => setAadhaarNumber(e.target.value)}
-          placeholder="Enter your Aadhaar Number"
+          placeholder={`${t('ENTER_YOUR_AADHAAR_NUMBER')}`}
           required
         />
         <Grid container columnSpacing={10} justifyContent="center">
@@ -35,7 +37,7 @@ const Update = () => {
                 navigate('/update/otp')
               }}
             >
-              Submit
+              {t('SUBMIT')}
             </Button>
           </Grid>
         </Grid>

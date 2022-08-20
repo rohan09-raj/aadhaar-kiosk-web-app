@@ -52,7 +52,7 @@ const Address = () => {
           <Input
             id="houseNo"
             label={t('HOUSE_NUMBER_APARTMENT')}
-            value={userData.houseNo}
+            value={userData.address.houseNo}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -68,7 +68,7 @@ const Address = () => {
           <Input
             id="town"
             label={t('VILLAGE_TOWN')}
-            value={userData.village}
+            value={userData.address.village}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -105,7 +105,7 @@ const Address = () => {
           <Input
             id="street"
             label={t('STREET_ROAD')}
-            value={userData.street}
+            value={userData.address.street}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -121,7 +121,7 @@ const Address = () => {
           <Input
             id="postOffice"
             label={t('POST_OFFICE')}
-            value={userData.postOffice}
+            value={userData.address.postOffice}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -158,7 +158,7 @@ const Address = () => {
           <Input
             id="locality"
             label={t('AREA_LOCALITY')}
-            value={userData.locality}
+            value={userData.address.locality}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -174,7 +174,7 @@ const Address = () => {
           <Input
             id="pincode"
             label={t('PINCODE')}
-            value={userData.pincode}
+            value={userData.address.pincode}
             type="text"
             onChange={(e) => {
               setUserData({
@@ -190,7 +190,7 @@ const Address = () => {
           <Input
             id="landmark"
             label={t('LANDMARK')}
-            value={userData.landmark}
+            value={userData.address.landmark}
             type="text"
             onChange={(e) => {
               setUserData({

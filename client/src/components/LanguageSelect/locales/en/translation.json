@@ -62,6 +62,7 @@
   "PLEASE_SELECT_YOUR_GENDER": "Please select your gender",
   "PLEASE_ENTER_YOUR_MOBILE_NUMBER": "Please enter your mobile number",
   "PLEASE_ENTER_VALID_MOBILE_NUMBER": "Please enter valid mobile number",
+  "PLEASE_SELECT_YOUR_DOB": "Please select your birth date",
   "PLEASE_ENTER_YOUR_EMAIL": "Please enter your email",
   "PLEASE_ENTER_VALID_EMAIL": "Please enter valid email",
   "PLEASE_SELECT_YOUR_COUNTRY": "Please select your country",
@@ -83,5 +84,15 @@
   "BIOMETRIC": "Biometric",
   "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_IDENTITY": "Please take the picture of the Proof of Identity",
   "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_ADDRESS": "Please take the picture of the Proof of Identity",
-  "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_DATE_OF_BIRTH": "Please take the picture of the Proof of Date of Birth"
+  "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_DATE_OF_BIRTH": "Please take the picture of the Proof of Date of Birth",
+  "PLEASE_CAPTURE_PHOTOGRAPH": "Please capture photograph",
+  "SCAN_YOUR_DOCUMENT": "Scan your document",
+  "INCORRECT_OTP": "Incorrect OTP!",
+  "OTP_VERIFIED!": "OTP verified!",
+  "PROVIDE_AADHAAR_NUMBER": "Provide Aadhaar Number",
+  "SUBMIT": "Submit",
+  "ENTER_YOUR_AADHAAR_NUMBER": "Enter your Aadhaar Number",
+  "ENTER_OTP": "Enter OTP",
+  "PLEASE_VERIFY_OTP": "Please verify OTP",
+  "USER_ALREADY_EXISTS": "User already exists"
 }
