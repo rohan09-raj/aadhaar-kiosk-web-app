@@ -22,7 +22,8 @@ Windows/Linux – Operating System
 
 ###### Case 1 : Enrollment
 
-Applicant will go through a series of fields/forms in kiosk in which they have to fill their personal details , scan their biometrics and necessary documents. After all the details are provided, the applicant will provide an OTP & EID will be generated.
+Applicant will go through a series of fields/forms in kiosk in which they have to fill their personal details, scan their bio-metrics and necessary documents. After all the details are provided, the applicant will be provided an OTP & EID will be generated.
+
 ###### Case 2 : Update
 In this scenario the applicants will enter their Aadhaar No., then their details will be fetched from the database and the fields will be pre-populated. After that they can select & update their required details through the kiosk.
 ###### Case 3 : Check Status
