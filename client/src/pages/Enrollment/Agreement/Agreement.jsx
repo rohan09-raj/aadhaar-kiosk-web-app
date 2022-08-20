@@ -68,6 +68,7 @@ const Agreement = ({ unverified, setUnverified }) => {
           type="submit"
           variant="contained"
           disabled={disabled}
+          sx={{ marginTop: '1rem' }}
           onClick={() => {
             mutate()
             setDisabled(true)

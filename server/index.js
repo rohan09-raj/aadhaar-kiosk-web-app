@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 
 import userRoutes from './routes/users.js';
 import healthRoutes from './routes/health.js';
-import otpRoutes from './routes/otp.js';
+import messageRoutes from './routes/message.js';
 
 const app = Express();
 dotenv.config();
@@ -17,7 +17,7 @@ app.use(cors());
 
 app.use('/', healthRoutes);
 app.use('/', userRoutes);
-app.use('/', otpRoutes);
+app.use('/', messageRoutes);
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
 const PORT = process.env.PORT;
