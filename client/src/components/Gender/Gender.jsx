@@ -14,7 +14,7 @@ const Gender = ({ formData, setFormData }) => {
   return (
     <div className={styles.formone__gender}>
       <LabelCard
-        id="Male"
+        id="male"
         name="gender"
         title={t('MALE')}
         value={formData?.gender}
@@ -28,7 +28,7 @@ const Gender = ({ formData, setFormData }) => {
         image={`${process.env.PUBLIC_URL}/assets/images/male.svg`}
       />
       <LabelCard
-        id="Female"
+        id="female"
         name="gender"
         value={formData?.gender}
         title={t('FEMALE')}
@@ -42,7 +42,7 @@ const Gender = ({ formData, setFormData }) => {
         image={`${process.env.PUBLIC_URL}/assets/images/female.svg`}
       />
       <LabelCard
-        id="Other"
+        id="other"
         name="gender"
         value={formData?.gender}
         title={t('OTHER')}

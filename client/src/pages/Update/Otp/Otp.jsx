@@ -43,13 +43,13 @@ const Otp = () => {
   }
   return (
     <>
-      <Header subheading="Update" />
+      <Header subheading={`${t('UPDATE')}`} />
       <div className={styles.subheading__container}>
-        <h3 className={styles.subheading}> Enter OTP </h3>
+        <h3 className={styles.subheading}> {t('ENTER_OTP')} </h3>
         <Input
           type="text"
           id="aadhaarNumber"
-          placeholder="Enter One Time Password"
+          placeholder={`${t('ENTER_OTP')}`}
         />
         <Grid container columnSpacing={10} justifyContent="center">
           <Grid item>
@@ -60,7 +60,7 @@ const Otp = () => {
               variant="contained"
               onClick={() => {}}
             >
-              Verify OTP
+              {t('VERIFY_OTP')}
             </Button>
           </Grid>
         </Grid>
