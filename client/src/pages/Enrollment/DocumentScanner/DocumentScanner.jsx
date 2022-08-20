@@ -37,7 +37,7 @@ const DocumentScanner = () => {
       DOB: doccu.DOB
     })
   })
-  console.log(activeStep)
+
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
       setUserData({ ...userData, documents: documents })

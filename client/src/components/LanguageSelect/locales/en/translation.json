@@ -89,10 +89,12 @@
   "SCAN_YOUR_DOCUMENT": "Scan your document",
   "INCORRECT_OTP": "Incorrect OTP!",
   "OTP_VERIFIED!": "OTP verified!",
-  "PROVIDE_AADHAAR_NUMBER": "Provide Aadhaar Number",
+  "PROVIDE_YOUR_AADHAAR_NUMBER": "Provide your Aadhaar Number",
   "SUBMIT": "Submit",
   "ENTER_YOUR_AADHAAR_NUMBER": "Enter your Aadhaar Number",
+  "PLEASE_ENTER_VALID_AADHAAR_NUMBER": "Please enter a valid aadhaar number",
   "ENTER_OTP": "Enter OTP",
+  "SENT_TO_YOUR_REGISTERED_MOBILE_NUMBER": "Sent to your registered mobile number",
   "PLEASE_VERIFY_OTP": "Please verify OTP",
-  "USER_ALREADY_EXISTS": "User already exists"
+  "USER_ALREADY_EXISTS": "USER ALREADY EXISTS"
 }

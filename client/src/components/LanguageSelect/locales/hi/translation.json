@@ -89,10 +89,12 @@
   "SCAN_YOUR_DOCUMENT": "अपना दस्तावेज़ स्कैन करें",
   "INCORRECT_OTP": "गलत ऑट्पी!",
   "OTP_VERIFIED!": "ऑट्पी सत्यापित कर दिया गया है!",
-  "PROVIDE_AADHAAR_NUMBER": "आधार नंबर प्रदान करें",
-  "ENTER_YOUR_AADHAAR_NUMBER": "आधार नंबर दर्ज करें",
+  "PROVIDE_YOUR_AADHAAR_NUMBER": "अपना आधार नंबर प्रदान करें",
+  "ENTER_YOUR_AADHAAR_NUMBER": "अपना आधार नंबर दर्ज करें",
+  "PLEASE_ENTER_VALID_AADHAAR_NUMBER": "कृपया वैध आधार संख्या दर्ज करें",
   "SUBMIT": "प्रस्तुत करें",
   "ENTER_OTP": "ओटीपी दर्ज करें",
+  "SENT_TO_YOUR_REGISTERED_MOBILE_NUMBER": "आपके पंजीकृत मोबाइल नंबर पर भेजा गया",
   "PLEASE_VERIFY_OTP": "कृपया ओटीपी सत्यापित करें",
   "USER_ALREADY_EXISTS": "उपयोगकर्ता पहले से मौजूद है"
 }

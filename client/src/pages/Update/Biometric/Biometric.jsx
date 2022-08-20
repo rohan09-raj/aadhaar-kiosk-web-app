@@ -11,20 +11,14 @@ const Biometric = () => {
   const [page, setPage] = useState(4)
   const { userData, oriUserData, setUserData } = userContext()
 
-  const [formData, setFormData] = useState({
-    photo: '',
-    irisScan: '',
-    fingerPrint: ''
-  })
-
   const conditionalComponent = () => {
     switch (page) {
       case 0:
-        return <PhotoCapture formData={formData} setFormData={setFormData} />
+        return <PhotoCapture />
       case 1:
-        return <Fingerprint formData={formData} setFormData={setFormData} />
+        return <Fingerprint />
       case 2:
-        return <IrisScan formData={formData} setFormData={setFormData} />
+        return <IrisScan />
       default:
         return <BiometricSelect page={page} setPage={setPage} />
     }
@@ -49,21 +43,21 @@ const Biometric = () => {
       case 0:
         return (
           <>
-            <SubmitButton onClick={() => handleSubmit()}> Next</SubmitButton>
+            <SubmitButton onClick={() => handleSubmit()} />
             <BackButton onClick={() => handleBack()} />
           </>
         )
       case 1:
         return (
           <>
-            <SubmitButton onClick={() => setPage(4)}> Next</SubmitButton>
+            <SubmitButton onClick={() => setPage(4)} />
             <BackButton onClick={() => setPage(page - 1)} />
           </>
         )
       case 2:
         return (
           <>
-            <SubmitButton onClick={() => setPage(4)}> Next</SubmitButton>
+            <SubmitButton onClick={() => setPage(4)} />
             <BackButton onClick={() => setPage(page - 1)} />
           </>
         )

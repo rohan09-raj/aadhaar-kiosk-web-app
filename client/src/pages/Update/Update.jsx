@@ -6,6 +6,8 @@ import { Grid, Button } from '@mui/material'
 import { userContext } from '../../context/User'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { ToastContainer, toast } from 'react-toastify'
+import { validAadhaar } from '../../constants/RegEx'
 
 const Update = () => {
   const { aadhaarNumber, setAadhaarNumber } = userContext()
@@ -15,11 +17,18 @@ const Update = () => {
 
   return (
     <>
+      <ToastContainer
+        autoClose={1000}
+        hideProgressBar={true}
+        theme={'colored'}
+      />
       <Header subheading={`${t('UPDATE')}`} />
       <div className={styles.subheading__container}>
-        <h3 className={styles.subheading}> {t('PROVIDE_AADHAAR_NUMBER')} </h3>
+        <h3 className={styles.subheading}>
+          {t('PROVIDE_YOUR_AADHAAR_NUMBER')}
+        </h3>
         <Input
-          type="text"
+          type="number"
           id="aadhaarNumber"
           value={aadhaarNumber}
           onChange={(e) => setAadhaarNumber(e.target.value)}
@@ -34,7 +43,11 @@ const Update = () => {
               type="submit"
               variant="contained"
               onClick={() => {
-                navigate('/update/otp')
+                if (!validAadhaar.test(aadhaarNumber)) {
+                  toast.error(t('Please enter a valid aadhaar number'))
+                } else {
+                  navigate('/update/otp')
+                }
               }}
             >
               {t('SUBMIT')}

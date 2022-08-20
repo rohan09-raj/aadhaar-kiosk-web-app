@@ -1,33 +1,22 @@
 .address {
   display: flex;
   justify-content: center;
+  margin: 40px 0px 0px;
 }
 
 .address__container {
   margin: 0px 20px;
 }
 
-.input {
+.input__container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   font-family: 'Barlow';
   font-size: var(--font-medium-s);
 }
 
-.input__container {
-  display: flex;
-  flex-direction: column;
-}
-
-.input__edit{
+.input__edit {
   display: flex;
   flex-direction: row;
-}
-
-.input__field {
-  width: 300px;
-  margin: 10px 0px;
-  padding: 20px 10px;
-  border: 3px solid;
-  border-radius: 10px;
 }

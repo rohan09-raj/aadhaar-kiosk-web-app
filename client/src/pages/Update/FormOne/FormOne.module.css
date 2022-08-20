@@ -34,14 +34,14 @@
 }
 
 .formone__dob_input {
-  width: 300px;
+  width: 330px;
   margin: 10px 0px;
   padding: 11px 10px;
   border: 3px solid;
   border-radius: 10px;
 }
 
-.input__edit{
+.input__edit {
   display: flex;
   flex-direction: row;
 }

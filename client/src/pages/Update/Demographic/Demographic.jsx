@@ -13,6 +13,7 @@ import UpdateSelect from '../UpdateSelect/UpdateSelect'
 import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
 import { ToastContainer, toast } from 'react-toastify'
+import BackButton from '../../../components/BackButton/BackButton'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Demographic = () => {
@@ -87,13 +88,26 @@ const Demographic = () => {
   const conditionalButton = () => {
     switch (page) {
       case 0:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
+        return (
+          <>
+            <SubmitButton onClick={handleSubmit} />
+            <BackButton onClick={() => setPage(page - 1)} />
+          </>
+        )
       case 1:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
+        return (
+          <>
+            <SubmitButton onClick={handleSubmit} />
+            <BackButton onClick={() => setPage(page - 1)} />
+          </>
+        )
       case 2:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
-      default:
-        return <SubmitButton onClick={handleSubmit}>Next</SubmitButton>
+        return (
+          <>
+            <SubmitButton onClick={handleSubmit} />
+            <BackButton onClick={() => setPage(page - 1)} />
+          </>
+        )
     }
   }
   return (

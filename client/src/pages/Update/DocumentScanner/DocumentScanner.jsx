@@ -3,34 +3,18 @@ import React, { useState } from 'react'
 import Webcam from 'react-webcam'
 import Header from '../../../components/Header/Header'
 import styles from './DocumentScanner.module.css'
-import {
-  Button,
-  Grid,
-  Typography,
-  StepLabel,
-  Step,
-  Stepper,
-  Box
-} from '@mui/material'
+import { Button, Typography, StepLabel, Step, Stepper } from '@mui/material'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
+import { toast } from 'react-toastify'
+import { useStyles } from './styles'
 
 const DocumentScanner = () => {
   const { userData, oriUserData, setUserData } = userContext()
   const { t } = useTranslation()
-
-  // JSON.stringify(oriUserData?.address) ===
   let steps
 
-  // use conditional statements to compare userData and oriUserData to determine the steps
-  // 1st case: if only address is changed, then step=['POA']
-  // 2nd case: if only either name or gender is changed, then step=['POI']
-  // 3rd case: if only dob is changed, then step=['DOB']
-  // 4th case: If only address and name or gender is changed, then step=['POA', 'POI']
-  // 5th case: If only address and dob is changed, then step=['POA', 'DOB']
-  // 6th case: If only name or gender and dob is changed, then step=['POI', 'DOB']
-  // 7th case: If everything is changed, then step=['POA', 'POI', 'DOB']
   if (
     (userData.address !== oriUserData.address &&
       userData.dob !== oriUserData.dob &&
@@ -71,7 +55,7 @@ const DocumentScanner = () => {
 
   const [doccu] = useState({ POI: '', POA: '', DOB: '' })
 
-  console.log(documents)
+  const classes = useStyles()
 
   const webcamRef = React.useRef(null)
 
@@ -90,7 +74,15 @@ const DocumentScanner = () => {
     if (activeStep === steps.length - 1) {
       setUserData({ ...userData, documents: documents })
     }
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    if (
+      (!documents.POI && activeStep === 0) ||
+      (!documents.POA && activeStep === 1) ||
+      (!documents.DOB && activeStep === 2)
+    ) {
+      toast.error(t('SCAN_YOUR_DOCUMENT'))
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    }
   }
 
   const handleBack = () => {
@@ -100,67 +92,85 @@ const DocumentScanner = () => {
   const WebcamComponent = ({ doc }) => {
     return (
       <>
-        <div className={styles.card__container}>
-          {documents[doc] === '' ? (
-            <Webcam
-              audio={false}
-              height={400}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              width={600}
-              videoConstraints={{
-                height: 400,
-                width: 600,
-                facingMode: 'user'
-              }}
+        <div className={styles.container}>
+          <button
+            className={styles.button}
+            disabled={activeStep === 0}
+            onClick={handleBack}
+          >
+            <img
+              src={`${process.env.PUBLIC_URL}/assets/images/back_inverse.svg`}
+              alt=""
+              className={styles.image}
             />
-          ) : (
-            <img src={documents[doc]} />
-          )}
+          </button>
+          <div className={styles.card__container}>
+            {documents[doc] === '' ? (
+              <Webcam
+                audio={false}
+                height={400}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+                width={600}
+                videoConstraints={{
+                  height: 400,
+                  width: 600,
+                  facingMode: 'user'
+                }}
+              />
+            ) : (
+              <img src={documents[doc]} />
+            )}
+          </div>
+          <button onClick={handleNext} className={styles.button}>
+            <img
+              src={`${process.env.PUBLIC_URL}/assets/images/next_inverse.svg`}
+              alt=""
+              className={styles.image}
+            />
+          </button>
         </div>
-        <Grid container columnSpacing={10} justifyContent="center">
-          <Grid item>
-            <Button
-              color="primary"
-              size="large"
-              type="submit"
-              variant="contained"
-              onClick={(e) => {
-                e.preventDefault()
-                capture(doc)
-              }}
-            >
-              {t('SCAN')}
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              color="primary"
-              size="large"
-              type="submit"
-              variant="contained"
-              onClick={(e) => {
-                e.preventDefault()
-                doccu[doc] = ''
-                setDocuments({
-                  ...documents,
-                  POI: doccu.POI,
-                  POA: doccu.POA,
-                  DOB: doccu.DOB
-                })
-              }}
-            >
-              {t('RESET')}
-            </Button>
-          </Grid>
-        </Grid>
+        <div className={styles.button__container}>
+          <Button
+            color="primary"
+            size="large"
+            type="submit"
+            variant="contained"
+            sx={{ margin: '0px 20px' }}
+            onClick={(e) => {
+              e.preventDefault()
+              capture(doc)
+            }}
+          >
+            {t('SCAN')}
+          </Button>
+          <Button
+            color="primary"
+            size="large"
+            type="submit"
+            variant="contained"
+            sx={{ margin: '0px 20px' }}
+            onClick={(e) => {
+              e.preventDefault()
+              doccu[doc] = ''
+              setDocuments({
+                ...documents,
+                POI: doccu.POI,
+                POA: doccu.POA,
+                DOB: doccu.DOB
+              })
+            }}
+          >
+            {t('RESET')}
+          </Button>
+        </div>
         <br></br>
         <div>
-          <Grid container justifyContent="center">
+          <div>
             <Typography align="center">
               {t('KINDLY_CLICK_THE_PICTURE_OF_YOUR_DOCUMENTS')}
             </Typography>
-          </Grid>
+          </div>
         </div>
       </>
     )
@@ -168,55 +178,43 @@ const DocumentScanner = () => {
 
   return (
     <>
-      <Header subheading={t('ENROLLMENT')} />
+      <Header subheading={t('UPDATE')} />
       <SubmitButton />
-      <Box sx={{ width: '100%' }}>
-        <Stepper activeStep={activeStep}>
-          {steps.map((label, index) => {
-            const stepProps = {}
-            const labelProps = {}
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
-              </Step>
-            )
-          })}
-        </Stepper>
-        {activeStep === steps.length ? (
-          <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>
+      <div className={styles.stepper__container}>
+        <div className={styles.box}>
+          <Stepper activeStep={activeStep} sx={{ width: '60%' }}>
+            {steps.map((label, index) => {
+              const stepProps = {}
+              const labelProps = {}
+              return (
+                <Step key={label} {...stepProps}>
+                  <StepLabel
+                    {...labelProps}
+                    classes={{ label: classes.stepLabel }}
+                  >
+                    {label}
+                  </StepLabel>
+                </Step>
+              )
+            })}
+          </Stepper>
+          {activeStep === steps.length ? (
+            <Typography variant="h3" sx={{ mt: 8, mb: 1 }}>
               {t('ALL_STEPS_COMPLETED')}
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Box sx={{ flex: '1 1 auto' }} />
-            </Box>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            {activeStep === 0 ? (
-              <WebcamComponent doc="POI" />
-            ) : activeStep === 1 ? (
-              <WebcamComponent doc="POA" />
-            ) : (
-              activeStep === 2 && <WebcamComponent doc="DOB" />
-            )}
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                {t('BACK')}
-              </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext}>
-                {activeStep === steps.length - 1 ? t('FINISH') : t('NEXT')}
-              </Button>
-            </Box>
-          </React.Fragment>
-        )}
-      </Box>
+          ) : (
+            <React.Fragment>
+              {activeStep === 0 ? (
+                <WebcamComponent doc="POI" />
+              ) : activeStep === 1 ? (
+                <WebcamComponent doc="POA" />
+              ) : (
+                activeStep === 2 && <WebcamComponent doc="DOB" />
+              )}
+            </React.Fragment>
+          )}
+        </div>
+      </div>
     </>
   )
 }

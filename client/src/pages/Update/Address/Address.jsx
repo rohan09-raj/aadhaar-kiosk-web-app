@@ -27,7 +27,7 @@ const Address = () => {
     }))
 
   const customStyles = {
-    control: (base, state) => ({
+    control: (base) => ({
       ...base,
       width: '330px',
       height: '60px',
@@ -35,7 +35,7 @@ const Address = () => {
       border: '3px solid',
       borderRadius: '10px !important'
     }),
-    input: (base, state) => ({
+    input: (base) => ({
       ...base,
       display: 'flex',
       justifyContent: 'center',
@@ -55,88 +55,10 @@ const Address = () => {
     setEditable2(!editable2)
   }
 
-  console.log(userData.address.village)
-
   return (
     <>
-      <Header subheading={t('ENROLLMENT')} />
+      <Header subheading={t('UPDATE')} />
       <div className={styles.address}>
-        <div className={styles.address__container}>
-          <div className={styles.input}>
-            <div className={styles.input__container}>
-              <label htmlFor="state">{t('STATE')}</label>
-              <div className={styles.input__edit}>
-                <Select
-                  id="state"
-                  name="state"
-                  options={updatedStates('IN')}
-                  defaultValue={userData.address.state}
-                  isDisabled={editable1}
-                  isSearchable={!editable1}
-                  onChange={(e) => {
-                    setUserData({
-                      ...userData,
-                      address: {
-                        ...userData.address,
-                        state: e
-                      }
-                    })
-                  }}
-                  styles={customStyles}
-                />
-                <EditButton
-                  onClick={handleEdit1}
-                  enabled={!editable1 ? '1' : '0'}
-                />
-              </div>
-            </div>
-          </div>
-          <div className={styles.input}>
-            <div className={styles.input__container}>
-              <label htmlFor="city">{t('DISTRICT')}</label>
-              <div className={styles.input__edit}>
-                <Select
-                  id="city"
-                  name="city"
-                  options={updatedCities('IN', userData.address.state.isoCode)}
-                  defaultValue={userData.address.district}
-                  isDisabled={editable2}
-                  isSearchable={!editable2}
-                  onChange={(e) => {
-                    setUserData({
-                      ...userData,
-                      address: {
-                        ...userData.address,
-                        district: e
-                      }
-                    })
-                  }}
-                  styles={customStyles}
-                />
-                <EditButton
-                  onClick={handleEdit2}
-                  enabled={!editable2 ? '1' : '0'}
-                />
-              </div>
-            </div>
-          </div>
-          <UpdateInput
-            id="town"
-            label={t('VILLAGE_TOWN')}
-            defaultValue={userData.address.village}
-            type="text"
-            onChange={(e) => {
-              setUserData({
-                ...userData,
-                address: {
-                  ...userData.address,
-                  village: e.target.value
-                }
-              })
-            }}
-            placeholder={t('ENTER_YOUR_VILLAGE_TOWN')}
-          />
-        </div>
         <div className={styles.address__container}>
           <UpdateInput
             id="houseNo"
@@ -155,6 +77,51 @@ const Address = () => {
             placeholder={t('ENTER_YOUR_HOUSE_NUMBER_APARTMENT')}
           />
           <UpdateInput
+            id="town"
+            label={t('VILLAGE_TOWN')}
+            defaultValue={userData.address.village}
+            type="text"
+            onChange={(e) => {
+              setUserData({
+                ...userData,
+                address: {
+                  ...userData.address,
+                  village: e.target.value
+                }
+              })
+            }}
+            placeholder={t('ENTER_YOUR_VILLAGE_TOWN')}
+          />
+          <div className={styles.input__container}>
+            <label htmlFor="state">{t('STATE')}</label>
+            <div className={styles.input__edit}>
+              <Select
+                id="state"
+                name="state"
+                options={updatedStates('IN')}
+                defaultValue={userData.address.state}
+                isDisabled={editable1}
+                isSearchable={!editable1}
+                onChange={(e) => {
+                  setUserData({
+                    ...userData,
+                    address: {
+                      ...userData.address,
+                      state: e
+                    }
+                  })
+                }}
+                styles={customStyles}
+              />
+              <EditButton
+                onClick={handleEdit1}
+                enabled={!editable1 ? '1' : '0'}
+              />
+            </div>
+          </div>
+        </div>
+        <div className={styles.address__container}>
+          <UpdateInput
             id="street"
             label={t('STREET_ROAD')}
             defaultValue={userData.address.street}
@@ -169,22 +136,6 @@ const Address = () => {
               })
             }}
             placeholder={t('ENTER_YOUR_STREET_ROAD')}
-          />
-          <UpdateInput
-            id="locality"
-            label={t('AREA_LOCALITY')}
-            defaultValue={userData.address.locality}
-            type="text"
-            onChange={(e) => {
-              setUserData({
-                ...userData,
-                address: {
-                  ...userData.address,
-                  locality: e.target.value
-                }
-              })
-            }}
-            placeholder={t('ENTER_YOUR_AREA_LOCALITY')}
           />
           <UpdateInput
             id="postOffice"
@@ -202,23 +153,50 @@ const Address = () => {
             }}
             placeholder={t('ENTER_YOUR_AREA_POST_OFFICE')}
           />
+          <div className={styles.input__container}>
+            <label htmlFor="city">{t('DISTRICT')}</label>
+            <div className={styles.input__edit}>
+              <Select
+                id="city"
+                name="city"
+                options={updatedCities('IN', userData.address.state.isoCode)}
+                defaultValue={userData.address.district}
+                isDisabled={editable2}
+                isSearchable={!editable2}
+                onChange={(e) => {
+                  setUserData({
+                    ...userData,
+                    address: {
+                      ...userData.address,
+                      district: e
+                    }
+                  })
+                }}
+                styles={customStyles}
+              />
+              <EditButton
+                onClick={handleEdit2}
+                enabled={!editable2 ? '1' : '0'}
+              />
+            </div>
+          </div>
         </div>
         <div className={styles.address__container}>
           <UpdateInput
-            id="landmark"
-            label={t('LANDMARK')}
-            defaultValue={userData.address.landmark}
+            id="locality"
+            label={t('AREA_LOCALITY')}
+            defaultValue={userData.address.locality}
             type="text"
             onChange={(e) => {
               setUserData({
                 ...userData,
                 address: {
                   ...userData.address,
-                  landmark: e.target.value
+                  locality: e.target.value
                 }
               })
             }}
-            placeholder={t('ENTER_ANY_NEAREST_LANDMARK')}
+            placeholder={t('ENTER_YOUR_AREA_LOCALITY')}
           />
           <UpdateInput
             id="pincode"
@@ -235,6 +213,22 @@ const Address = () => {
               })
             }}
             placeholder={t('ENTER_YOUR_AREA_PINCODE')}
+          />
+          <UpdateInput
+            id="landmark"
+            label={t('LANDMARK')}
+            defaultValue={userData.address.landmark}
+            type="text"
+            onChange={(e) => {
+              setUserData({
+                ...userData,
+                address: {
+                  ...userData.address,
+                  landmark: e.target.value
+                }
+              })
+            }}
+            placeholder={t('ENTER_ANY_NEAREST_LANDMARK')}
           />
         </div>
       </div>
