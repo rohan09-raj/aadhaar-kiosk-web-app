@@ -17,7 +17,7 @@ import {
   validPincode,
   validString
 } from '../../constants/RegEx'
-import { createUser } from '../../services/apiservice'
+import { createUser, sendMessage } from '../../services/apiservice'
 import { useTranslation } from 'react-i18next'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -33,9 +33,19 @@ const Enrollment = () => {
   const navigate = useNavigate()
   const [unverified, setUnverified] = useState(true)
 
-  const pushUser = useMutation((payload) => createUser(payload))
+  const pushUser = useMutation((payload) => createUser(payload), {
+    onSuccess: () => {
+      console.log('Before mutate')
+      setConfirm.mutate({
+        mobile: `+91${userData.mobile}`,
+        id: pushUser.data._id
+      })
+      console.log('After mutate')
+      setPage(page + 1)
+    }
+  })
 
-  // const setConfirm = useMutation((payload) => sendMessage(payload))
+  const setConfirm = useMutation((payload) => sendMessage(payload))
 
   const handleSubmit = () => {
     if (page === 0) {
@@ -109,32 +119,21 @@ const Enrollment = () => {
     } else if (page === 6) {
       setPage(page + 1)
     } else if (page === 7) {
-      pushUser.mutate(
-        {
-          indianResident: userData.indianResident,
-          name: userData.name,
-          gender: userData.gender,
-          dob: userData.dob,
-          mobile: userData.mobile,
-          email: userData.email,
-          address: userData.address,
-          photo: userData.photo,
-          documents: {
-            POI: userData.documents.POI,
-            POA: userData.documents.POA,
-            DOB: userData.documents.DOB
-          }
-        },
-        {
-          onSuccess: () => {
-            // setConfirm.mutate({
-            //   mobile: `+91${userData.mobile}`,
-            //   id: pushUser.data._id
-            // })
-            setPage(page + 1)
-          }
+      pushUser.mutate({
+        indianResident: userData.indianResident,
+        name: userData.name,
+        gender: userData.gender,
+        dob: userData.dob,
+        mobile: userData.mobile,
+        email: userData.email,
+        address: userData.address,
+        photo: userData.photo,
+        documents: {
+          POI: userData.documents.POI,
+          POA: userData.documents.POA,
+          DOB: userData.documents.DOB
         }
-      )
+      })
     } else if (page === 8) {
       setUserData(initialUserData)
       navigate('/')
