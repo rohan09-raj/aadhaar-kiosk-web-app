@@ -86,7 +86,7 @@
   "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_ADDRESS": "Please take the picture of the Proof of Identity",
   "PLEASE_TAKE_THE_PICTURE_OF_THE_PROOF_OF_DATE_OF_BIRTH": "Please take the picture of the Proof of Date of Birth",
   "PLEASE_CAPTURE_PHOTOGRAPH": "Please capture photograph",
-  "SCAN_YOUR_DOCUMENT": "Scan your document",
+  "SCAN_YOUR_DOCUMENT": "Please scan your document",
   "INCORRECT_OTP": "Incorrect OTP!",
   "OTP_VERIFIED!": "OTP verified!",
   "PROVIDE_YOUR_AADHAAR_NUMBER": "Provide your Aadhaar Number",
@@ -96,5 +96,7 @@
   "ENTER_OTP": "Enter OTP",
   "SENT_TO_YOUR_REGISTERED_MOBILE_NUMBER": "Sent to your registered mobile number",
   "PLEASE_VERIFY_OTP": "Please verify OTP",
-  "USER_ALREADY_EXISTS": "USER ALREADY EXISTS"
+  "USER_ALREADY_EXISTS": "USER ALREADY EXISTS",
+  "YOU_HAVEN'T_UPDATED_ANYTHING": "You haven't updated anything.",
+  "YOU_MAY_EITHER_UPDATE_OR_MOVE_TO_NEXT_STEP": "You may either update or move to the next step"
 }

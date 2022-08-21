@@ -15,10 +15,15 @@ import { userContext } from '../../../context/User'
 import { ToastContainer, toast } from 'react-toastify'
 import BackButton from '../../../components/BackButton/BackButton'
 import 'react-toastify/dist/ReactToastify.css'
+import { useNavigate } from 'react-router-dom'
+import { initialUserData } from '../../../constants/userData'
 
 const Demographic = () => {
   const { t } = useTranslation()
-  const { userData } = userContext()
+  const { userData, setUserData, setOriUserData, setAadhaarNumber } =
+    userContext()
+
+  const navigate = useNavigate()
 
   const [page, setPage] = useState(0)
 
@@ -91,7 +96,14 @@ const Demographic = () => {
         return (
           <>
             <SubmitButton onClick={handleSubmit} />
-            <BackButton onClick={() => setPage(page - 1)} />
+            <BackButton
+              onClick={() => {
+                setUserData(initialUserData)
+                setOriUserData(initialUserData)
+                setAadhaarNumber('')
+                navigate('/')
+              }}
+            />
           </>
         )
       case 1:

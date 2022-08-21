@@ -96,5 +96,7 @@
   "ENTER_OTP": "ओटीपी दर्ज करें",
   "SENT_TO_YOUR_REGISTERED_MOBILE_NUMBER": "आपके पंजीकृत मोबाइल नंबर पर भेजा गया",
   "PLEASE_VERIFY_OTP": "कृपया ओटीपी सत्यापित करें",
-  "USER_ALREADY_EXISTS": "उपयोगकर्ता पहले से मौजूद है"
+  "USER_ALREADY_EXISTS": "उपयोगकर्ता पहले से मौजूद है",
+  "YOU_HAVEN'T_UPDATED_ANYTHING": "आपने कोई भी अपडेट नहीं किया है",
+  "YOU_MAY_EITHER_UPDATE_OR_MOVE_TO_NEXT_STEP": "आप अपडेट कर सकते हैं या अगले चरण पर चले जाएँ"
 }

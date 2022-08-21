@@ -3,31 +3,52 @@ import Header from '../../../components/Header/Header'
 import CardAgreement from '../../../components/Card/CardAgreement'
 import styles from './Agreement.module.css'
 import Input from '../../../components/Input/Input'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import { Button, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { sendOTP, updateUser } from '../../../services/apiservice'
+import { sendOTP, updateUser, sendMessage } from '../../../services/apiservice'
 import { userContext } from '../../../context/User'
 import { useMutation } from 'react-query'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const Agreement = ({ unverified, setUnverified }) => {
+const Agreement = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const [otp, setOtp] = useState()
+  const [unverified, setUnverified] = useState(true)
   const [disabled, setDisabled] = useState(false)
   const [finalDisable, setFinalDisable] = useState(false)
   const [show, setShow] = useState(false)
   const { userData } = userContext()
 
-  const updateUse = useMutation(() => updateUser(userData._id, { ...userData }))
+  const updateUse = useMutation(
+    () => updateUser(userData._id, { ...userData }),
+    {
+      onSuccess: () => {
+        setConfirm.mutate({
+          mobile: `+91${userData.mobile}`,
+          id: userData._id
+        })
+      }
+    }
+  )
+
+  const setConfirm = useMutation(
+    (payload) => {
+      sendMessage(payload)
+    },
+    {
+      onSuccess: () => {
+        navigate('/update/final-slip')
+      }
+    }
+  )
 
   const { data, mutate } = useMutation(() =>
     sendOTP({ mobile: `+91${userData?.mobile}` })
   )
-
-  console.log('Disabled: ', disabled, 'Final Disable: ', finalDisable)
 
   const verifyOTP = () => {
     if (data?.data?.otpCode === Number(otp)) {
@@ -38,7 +59,7 @@ const Agreement = ({ unverified, setUnverified }) => {
       setUnverified(false)
       toast.success(t('OTP_VERIFIED!'))
     } else {
-      toast.error(t('INCORRECT_OTP!'))
+      toast.error(t('INCORRECT_OTP'))
     }
   }
 
@@ -106,9 +127,15 @@ const Agreement = ({ unverified, setUnverified }) => {
           </>
         )}
       </div>
-      <Link to="/update/final-slip">
-        <SubmitButton onClick={() => updateUse.mutate()} />
-      </Link>
+      <SubmitButton
+        onClick={() => {
+          if (unverified) {
+            toast.error(t('PLEASE_VERIFY_OTP'))
+          } else {
+            updateUse.mutate()
+          }
+        }}
+      />
     </>
   )
 }

@@ -4,9 +4,12 @@ import CardScanner from '../../../components/Card/CardScanner'
 import styles from './FinalSlip.module.css'
 import { Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import SubmitButton from '../../../components/SubmitButton/SubmitButton'
+import { useNavigate } from 'react-router-dom'
 
 const FinalSlip = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   return (
     <>
       <Header subheading={t('UPDATE')} />
@@ -24,6 +27,7 @@ const FinalSlip = () => {
           </Typography>
         </Grid>
       </div>
+      <SubmitButton onClick={() => navigate('/')} />
     </>
   )
 }

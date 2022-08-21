@@ -71,9 +71,29 @@ const DocumentScanner = () => {
   })
 
   const handleNext = () => {
-    if (activeStep === steps.length - 1) {
+    if (
+      activeStep === steps.length - 1 &&
+      documents.POI !== '' &&
+      documents.POA !== '' &&
+      documents.DOB !== ''
+    ) {
       setUserData({ ...userData, documents: documents })
+    } else if (documents.POI !== '' && documents.POA !== '') {
+      toast.error(t('SCAN_YOUR_DOCUMENT'))
+    } else if (documents.POI !== '' && documents.DOB !== '') {
+      toast.error(t('SCAN_YOUR_DOCUMENT'))
+    } else if (documents.POA !== '' && documents.DOB !== '') {
+      toast.error(t('SCAN_YOUR_DOCUMENT'))
+    } else if (documents.POI !== '') {
+      toast.error(t('SCAN_YOUR_DOCUMENT'))
+    } else if (documents.POA !== '') {
+      toast.error(t('SCAN_YOUR_DOCUMENT'))
+    } else if (documents.DOB !== '') {
+      toast.error(t('SCAN_YOUR_DOCUMENT'))
+    } else {
+      toast.error(t('SCAN_YOUR_DOCUMENT'))
     }
+
     if (
       (!documents.POI && activeStep === 0) ||
       (!documents.POA && activeStep === 1) ||
@@ -199,9 +219,20 @@ const DocumentScanner = () => {
             })}
           </Stepper>
           {activeStep === steps.length ? (
-            <Typography variant="h3" sx={{ mt: 8, mb: 1 }}>
-              {t('ALL_STEPS_COMPLETED')}
-            </Typography>
+            steps.length === 0 ? (
+              <>
+                <Typography variant="h4" sx={{ mt: 8, mb: 1 }}>
+                  {t("YOU_HAVEN'T_UPDATED_ANYTHING")}
+                </Typography>
+                <Typography variant="h4" sx={{ mt: 8, mb: 1 }}>
+                  {t('YOU_MAY_EITHER_UPDATE_OR_MOVE_TO_NEXT_STEP')}
+                </Typography>
+              </>
+            ) : (
+              <Typography variant="h3" sx={{ mt: 8, mb: 1 }}>
+                {t('ALL_STEPS_COMPLETED')}
+              </Typography>
+            )
           ) : (
             <React.Fragment>
               {activeStep === 0 ? (

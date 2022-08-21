@@ -28,14 +28,14 @@ const Biometric = () => {
     if (!userData.photo) {
       setUserData({ ...userData, photo: oriUserData.photo })
     }
-    setPage(page - 1)
+    setPage(4) // DUMMY VALUE 4
   }
 
   const handleSubmit = () => {
     if (!userData.photo) {
       setUserData({ ...userData, photo: oriUserData.photo })
     }
-    setPage(page + 1)
+    setPage(4)
   }
 
   const conditionalButton = () => {
@@ -51,14 +51,14 @@ const Biometric = () => {
         return (
           <>
             <SubmitButton onClick={() => setPage(4)} />
-            <BackButton onClick={() => setPage(page - 1)} />
+            <BackButton onClick={() => setPage(4)} />
           </>
         )
       case 2:
         return (
           <>
             <SubmitButton onClick={() => setPage(4)} />
-            <BackButton onClick={() => setPage(page - 1)} />
+            <BackButton onClick={() => setPage(4)} />
           </>
         )
     }

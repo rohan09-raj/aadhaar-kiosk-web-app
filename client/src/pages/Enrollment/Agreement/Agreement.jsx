@@ -18,12 +18,10 @@ const Agreement = ({ unverified, setUnverified }) => {
   const [finalDisable, setFinalDisable] = useState(false)
   const [show, setShow] = useState(false)
   const { userData } = userContext()
-  console.log(userData)
+
   const { data, mutate } = useMutation(() =>
     sendOTP({ mobile: `+91${userData?.mobile}` })
   )
-
-  console.log('Disabled: ', disabled, 'Final Disable: ', finalDisable)
 
   const verifyOTP = () => {
     if (data?.data?.otpCode === Number(otp)) {
