@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Address from './Address/Address'
 import Agreement from './Agreement/Agreement'
 import DocumentScanner from './DocumentScanner/DocumentScanner'
@@ -25,6 +25,8 @@ import { userContext } from '../../context/User'
 import { useNavigate } from 'react-router-dom'
 import BackButton from '../../components/BackButton/BackButton'
 import { initialUserData } from '../../constants/userData'
+import * as cocoSsd from '@tensorflow-models/coco-ssd'
+import * as tf from '@tensorflow/tfjs'
 
 const Enrollment = () => {
   const { t } = useTranslation()
@@ -32,6 +34,35 @@ const Enrollment = () => {
   const { userData, setUserData } = userContext()
   const navigate = useNavigate()
   const [unverified, setUnverified] = useState(true)
+
+  const [model, setModel] = useState()
+
+  async function loadModel () {
+    try {
+      const model = await cocoSsd.load()
+      setModel(model)
+      console.log('setloadedModel')
+    } catch (err) {
+      console.log(err)
+      console.log('failed load model')
+    }
+  }
+
+  useEffect(() => {
+    tf.ready().then(() => {
+      loadModel()
+    })
+  }, [])
+
+  let predictions = []
+  async function predictionFunction () {
+    predictions = await model.detect(document.getElementById('img'))
+    if (predictions.length > 0) {
+      console.log(predictions)
+      console.log(predictions[0])
+    }
+    return predictions
+  }
 
   const { mutate } = useMutation((payload) => createUser(payload), {
     onSuccess: (data) => {
@@ -108,11 +139,23 @@ const Enrollment = () => {
         setPage(page + 1)
       }
     } else if (page === 3) {
-      if (!userData.photo) {
-        toast.error(t('PLEASE_CAPTURE_PHOTOGRAPH'))
-      } else {
+      predictionFunction()
+       if (predictions.length === 0) {
+         toast.warning(t('PLEASE_WAIT'), {
+          timeout: 1000
+         })
+       }
+      setTimeout(() => {
+        if (predictions.length > 0) {
+       if (!userData.photo) {
+         toast.error(t('PLEASE_CAPTURE_PHOTOGRAPH'))
+       } else if (predictions[0].class === 'person' && predictions[0].score > 0.5) {
         setPage(page + 1)
+       } else {
+        toast.error(t('PLEASE_CAPTURE_CLEAR_PHOTOGRAPH'))
+       }
       }
+      }, 1000)
     } else if (page === 4) {
       if (!userData.documents.POI) {
         toast.error(t('SCAN_YOUR_DOCUMENT'))
