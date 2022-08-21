@@ -4,6 +4,7 @@ import CardBiometrics from '../../../components/Card/CardBiometrics'
 import styles from './IrisScan.module.css'
 import { Button, Grid, Typography } from '@mui/material'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
+import PopUpModal from '../../../components/Modal/Modal'
 import { useTranslation } from 'react-i18next'
 
 const IrisScan = () => {
@@ -11,6 +12,17 @@ const IrisScan = () => {
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
+      <PopUpModal
+        title="Scan your Iris"
+        image={`${process.env.PUBLIC_URL}/assets/images/iris_scan.svg`}
+        description={
+          <>
+            <ul>
+              <li className="list__item">INSTRUCTIONS TO BE ADDED</li>
+            </ul>
+          </>
+        }
+      />
       <div className={styles.card__container}>
         <CardBiometrics
           image={`${process.env.PUBLIC_URL}/assets/images/iris.svg`}

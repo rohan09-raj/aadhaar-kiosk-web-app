@@ -5,6 +5,7 @@ import { State, City } from 'country-state-city'
 import Select from 'react-select'
 import { userContext } from '../../../context/User'
 import { useTranslation } from 'react-i18next'
+import PopUpModal from '../../../components/Modal/Modal'
 
 import styles from './Address.module.css'
 
@@ -47,6 +48,26 @@ const Address = () => {
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
+      <PopUpModal
+        title="Fill your information"
+        image={`${process.env.PUBLIC_URL}/assets/images/address.svg`}
+        description={
+          <>
+            <ul>
+              <li className="list__item">
+                Enter your details according to the relevant fields
+              </li>
+              <li className="list__item">
+                State: Select the state you belong to. from the dropdown list
+              </li>
+              <li className="list__item">
+                District: Select the district you belong to. from the dropdown
+                list
+              </li>
+            </ul>
+          </>
+        }
+      />
       <div className={styles.address}>
         <div className={styles.address__container}>
           <Input

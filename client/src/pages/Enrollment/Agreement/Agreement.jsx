@@ -9,6 +9,7 @@ import { sendOTP } from '../../../services/apiservice'
 import { userContext } from '../../../context/User'
 import { useMutation } from 'react-query'
 import { ToastContainer, toast } from 'react-toastify'
+import PopUpModal from '../../../components/Modal/Modal'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Agreement = ({ unverified, setUnverified }) => {
@@ -53,6 +54,17 @@ const Agreement = ({ unverified, setUnverified }) => {
         theme={'colored'}
       />
       <Header subheading={t('ENROLLMENT')} />
+      <PopUpModal
+        title="Verify your mobile number"
+        image={`${process.env.PUBLIC_URL}/assets/images/agreement.svg`}
+        description={
+          <>
+            <ul>
+              <li className="list__item">INSTRUCTIONS TO BE ADDED</li>
+            </ul>
+          </>
+        }
+      />
       <div className={styles.card__container}>
         <CardAgreement
           image={`${process.env.PUBLIC_URL}/assets/images/agreement.svg`}

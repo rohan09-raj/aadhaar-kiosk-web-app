@@ -38,14 +38,14 @@ const PopUpModal = ({ title, description, image }) => {
           <h1 id="modal-modal-title" className={styles.modal__title}>
             {title}
           </h1>
-          <Container sx={{ display: 'flex' }}>
+          <Container sx={{ display: 'flex', alignItems: 'center' }}>
             <img
               src={image}
-              height="200px"
-              width="200px"
+              height="300px"
+              width="300px"
               className={styles.modal__image}
             />
-            <p className={styles.modal__content}>{description}</p>
+            <h3 className={styles.modal__content}>{description}</h3>
           </Container>
         </Box>
       </Modal>

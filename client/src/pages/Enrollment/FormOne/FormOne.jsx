@@ -5,6 +5,7 @@ import Input from '../../../components/Input/Input'
 import LabelCard from '../../../components/LabelCard/LabelCard'
 import styles from './FormOne.module.css'
 import { userContext } from '../../../context/User'
+import PopUpModal from '../../../components/Modal/Modal'
 
 const FormOne = () => {
   const { t } = useTranslation()
@@ -33,6 +34,28 @@ const FormOne = () => {
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
+      <PopUpModal
+        title="Fill your information"
+        image={`${process.env.PUBLIC_URL}/assets/images/id.svg`}
+        description={
+          <>
+            <ul>
+              <li className="list__item">
+                Select your residency by selecting the appropriate checkbox
+              </li>
+              <li className="list__item">
+                Enter your full name without any title or salutation
+              </li>
+              <li className="list__item">
+                Select your gender by clicking on the appropriate card
+              </li>
+              <li className="list__item">
+                Select your date of birth from the provided calender
+              </li>
+            </ul>
+          </>
+        }
+      />
       <div className={styles.formone}>
         <div className={styles.formone__radio}>
           <span className={styles.formone__resident}>
