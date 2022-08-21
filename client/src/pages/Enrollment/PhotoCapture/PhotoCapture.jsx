@@ -58,7 +58,7 @@ const PhotoCapture = () => {
             }}
           />
         ) : (
-          <img src={userData.photo} />
+          <img id="img" src={userData.photo} />
         )}
       </div>
       <Grid container columnSpacing={10} justifyContent="center">
