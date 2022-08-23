@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-  baseURL: 'https://aadhaar-kiosk.herokuapp.com/'
+  baseURL: 'http://localhost:5000'
 })
 
 export const createUser = async (payload) => {
@@ -11,6 +11,11 @@ export const createUser = async (payload) => {
 
 export const getUserByAadhaar = async (aadhaarNumber) => {
   const response = await apiClient.get(`/user/aadhaar/${aadhaarNumber}`)
+  return response
+}
+
+export const getUser = async (id, payload) => {
+  const response = await apiClient.get(`/user/${id}`, payload)
   return response
 }
 

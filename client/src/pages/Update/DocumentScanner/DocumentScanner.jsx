@@ -4,7 +4,7 @@ import Webcam from 'react-webcam'
 import Header from '../../../components/Header/Header'
 import styles from './DocumentScanner.module.css'
 import { Button, Typography, StepLabel, Step, Stepper } from '@mui/material'
-import SubmitButton from '../../../components/SubmitButton/SubmitButton'
+import PopUpModal from '../../../components/Modal/Modal'
 import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
 import { toast } from 'react-toastify'
@@ -199,7 +199,31 @@ const DocumentScanner = () => {
   return (
     <>
       <Header subheading={t('UPDATE')} />
-      <SubmitButton />
+      <PopUpModal
+        title="Scan your documents"
+        image={`${process.env.PUBLIC_URL}/assets/images/document.svg`}
+        description={
+          <>
+            <ul>
+              <li className="list__item">
+                Consists of 3 steps :
+                <ul>
+                  <li>Proof of Identity: </li>
+                  <li>Proof of Address: </li>
+                  <li>Proof of Date of Birth: </li>
+                </ul>
+              </li>
+              <li className="list__item">
+                Ensure that your documents are in the center of the frame
+              </li>
+              <li className="list__item">
+                You won&apos;t be able to proceed until you have scanned all the
+                required documents
+              </li>
+            </ul>
+          </>
+        }
+      />
       <div className={styles.stepper__container}>
         <div className={styles.box}>
           <Stepper activeStep={activeStep} sx={{ width: '60%' }}>

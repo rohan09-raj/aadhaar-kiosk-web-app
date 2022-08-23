@@ -1,13 +1,16 @@
 import { t } from 'i18next'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Card from '../../../components/Card/Card'
 import Header from '../../../components/Header/Header'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
+import { userContext } from '../../../context/User'
 
 import styles from './UpdateSelect.module.css'
 
 const UpdateSelect = () => {
+  const { userData, oriUserData } = userContext()
+  const navigate = useNavigate()
   return (
     <>
       <Header subheading={t('UPDATE')} />
@@ -24,9 +27,15 @@ const UpdateSelect = () => {
             image={`${process.env.PUBLIC_URL}/assets/images/biometrics.svg`}
           />
         </Link>
-        <Link to="/update/agreement">
-          <SubmitButton />
-        </Link>
+        <SubmitButton
+          onClick={() => {
+            if (userData === oriUserData) {
+              navigate('/no-update')
+            } else {
+              navigate('/update/agreement')
+            }
+          }}
+        />
       </div>
     </>
   )

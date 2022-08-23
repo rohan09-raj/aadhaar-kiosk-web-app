@@ -119,6 +119,15 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getUpdatingUsers = async (req, res) => {
+  try {
+    const updatingUsers = await UserDetails.find({isUpdating: true});
+    return res.status(200).json(updatingUsers);
+  } catch (error) {
+    res.status(404).json({message: error.message});
+  }
+};
+
 export default {
   createUser,
   getUser,
@@ -127,4 +136,5 @@ export default {
   getUnverifiedUsers,
   updateUser,
   deleteUser,
+  getUpdatingUsers,
 };

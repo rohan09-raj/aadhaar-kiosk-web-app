@@ -6,6 +6,7 @@ import EditButton from '../../../components/EditButton/EditButton'
 import Gender from '../../../components/Gender/Gender'
 import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
+import PopUpModal from '../../../components/Modal/Modal'
 
 const FormOne = () => {
   const { userData, setUserData } = userContext()
@@ -34,6 +35,35 @@ const FormOne = () => {
   return (
     <>
       <Header subheading={t('UPDATE')} />
+      <PopUpModal
+        title="Fill your information"
+        image={`${process.env.PUBLIC_URL}/assets/images/id.svg`}
+        description={
+          <>
+            <ul>
+              <li className="list__item">
+                Select your residency by selecting the appropriate checkbox
+              </li>
+              <li className="list__item">
+                Enter your full name without any title or salutation
+              </li>
+              <li className="list__item">
+                Select your gender by clicking on the appropriate card
+              </li>
+              <li className="list__item">
+                Select your date of birth from the provided calender
+              </li>
+              <li className="list__item">
+                Enter your 10 digit mobile number without any prefix or country
+                code
+              </li>
+              <li className="list__item">
+                Enter your email address in proper format
+              </li>
+            </ul>
+          </>
+        }
+      />
       <div className={styles.formone}>
         <UpdateInput
           type="text"

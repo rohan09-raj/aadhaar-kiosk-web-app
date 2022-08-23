@@ -1,3 +1,4 @@
+/* eslint-disable space-before-function-paren */
 import React, { useState, useEffect } from 'react'
 import Address from './Address/Address'
 import Agreement from './Agreement/Agreement'
@@ -37,7 +38,7 @@ const Enrollment = () => {
 
   const [model, setModel] = useState()
 
-  async function loadModel () {
+  async function loadModel() {
     try {
       const model = await cocoSsd.load()
       setModel(model)
@@ -55,7 +56,7 @@ const Enrollment = () => {
   }, [])
 
   let predictions = []
-  async function predictionFunction () {
+  async function predictionFunction() {
     predictions = await model.detect(document.getElementById('img'))
     if (predictions.length > 0) {
       console.log(predictions)
@@ -140,21 +141,26 @@ const Enrollment = () => {
       }
     } else if (page === 3) {
       predictionFunction()
-       if (predictions.length === 0) {
-         toast.warning(t('PLEASE_WAIT'), {
+      if (predictions.length === 0) {
+        toast.warning(t('PLEASE_WAIT'), {
           timeout: 1000
-         })
-       }
+        })
+      }
       setTimeout(() => {
         if (predictions.length > 0) {
-       if (!userData.photo) {
-         toast.error(t('PLEASE_CAPTURE_PHOTOGRAPH'))
-       } else if (predictions[0].class === 'person' && predictions[0].score > 0.5) {
-        setPage(page + 1)
-       } else {
-        toast.error(t('PLEASE_CAPTURE_CLEAR_PHOTOGRAPH'))
-       }
-      }
+          if (!userData.photo) {
+            toast.error(t('PLEASE_CAPTURE_PHOTOGRAPH'))
+          } else if (
+            predictions[0].class === 'person' &&
+            predictions[0].score > 0.8
+          ) {
+            setPage(page + 1)
+          } else {
+            toast.error(t('PLEASE_CAPTURE_CLEAR_PHOTOGRAPH'))
+          }
+        } else {
+          toast.error(t('PLEASE_CAPTURE_CLEAR_PHOTOGRAPH'))
+        }
       }, 1000)
     } else if (page === 4) {
       if (!userData.documents.POI) {

@@ -8,10 +8,11 @@ import styles from './PhotoCapture.module.css'
 import { Button, Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
+import PopUpModal from '../../../components/Modal/Modal'
 
 const PhotoCapture = () => {
   const { t } = useTranslation()
-  const { userData, setUserData, oriUserData } = userContext()
+  const { userData, setUserData } = userContext()
 
   const navigate = useNavigate()
 
@@ -22,8 +23,6 @@ const PhotoCapture = () => {
     setUserData({ ...userData, photo: imageSrc })
   })
 
-  console.log(oriUserData.photo)
-
   const handleSubmit = () => {
     console.log(userData.photo)
     if (userData.photo) {
@@ -31,11 +30,29 @@ const PhotoCapture = () => {
     }
   }
 
-  console.log(userData?.photo)
-
   return (
     <>
       <Header subheading={t('UPDATE')} />
+      <PopUpModal
+        title="Update your photo"
+        image={`${process.env.PUBLIC_URL}/assets/images/photo.svg`}
+        description={
+          <>
+            <ul>
+              <li className="list__item">
+                Ensure that your photo is clear and in focus
+              </li>
+              <li className="list__item">
+                Also, ensure that you are in the center of your photo
+              </li>
+              <li className="list__item">
+                You won&apos;t be able to proceed until you have captured a
+                clear and centered photo
+              </li>
+            </ul>
+          </>
+        }
+      />
       <div className={styles.card__container}>
         {userData?.photo === '' ? (
           <Webcam
@@ -51,7 +68,7 @@ const PhotoCapture = () => {
             }}
           />
         ) : (
-          <img src={userData?.photo} />
+          <img id="img" src={userData?.photo} />
         )}
       </div>
       <Grid container columnSpacing={10} justifyContent="center">

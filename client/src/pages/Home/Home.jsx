@@ -33,6 +33,12 @@ const Home = ({ page, setPage }) => {
             image={`${process.env.PUBLIC_URL}/assets/images/update.svg`}
           />
         </Link>
+        <Link to="/status">
+          <Card
+            title={t('CHECK_STATUS')}
+            image={`${process.env.PUBLIC_URL}/assets/images/status.svg`}
+          />
+        </Link>
       </div>
     </>
   )

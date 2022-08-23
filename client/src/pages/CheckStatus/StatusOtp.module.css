@@ -1,0 +1,19 @@
+.subheading__container {
+  font-family: 'Barlow';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bolder;
+  margin: 20px;
+  padding: 20px;
+}
+
+.subheading {
+  font-size: var(--font-medium);
+  font-weight: 400;
+}
+
+.subsubheading {
+  font-size: var(--font-medium-s);
+  margin: 10px 0px;
+}

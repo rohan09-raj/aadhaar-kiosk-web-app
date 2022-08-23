@@ -4,10 +4,10 @@ import UpdateInput from '../../../components/UpdateInput/UpdateInput'
 import { State, City } from 'country-state-city'
 import EditButton from '../../../components/EditButton/EditButton'
 import Select from 'react-select'
-
-import styles from './Address.module.css'
+import PopUpModal from '../../../components/Modal/Modal'
 import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
+import styles from './Address.module.css'
 
 const Address = () => {
   const { userData, setUserData } = userContext()
@@ -58,6 +58,29 @@ const Address = () => {
   return (
     <>
       <Header subheading={t('UPDATE')} />
+      <PopUpModal
+        title="Fill your information"
+        image={`${process.env.PUBLIC_URL}/assets/images/address.svg`}
+        description={
+          <>
+            <ul>
+              <li className="list__item">
+                Update the required details in the relevant fields by clicking
+                the edit button
+              </li>
+              <li className="list__item">
+                If required, select the state you belong to. from the dropdown
+                list
+              </li>
+              <li className="list__item">
+                If required, select the district you belong to. from the
+                dropdown list. This won&apos;t show any options until you have
+                selected the state
+              </li>
+            </ul>
+          </>
+        }
+      />
       <div className={styles.address}>
         <div className={styles.address__container}>
           <UpdateInput

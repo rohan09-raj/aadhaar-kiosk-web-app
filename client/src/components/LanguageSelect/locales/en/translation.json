@@ -98,5 +98,13 @@
   "PLEASE_VERIFY_OTP": "Please verify OTP",
   "USER_ALREADY_EXISTS": "USER ALREADY EXISTS",
   "YOU_HAVEN'T_UPDATED_ANYTHING": "You haven't updated anything.",
-  "YOU_MAY_EITHER_UPDATE_OR_MOVE_TO_NEXT_STEP": "You may either update or move to the next step"
+  "YOU_MAY_EITHER_UPDATE_OR_MOVE_TO_NEXT_STEP": "You may either update or move to the next step",
+  "YOU_HAVENT_UPDATED_ANYTHING_DIRECTING_YOU_TO_MAIN_PAGE": "You haven't updated anything. Directing you to main page",
+  "STATUS": "Status",
+  "ENROLLMENT_STATUS": "Enrollment Status",
+  "YOUR_AADHAAR_STATUS_IS_IN_PENDING_STATE": "Your Aadhaar enrollment request is in process.",
+  "PLEASE_HAVE_PATIENCE": "Please have patience, and wait for maximum 48hrs",
+  "YOUR_AADHAAR_STATUS_IS_APPROVED": "Your Aadhaar enrollment request has been approved",
+  "PRINT_YOUR_AADHAAR_CARD_FROM_WEBSITE": "You may now print your Aadhaar card from the official website",
+  "BACK_TO_HOME": "Back to Home"
 }

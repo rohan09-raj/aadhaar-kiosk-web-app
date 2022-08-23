@@ -9,6 +9,7 @@ import { useQuery, useMutation } from 'react-query'
 import { getUserByAadhaar, sendOTP } from '../../../services/apiservice'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import { toast, ToastContainer } from 'react-toastify'
+import PopUpModal from '../../../components/Modal/Modal'
 
 import styles from './Otp.module.css'
 
@@ -80,6 +81,27 @@ const Otp = () => {
         theme={'colored'}
       />
       <Header subheading={`${t('UPDATE')}`} />
+      <PopUpModal
+        title="Verify your mobile number"
+        image={`${process.env.PUBLIC_URL}/assets/images/otp.svg`}
+        description={
+          <>
+            <ul>
+              <li className="list__item">Click on &quot;SEND OTP&quot;</li>
+              <li className="list__item">
+                You will recieve an OTP on your entered mobile number
+              </li>
+              <li className="list__item">
+                You can &quot;RESEND&quot; the OTP after 30 seconds, if you
+                haven&apos;t received it yet.
+              </li>
+              <li className="list__item">
+                Click on &quot;VERIFY OTP&quot; to verify your mobile number
+              </li>
+            </ul>
+          </>
+        }
+      />
       <div className={styles.subheading__container}>
         <h3 className={styles.subheading}>{t('ENTER_OTP')}</h3>
         <p className={styles.subsubheading}>

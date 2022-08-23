@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { initialUserData } from '../../constants/userData'
+import { userContext } from '../../context/User'
 
 import styles from './Error.module.css'
 
 const Error = ({ message }) => {
   const navigate = useNavigate()
+  const { setUserData, setOriUserData, setAadhaarNumber } = userContext()
 
   useEffect(() => {
     setTimeout(() => {
+      setUserData(initialUserData)
+      setOriUserData(initialUserData)
+      setAadhaarNumber('')
       navigate('/')
     }, 3000)
   }, [])

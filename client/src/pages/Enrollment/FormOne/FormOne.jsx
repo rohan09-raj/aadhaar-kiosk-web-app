@@ -88,7 +88,9 @@ const FormOne = () => {
               }}
               required
             />
-            <label htmlFor="indian">{t('NON_RESIDENTIAL_INDIAN')}</label>
+            <label htmlFor="non-resident-indian">
+              {t('NON_RESIDENTIAL_INDIAN')}
+            </label>
           </span>
         </div>
 

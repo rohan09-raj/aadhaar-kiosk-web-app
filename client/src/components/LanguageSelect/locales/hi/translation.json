@@ -98,5 +98,9 @@
   "PLEASE_VERIFY_OTP": "कृपया ओटीपी सत्यापित करें",
   "USER_ALREADY_EXISTS": "उपयोगकर्ता पहले से मौजूद है",
   "YOU_HAVEN'T_UPDATED_ANYTHING": "आपने कोई भी अपडेट नहीं किया है",
-  "YOU_MAY_EITHER_UPDATE_OR_MOVE_TO_NEXT_STEP": "आप अपडेट कर सकते हैं या अगले चरण पर चले जाएँ"
+  "YOU_MAY_EITHER_UPDATE_OR_MOVE_TO_NEXT_STEP": "आप अपडेट कर सकते हैं या अगले चरण पर चले जाएँ",
+  "YOU_HAVENT_UPDATED_ANYTHING_DIRECTING_YOU_TO_MAIN_PAGE": "आपने कोई भी अपडेट नहीं किया है, आपको मुखपृष्ठ पर भेजा जा रहा हैं",
+  "STATUS": "स्थिति",
+  "ENROLLMENT_STATUS": "नामांकन की स्थिति",
+  "BACK_TO_HOME": "मुखपृष्ठ पर वापस"
 }

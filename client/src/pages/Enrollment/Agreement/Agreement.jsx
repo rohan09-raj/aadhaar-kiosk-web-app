@@ -60,7 +60,17 @@ const Agreement = ({ unverified, setUnverified }) => {
         description={
           <>
             <ul>
-              <li className="list__item">INSTRUCTIONS TO BE ADDED</li>
+              <li className="list__item">Click on &quot;SEND OTP&quot;</li>
+              <li className="list__item">
+                You will recieve an OTP on your entered mobile number
+              </li>
+              <li className="list__item">
+                You can &quot;RESEND&quot; the OTP after 30 seconds, if you
+                haven&apos;t received it yet.
+              </li>
+              <li className="list__item">
+                Click on &quot;VERIFY OTP&quot; to verify your mobile number
+              </li>
             </ul>
           </>
         }
