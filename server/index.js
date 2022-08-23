@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-import userRoutes from './routes/users.js';
+import userRoutes from './routes/user.js';
+import usersRoutes from './routes/users.js';
 import healthRoutes from './routes/health.js';
 import messageRoutes from './routes/message.js';
 
@@ -17,6 +18,7 @@ app.use(cors());
 
 app.use('/', healthRoutes);
 app.use('/user', userRoutes);
+app.use('/users', usersRoutes);
 app.use('/', messageRoutes);
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
