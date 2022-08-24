@@ -5,12 +5,12 @@ const apiClient = axios.create({
 });
 
 export const getVerifiedUsers = async () => {
-  const response = await apiClient.get('/verifiedusers');
+  const response = await apiClient.get('/users/verified');
   return response;
 };
 
 export const getUnverifiedUsers = async () => {
-  const response = await apiClient.get('/unverifiedusers');
+  const response = await apiClient.get('/users/unverified');
   return response;
 };
 
