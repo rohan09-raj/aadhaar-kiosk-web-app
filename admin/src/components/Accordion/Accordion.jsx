@@ -16,16 +16,17 @@ const Accordion = ({name, user}) => {
       </div>
       {isActive && (
         <div className={styles.accordion__content}>
-          <div>Indian Resident : {user.indianResident}</div>
+          <div>Indian Resident : {user.indianResident ? 'Yes' : 'No'}</div>
           <div>Name : {user.name}</div>
           <div>Gender : {user.gender}</div>
           <div>Date of Birth : {user.dob}</div>
           <div>Mobile Number : {user.mobile}</div>
           <div>Email : {user.email}</div>
-          <div>Address : {user.address}</div>
-          <div>Photograph : {user.photo}</div>
-          <div>Documents : {user.documents.doc1}</div>
-          <div>Biometrics : {user.biometrics.bio1}</div>
+          <div>Address : {user.address.houseNo},{user.address.street},{user.address.locality},{user.address.landmark},{user.address.village},{user.address.district.name},{user.address.state.name},{user.address.pincode}</div>
+          <img src={`${user.photo}`} />
+          <img src={`${user.documents.POI}`} />
+          <img src={`${user.documents.POA}`} />
+          <img src={`${user.documents.DOB}`} />
         </div>
       )}
     </div>
