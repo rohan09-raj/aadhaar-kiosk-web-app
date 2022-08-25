@@ -33,6 +33,7 @@
 
 .accordion__demographic {
   display: flex;
+  flex-direction: column;
   width: 60%;
   background-color: #ecf0f1;
   border-radius: 10px;
@@ -50,8 +51,10 @@
   border-radius: 6px;
 }
 
-.demographic__heading div,
-.demographic__content div {
-  margin: 20px 0px;
-  font-size: var(--font-medium-s);
+.accordion__demographic div {
+  margin: 6px;
+}
+
+.accordion__demographic div span {
+  font-weight: 700;
 }

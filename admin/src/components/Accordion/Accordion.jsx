@@ -18,30 +18,16 @@ const Accordion = ({name, user}) => {
       {isActive && (
         <div className={styles.accordion__content}>
           <div className={styles.accordion__demographic}>
-            <div className={styles.demographic__heading}>
-              <div>Name</div>
-              <div>Gender</div>
-              <div>Date of Birth</div>
-              <div>Mobile Number</div>
-              <div>Email</div>
-              <div>Address</div>
-              <div>Indian Resident</div>
-            </div>
-            <hr />
-            <div className={styles.demographic__content}>
-              <div>{user.name}</div>
-              <div>{user.gender}</div>
-              <div>{user.dob}</div>
-              <div>{user.mobile}</div>
-              <div>{user.email}</div>
-              <div>
-                {user.address.houseNo},{user.address.street},
+              <div><span>Name</span> <hr/> {user.name}</div>
+              <div><span>Gender</span> <hr/> {user.gender}</div>
+              <div><span>Date of Birth</span> <hr/> {user.dob}</div>
+              <div><span>Mobile Number</span> <hr/> {user.mobile}</div>
+              <div><span>Email</span> <hr/> {user.email}</div>
+              <div><span>Address</span> <hr/> {user.address.houseNo},{user.address.street},
                 {user.address.locality},{user.address.landmark},
                 {user.address.village},{user.address.district.name},
-                {user.address.state.name},{user.address.pincode}
-              </div>
-              <div>Indian Resident : {user.indianResident ? 'Yes' : 'No'}</div>
-            </div>
+                {user.address.state.name},{user.address.pincode}</div>
+              <div><span>Indian Resident</span> <hr/> {user.indianResident ? 'Yes' : 'No'}</div>
           </div>
           <div className={styles.accordion__biometric}>
             <img
@@ -53,6 +39,7 @@ const Accordion = ({name, user}) => {
             <Button
               sx={{margin: '10px 0px', padding: '20px'}}
               variant='contained'
+              onClick={() => {}}
             >
               Documents
             </Button>
