@@ -21,7 +21,7 @@ const FinalSlip = () => {
       </div>
       <div>
         <Grid container justifyContent="center">
-          <Typography align="center" fontWeight={'Bold'}>
+          <Typography align="center" fontWeight={'Bold'} sx={{ fontSize: '1.75rem' }}>
             {t('THANK_YOU_FOR_YOUR_TIME')}
             <br />
             {t('ENSURE_THAT_RECIEVED_A_CONFIRMATION_MESSAGE')}

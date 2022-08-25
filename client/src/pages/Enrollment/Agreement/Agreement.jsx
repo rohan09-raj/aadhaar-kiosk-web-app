@@ -86,8 +86,7 @@ const Agreement = ({ unverified, setUnverified }) => {
         />
       </div>
       <div className={styles.card__elements}>
-        <Typography sx={{ fontSize: '1.5rem' }}>
-          {t('PLEASE_VERIFY_YOUR_IDENTITY')}
+        <Typography sx={{ fontSize: '1.5rem' }}>{t('PLEASE_VERIFY_YOUR_IDENTITY')} xxxxxxxx{userData?.mobile?.slice(-2)}
         </Typography>
         <Button
           color="primary"
