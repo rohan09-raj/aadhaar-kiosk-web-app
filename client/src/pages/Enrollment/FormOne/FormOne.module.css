@@ -53,7 +53,7 @@
   height: 80px;
   margin: 10px 0px;
   padding: 11px 10px;
-  border: 3px solid;
+  border: 3px solid !important;
   border-radius: 10px;
   font-size: 1.5rem;
 }

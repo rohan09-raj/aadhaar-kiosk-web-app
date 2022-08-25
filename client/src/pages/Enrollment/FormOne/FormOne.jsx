@@ -160,8 +160,7 @@ const FormOne = () => {
           <label htmlFor="dob">{t('DATE_OF_BIRTH')}</label>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <MobileDatePicker
-              label="Date mobile"
-              inputFormat="mm/dd/yyyy"
+              inputFormat="MM/DD/yyyy"
               value={userData.dob}
               onChange={(e) => {
                 setUserData({
@@ -169,7 +168,7 @@ const FormOne = () => {
                   dob: e
                 })
               }}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => <TextField sx={{ '& fieldset': { border: 'none' } }} className={styles.formone__dob_input} {...params} />}
             />
           </LocalizationProvider>
           {/* <input
