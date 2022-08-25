@@ -12,14 +12,20 @@ const Home = ({page, setPage}) => {
       <div className={styles.card__container}>
         <Link to='/verified'>
           <Card
-            title='Verified'
+            title='Verified Users'
             image={`${process.env.PUBLIC_URL}/assets/images/verified.svg`}
           />
         </Link>
-        <Link to='/unverified'>
+        <Link to='/enrollment'>
           <Card
-            title='Unverified'
-            image={`${process.env.PUBLIC_URL}/assets/images/unverified.svg`}
+            title='Enrollment Requests'
+            image={`${process.env.PUBLIC_URL}/assets/images/enrollment.svg`}
+          />
+        </Link>
+        <Link to='/update'>
+          <Card
+            title='Update Requests'
+            image={`${process.env.PUBLIC_URL}/assets/images/update.svg`}
           />
         </Link>
       </div>

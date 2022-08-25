@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Accordion from '../../components/Accordion/Accordion';
 import Button from '../../components/Button/Button';
 import Header from '../../components/Header/Header';
@@ -8,29 +8,41 @@ import {
   updateUser,
 } from '../../services/apiservice';
 import {useQuery, useMutation} from 'react-query';
-
-import styles from './UnverifiedUsers.module.css';
+import {useNavigate} from 'react-router-dom';
+import styles from './UpdateRequests.module.css';
+import BackButton from '../../components/BackButton/BackButton';
 import Spinner from '../../components/Spinner/Spinner';
 
-const UnverifiedUsers = () => {
-  const {data, isLoading, isError} = useQuery('unverified', getUnverifiedUsers);
-  const deleteUse = useMutation((id) => deleteUser(id));
-  const updateUse = useMutation((id) => updateUser(id, {verified: true}));
-  
-  useEffect(() => {}, [data]);
-  
+const UpdateRequests = () => {
+  const navigate = useNavigate();
+  const {data, isLoading, isError, refetch} = useQuery(
+    'unverified',
+    getUnverifiedUsers
+  );
+  const deleteUse = useMutation((id) => deleteUser(id), {
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
+  const updateUse = useMutation((id) => updateUser(id, {verified: true}), {
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
   if (isLoading) {
-    return <Spinner heading='Admin' />
+    return <Spinner heading='Admin' />;
   }
 
   if (isError) {
-    return <div>Error</div>
+    return <div>Error</div>;
   }
-
 
   return (
     <div className={styles.unverified_users}>
       <Header subheading='Admin' />
+      <BackButton onClick={() => navigate('/')} />
       <h1 className={styles.unverified_users__heading}>Unverified Users</h1>
       <div className='accordion'>
         {data?.data.length !== 0 ? (
@@ -57,4 +69,4 @@ const UnverifiedUsers = () => {
   );
 };
 
-export default UnverifiedUsers;
+export default UpdateRequests;

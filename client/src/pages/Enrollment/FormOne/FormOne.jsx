@@ -6,6 +6,7 @@ import LabelCard from '../../../components/LabelCard/LabelCard'
 import styles from './FormOne.module.css'
 import { userContext } from '../../../context/User'
 import PopUpModal from '../../../components/Modal/Modal'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 const FormOne = () => {
   const { t } = useTranslation()
@@ -36,6 +37,7 @@ const FormOne = () => {
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
+      <AudioAutoplay audio={`${process.env.PUBLIC_URL}/assets/audios/iris`} />
       <PopUpModal
         title="FILL_YOUR_INFORMATION"
         image={`${process.env.PUBLIC_URL}/assets/images/id.svg`}
