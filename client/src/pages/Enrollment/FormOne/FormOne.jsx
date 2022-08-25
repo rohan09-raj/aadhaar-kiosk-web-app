@@ -163,6 +163,7 @@ const FormOne = () => {
               <MobileDatePicker
                 inputFormat="MM/DD/yyyy"
                 value={userData.dob}
+                showToolbar={false}
                 onChange={(e) => {
                   setUserData({
                     ...userData,
@@ -170,7 +171,7 @@ const FormOne = () => {
                   })
                 }}
                 renderInput={(params) => <TextField
-                  placeholder="MM/DD/yyyy" sx={{
+                  placeholder="MM/DD/YYYY" sx={{
                     '& fieldset': {
                       width: '500px',
                       height: '80px',

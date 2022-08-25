@@ -92,6 +92,7 @@ const FormOne = () => {
                 value={userData.dob}
                 className={styles.dob}
                 disabled={editable}
+                showToolbar={false}
                 onChange={(e) => {
                   setUserData({
                     ...userData,
