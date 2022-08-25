@@ -20,7 +20,7 @@ const PhotoCapture = () => {
     setUserData({ ...userData, photo: imageSrc })
   })
 
- const description = ['ENSURE_THAT_YOUR_PHOTO_IS_CLEAR_AND_IN_FOCUS', 'ALSO_ENSURE_THAT_YOU_ARE_IN_THE_CENTER_OF_YOUR_PHOTO', 'YOU_WONT_BE_ABLE_TO_PROCEED_UNTIL_YOU_HAVE_CAPTURED_A_CLEAR_AND_CENTERED_PHOTO']
+  const description = ['ENSURE_THAT_YOUR_PHOTO_IS_CLEAR_AND_IN_FOCUS', 'ALSO_ENSURE_THAT_YOU_ARE_IN_THE_CENTER_OF_YOUR_PHOTO', 'YOU_WONT_BE_ABLE_TO_PROCEED_UNTIL_YOU_HAVE_CAPTURED_A_CLEAR_AND_CENTERED_PHOTO']
 
   return (
     <>
@@ -61,6 +61,7 @@ const PhotoCapture = () => {
             size="large"
             type="submit"
             variant="contained"
+            sx={{ fontSize: '1.5rem', padding: '10px 30px' }}
             onClick={(e) => {
               e.preventDefault()
               capture()
@@ -75,6 +76,7 @@ const PhotoCapture = () => {
             size="large"
             type="submit"
             variant="contained"
+            sx={{ fontSize: '1.5rem', padding: '10px 48px' }}
             onClick={(e) => {
               e.preventDefault()
               setUserData({ ...userData, photo: '' })
@@ -87,7 +89,7 @@ const PhotoCapture = () => {
       <br></br>
       <div>
         <Grid container justifyContent="center">
-          <Typography align="center">
+          <Typography align="center" sx={{ fontSize: '1.25rem' }}>
             {t('PLEASE_LOOK_INTO_THE_CAMERA')}
             <br></br>
             {t('CLICK_CAPTURE_TO_CAPTURE_THE_PHOTO')}

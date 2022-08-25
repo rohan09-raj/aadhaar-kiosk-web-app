@@ -243,14 +243,14 @@ const DocumentScanner = () => {
           </Stepper>
           {activeStep === steps.length ? (
             steps.length === 0 ? (
-              <>
+              <div className={styles.typo__container}>
                 <Typography variant="h4" sx={{ mt: 8, mb: 1 }}>
                   {t("YOU_HAVEN'T_UPDATED_ANYTHING")}
                 </Typography>
-                <Typography variant="h4" sx={{ mt: 8, mb: 1 }}>
+                <Typography variant="h4" sx={{ mb: 1 }}>
                   {t('YOU_MAY_EITHER_UPDATE_OR_MOVE_TO_NEXT_STEP')}
                 </Typography>
-              </>
+              </div>
             ) : (
               <Typography variant="h3" sx={{ mt: 8, mb: 1 }}>
                 {t('ALL_STEPS_COMPLETED')}

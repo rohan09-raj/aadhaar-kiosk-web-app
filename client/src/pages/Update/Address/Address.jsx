@@ -29,11 +29,12 @@ const Address = () => {
   const customStyles = {
     control: (base) => ({
       ...base,
-      width: '330px',
-      height: '60px',
+      width: '500px',
+      height: '80px',
       margin: '10px 0px',
       border: '3px solid',
-      borderRadius: '10px !important'
+      borderRadius: '10px !important',
+      fontSize: '1.5rem'
     }),
     input: (base) => ({
       ...base,
@@ -106,7 +107,7 @@ const Address = () => {
             placeholder={t('ENTER_YOUR_VILLAGE_TOWN')}
           />
           <div className={styles.input__container}>
-            <label htmlFor="state">{t('STATE')}</label>
+            <label className={styles.label} htmlFor="state">{t('STATE')}</label>
             <div className={styles.input__edit}>
               <Select
                 id="state"
@@ -167,7 +168,7 @@ const Address = () => {
             placeholder={t('ENTER_YOUR_AREA_POST_OFFICE')}
           />
           <div className={styles.input__container}>
-            <label htmlFor="city">{t('DISTRICT')}</label>
+            <label className={styles.label} htmlFor="city">{t('DISTRICT')}</label>
             <div className={styles.input__edit}>
               <Select
                 id="city"

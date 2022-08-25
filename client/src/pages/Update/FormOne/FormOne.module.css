@@ -45,3 +45,11 @@
   display: flex;
   flex-direction: row;
 }
+
+.dob {
+  border : none;
+}
+
+.label {
+  font-size: 1.75rem;
+}

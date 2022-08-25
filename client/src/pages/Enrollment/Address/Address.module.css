@@ -15,3 +15,7 @@
   font-family: 'Barlow';
   font-size: var(--font-medium-s);
 }
+
+.input__container label {
+  font-size: 1.75rem;
+}

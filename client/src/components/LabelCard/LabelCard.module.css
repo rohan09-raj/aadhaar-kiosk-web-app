@@ -12,6 +12,8 @@
 .card__image {
   border: 3px solid var(--color-black);
   border-radius: 10px;
+  width: 158px;
+  height: 158px;
 }
 
 .card__title {
