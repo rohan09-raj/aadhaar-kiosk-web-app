@@ -3,7 +3,7 @@
   justify-content: center;
   font-family: 'Barlow';
   margin: 15px 0px;
-  font-size: var(--font-medium-s);
+  font-size: 1.75rem;
 }
 
 .input__container {
@@ -12,10 +12,11 @@
 }
 
 .input__field {
-  width: 330px;
+  width: 500px;
+  height: 80px;
   margin: 10px 0px;
   padding: 18px 10px;
   border: 3px solid;
   border-radius: 10px;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }

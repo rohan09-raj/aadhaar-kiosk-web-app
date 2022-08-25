@@ -7,6 +7,10 @@ import styles from './FormOne.module.css'
 import { userContext } from '../../../context/User'
 import PopUpModal from '../../../components/Modal/Modal'
 import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
+import { TextField } from '@mui/material'
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 
 const FormOne = () => {
   const { t } = useTranslation()
@@ -32,7 +36,12 @@ const FormOne = () => {
     }
   }, [userData.gender])
 
-  const description = ['SELECT_YOUR_RESIDENCY_BY_SELECTING_THE_APPROPRIATE_CHECKBOX', 'ENTER_YOUR_FULL_NAME_WITHOUT_ANY_TITLE_OR_SALUTATION', 'SELECT_YOUR_GENDER_BY_CLICKING_ON_THE_APPROPRIATE_CARD', 'SELECT_YOUR_DATE_OF_BIRTH_FROM_THE_PROVIDED_CALENDER']
+  const description = [
+    'SELECT_YOUR_RESIDENCY_BY_SELECTING_THE_APPROPRIATE_CHECKBOX',
+    'ENTER_YOUR_FULL_NAME_WITHOUT_ANY_TITLE_OR_SALUTATION',
+    'SELECT_YOUR_GENDER_BY_CLICKING_ON_THE_APPROPRIATE_CARD',
+    'SELECT_YOUR_DATE_OF_BIRTH_FROM_THE_PROVIDED_CALENDER'
+  ]
 
   return (
     <>
@@ -44,7 +53,11 @@ const FormOne = () => {
         description={
           <>
             <ul>
-              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
+              {description.map((item) => (
+                <li className="list__item" key="id">
+                  {t(item)}
+                </li>
+              ))}
             </ul>
           </>
         }
@@ -145,7 +158,21 @@ const FormOne = () => {
 
         <div className={styles.formone__dob}>
           <label htmlFor="dob">{t('DATE_OF_BIRTH')}</label>
-          <input
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <MobileDatePicker
+              label="Date mobile"
+              inputFormat="mm/dd/yyyy"
+              value={userData.dob}
+              onChange={(e) => {
+                setUserData({
+                  ...userData,
+                  dob: e
+                })
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+          {/* <input
             className={styles.formone__dob_input}
             type="date"
             id="dob"
@@ -158,7 +185,7 @@ const FormOne = () => {
               })
             }}
             required
-          />
+          /> */}
         </div>
       </div>
     </>
