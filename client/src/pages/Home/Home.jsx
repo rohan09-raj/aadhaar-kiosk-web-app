@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Card from '../../components/Card/Card'
 import Header from '../../components/Header/Header'
 import ExtendedPopUpModal from '../../components/Modal/ExtendedModal'
@@ -8,6 +8,8 @@ import styles from './Home.module.css'
 
 const Home = ({ page, setPage }) => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
+
   return (
     <>
       <Header subheading={t('MERA_AADHAAR_MERI_PEHCHAN')} />
@@ -21,24 +23,22 @@ const Home = ({ page, setPage }) => {
         image3={`${process.env.PUBLIC_URL}/assets/images/status.svg`}
       />
       <div className={styles.card__container}>
-        <Link to="/enrollment">
-          <Card
-            title={t('ENROLLMENT')}
-            image={`${process.env.PUBLIC_URL}/assets/images/enrollment.svg`}
-          />
-        </Link>
-        <Link to="/update">
-          <Card
-            title={t('UPDATE')}
-            image={`${process.env.PUBLIC_URL}/assets/images/update.svg`}
-          />
-        </Link>
-        <Link to="/status">
-          <Card
-            title={t('CHECK_STATUS')}
-            image={`${process.env.PUBLIC_URL}/assets/images/status.svg`}
-          />
-        </Link>
+        <Card
+          onClick={() => navigate('/enrollment')}
+          title={t('ENROLLMENT')}
+          image={`${process.env.PUBLIC_URL}/assets/images/enrollment.svg`}
+        />
+
+        <Card
+          onClick={() => navigate('/update')}
+          title={t('UPDATE')}
+          image={`${process.env.PUBLIC_URL}/assets/images/update.svg`}
+        />
+        <Card
+          onClick={() => navigate('/status')}
+          title={t('CHECK_STATUS')}
+          image={`${process.env.PUBLIC_URL}/assets/images/status.svg`}
+        />
       </div>
     </>
   )

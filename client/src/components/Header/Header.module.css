@@ -1,7 +1,8 @@
 @import '../../styles/GlobalVariables.css';
 
 .header {
-  font-family: 'Fredoka One', cursive;
+  font-family: 'Barlow', cursive;
+  font-weight: 700;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,11 +11,11 @@
 }
 
 .header__subheading {
-  font-size: var(--font-medium);
-  font-weight: 400;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 .header__image {
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;
 }
