@@ -5,6 +5,7 @@ import Card from '../../components/Card/Card'
 import Header from '../../components/Header/Header'
 import ExtendedPopUpModal from '../../components/Modal/ExtendedModal'
 import styles from './Home.module.css'
+import AudioAutoplay from '../../components/AudioAutoplay/AudioAutoplay'
 
 const Home = ({ page, setPage }) => {
   const { t } = useTranslation()
@@ -13,6 +14,9 @@ const Home = ({ page, setPage }) => {
   return (
     <>
       <Header subheading={t('MERA_AADHAAR_MERI_PEHCHAN')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/main-screen`}
+      />
       <ExtendedPopUpModal
         title="Choose the appropriate card"
         description1="For enrollment of new Aadhaar card"

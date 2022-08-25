@@ -6,6 +6,7 @@ import Select from 'react-select'
 import { userContext } from '../../../context/User'
 import { useTranslation } from 'react-i18next'
 import PopUpModal from '../../../components/Modal/Modal'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 import styles from './Address.module.css'
 
@@ -46,18 +47,29 @@ const Address = () => {
     })
   }
 
-  const description = ['ENTER_YOUR_DETAILS_ACCORDING_TO_THE_RELEVANT_FIELDS', 'SELECT_THE_STATE_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST', 'SELECT_THE_DISTRICT_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST']
+  const description = [
+    'ENTER_YOUR_DETAILS_ACCORDING_TO_THE_RELEVANT_FIELDS',
+    'SELECT_THE_STATE_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST',
+    'SELECT_THE_DISTRICT_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST'
+  ]
 
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/address`}
+      />
       <PopUpModal
         title="FILL_YOUR_INFORMATION"
         image={`${process.env.PUBLIC_URL}/assets/images/address.svg`}
         description={
           <>
             <ul>
-              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
+              {description.map((item) => (
+                <li className="list__item" key="id">
+                  {t(item)}
+                </li>
+              ))}
             </ul>
           </>
         }

@@ -9,6 +9,7 @@ import { Button, Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
 import PopUpModal from '../../../components/Modal/Modal'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 const PhotoCapture = () => {
   const { t } = useTranslation()
@@ -30,18 +31,29 @@ const PhotoCapture = () => {
     }
   }
 
-  const description = ['ENSURE_THAT_YOUR_PHOTO_IS_CLEAR_AND_IN_FOCUS', 'ALSO_ENSURE_THAT_YOU_ARE_IN_THE_CENTER_OF_YOUR_PHOTO', 'YOU_WONT_BE_ABLE_TO_PROCEED_UNTIL_YOU_HAVE_CAPTURED_A_CLEAR_AND_CENTERED_PHOTO']
+  const description = [
+    'ENSURE_THAT_YOUR_PHOTO_IS_CLEAR_AND_IN_FOCUS',
+    'ALSO_ENSURE_THAT_YOU_ARE_IN_THE_CENTER_OF_YOUR_PHOTO',
+    'YOU_WONT_BE_ABLE_TO_PROCEED_UNTIL_YOU_HAVE_CAPTURED_A_CLEAR_AND_CENTERED_PHOTO'
+  ]
 
   return (
     <>
       <Header subheading={t('UPDATE')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/photograph-update`}
+      />
       <PopUpModal
         title="CAPTURE_YOUR_PHOTO"
         image={`${process.env.PUBLIC_URL}/assets/images/photo.svg`}
         description={
           <>
             <ul>
-              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
+              {description.map((item) => (
+                <li className="list__item" key="id">
+                  {t(item)}
+                </li>
+              ))}
             </ul>
           </>
         }

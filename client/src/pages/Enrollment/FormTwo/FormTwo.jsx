@@ -6,21 +6,32 @@ import { userContext } from '../../../context/User'
 
 import styles from './FormTwo.module.css'
 import PopUpModal from '../../../components/Modal/Modal'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 const FormTwo = () => {
   const { t } = useTranslation()
   const { userData, setUserData } = userContext()
-  const description = ['ENTER_YOUR_10_DIGIT_MOBILE_NUMBER_WITHOUT_ANY_PREFIX_OR_COUNTRY_ID', 'ENTER_YOUR_EMAIL_ID']
+  const description = [
+    'ENTER_YOUR_10_DIGIT_MOBILE_NUMBER_WITHOUT_ANY_PREFIX_OR_COUNTRY_ID',
+    'ENTER_YOUR_EMAIL_ID'
+  ]
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/mobile-and-email-id`}
+      />
       <PopUpModal
         title="FILL_YOUR_INFORMATION"
         image={`${process.env.PUBLIC_URL}/assets/images/communication.svg`}
         description={
           <>
             <ul>
-              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
+              {description.map((item) => (
+                <li className="list__item" key="id">
+                  {t(item)}
+                </li>
+              ))}
             </ul>
           </>
         }

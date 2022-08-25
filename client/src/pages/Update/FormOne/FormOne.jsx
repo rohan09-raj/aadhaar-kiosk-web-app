@@ -6,6 +6,7 @@ import EditButton from '../../../components/EditButton/EditButton'
 import Gender from '../../../components/Gender/Gender'
 import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 import PopUpModal from '../../../components/Modal/Modal'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
 import { TextField } from '@mui/material'
@@ -36,18 +37,30 @@ const FormOne = () => {
     }
   }, [userData.gender])
 
-  const description = ['SELECT_YOUR_RESIDENCY_BY_SELECTING_THE_APPROPRIATE_CHECKBOX', 'ENTER_YOUR_FULL_NAME_WITHOUT_ANY_TITLE_OR_SALUTATION', 'SELECT_YOUR_GENDER_BY_CLICKING_ON_THE_APPROPRIATE_CARD', 'SELECT_YOUR_DATE_OF_BIRTH_FROM_THE_PROVIDED_CALENDER']
+  const description = [
+    'SELECT_YOUR_RESIDENCY_BY_SELECTING_THE_APPROPRIATE_CHECKBOX',
+    'ENTER_YOUR_FULL_NAME_WITHOUT_ANY_TITLE_OR_SALUTATION',
+    'SELECT_YOUR_GENDER_BY_CLICKING_ON_THE_APPROPRIATE_CARD',
+    'SELECT_YOUR_DATE_OF_BIRTH_FROM_THE_PROVIDED_CALENDER'
+  ]
 
   return (
     <>
       <Header subheading={t('UPDATE')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/demographic-personal-details-to-be-updated`}
+      />
       <PopUpModal
         title="FILL_YOUR_INFORMATION"
         image={`${process.env.PUBLIC_URL}/assets/images/id.svg`}
         description={
           <>
             <ul>
-              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
+              {description.map((item) => (
+                <li className="list__item" key="id">
+                  {t(item)}
+                </li>
+              ))}
             </ul>
           </>
         }

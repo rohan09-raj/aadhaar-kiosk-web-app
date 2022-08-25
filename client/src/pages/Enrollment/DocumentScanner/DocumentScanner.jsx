@@ -9,6 +9,7 @@ import { userContext } from '../../../context/User'
 import { toast } from 'react-toastify'
 import PopUpModal from '../../../components/Modal/Modal'
 import { useStyles } from './styles'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 const DocumentScanner = () => {
   const { t } = useTranslation()
@@ -147,6 +148,9 @@ const DocumentScanner = () => {
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/document`}
+      />
       <PopUpModal
         title="SCAN_YOUR_DOCUMENTS"
         image={`${process.env.PUBLIC_URL}/assets/images/document.svg`}
@@ -165,7 +169,9 @@ const DocumentScanner = () => {
                 {t('ENSURE_THAT_YOUR_DOCUMENTS_ARE_IN_THE_CENTER_OF_THE_FRAME')}
               </li>
               <li className="list__item">
-                {t('YOU_WONT_BE_ABLE_TO_PROCEED_UNTIL_YOU_HAVE_SCANNED_ALL_THE_REQUIRED_DOCUMENTS')}
+                {t(
+                  'YOU_WONT_BE_ABLE_TO_PROCEED_UNTIL_YOU_HAVE_SCANNED_ALL_THE_REQUIRED_DOCUMENTS'
+                )}
               </li>
             </ul>
           </>

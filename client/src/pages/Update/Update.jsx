@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ToastContainer, toast } from 'react-toastify'
 import { validAadhaar } from '../../constants/RegEx'
+import AudioAutoplay from '../../components/AudioAutoplay/AudioAutoplay'
 
 const Update = () => {
   const { aadhaarNumber, setAadhaarNumber } = userContext()
@@ -23,6 +24,9 @@ const Update = () => {
         theme={'colored'}
       />
       <Header subheading={`${t('UPDATE')}`} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/enter-aadhaar-no`}
+      />
       <div className={styles.subheading__container}>
         <h3 className={styles.subheading}>
           {t('PROVIDE_YOUR_AADHAAR_NUMBER')}

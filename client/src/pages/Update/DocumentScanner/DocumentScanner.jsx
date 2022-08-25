@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
 import { toast } from 'react-toastify'
 import { useStyles } from './styles'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 const DocumentScanner = () => {
   const { userData, oriUserData, setUserData } = userContext()
@@ -199,30 +200,39 @@ const DocumentScanner = () => {
   return (
     <>
       <Header subheading={t('UPDATE')} />
-      {steps.length !== 0 && (<PopUpModal
-        title="SCAN_YOUR_DOCUMENTS"
-        image={`${process.env.PUBLIC_URL}/assets/images/document.svg`}
-        description={
-          <>
-            <ul>
-              <li className="list__item">
-                {t('CONSISTS_OF_3_STEPS')}
-                <ul>
-                  <li>{t('PROOF_OF_IDENTITY')} </li>
-                  <li>{t(t('PROOF_OF_ADDRESS'))}</li>
-                  <li>{t('PROOF_OF_DOB')} </li>
-                </ul>
-              </li>
-              <li className="list__item">
-                {t('ENSURE_THAT_YOUR_DOCUMENTS_ARE_IN_THE_CENTER_OF_THE_FRAME')}
-              </li>
-              <li className="list__item">
-                {t('YOU_WONT_BE_ABLE_TO_PROCEED_UNTIL_YOU_HAVE_SCANNED_ALL_THE_REQUIRED_DOCUMENTS')}
-              </li>
-            </ul>
-          </>
-        }
-      />)}
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/update-document`}
+      />
+      {steps.length !== 0 && (
+        <PopUpModal
+          title="SCAN_YOUR_DOCUMENTS"
+          image={`${process.env.PUBLIC_URL}/assets/images/document.svg`}
+          description={
+            <>
+              <ul>
+                <li className="list__item">
+                  {t('CONSISTS_OF_3_STEPS')}
+                  <ul>
+                    <li>{t('PROOF_OF_IDENTITY')} </li>
+                    <li>{t(t('PROOF_OF_ADDRESS'))}</li>
+                    <li>{t('PROOF_OF_DOB')} </li>
+                  </ul>
+                </li>
+                <li className="list__item">
+                  {t(
+                    'ENSURE_THAT_YOUR_DOCUMENTS_ARE_IN_THE_CENTER_OF_THE_FRAME'
+                  )}
+                </li>
+                <li className="list__item">
+                  {t(
+                    'YOU_WONT_BE_ABLE_TO_PROCEED_UNTIL_YOU_HAVE_SCANNED_ALL_THE_REQUIRED_DOCUMENTS'
+                  )}
+                </li>
+              </ul>
+            </>
+          }
+        />
+      )}
       <div className={styles.stepper__container}>
         <div className={styles.box}>
           <Stepper activeStep={activeStep} sx={{ width: '60%' }}>

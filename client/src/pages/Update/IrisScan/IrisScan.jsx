@@ -6,12 +6,14 @@ import { Button, Grid, Typography } from '@mui/material'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import { useTranslation } from 'react-i18next'
 import PopUpModal from '../../../components/Modal/Modal'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 const IrisScan = () => {
   const { t } = useTranslation()
   return (
     <>
       <Header subheading={t('UPDATE')} />
+      <AudioAutoplay audio={`${process.env.PUBLIC_URL}/assets/audios/iris`} />
       <PopUpModal
         title="Scan your Iris"
         image={`${process.env.PUBLIC_URL}/assets/images/iris_scan.svg`}

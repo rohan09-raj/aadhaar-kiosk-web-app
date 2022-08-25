@@ -23,3 +23,8 @@ export const deleteUser = async (id) => {
   const response = await apiClient.delete(`/user/${id}`);
   return response;
 };
+
+export const updatingUsers = async () => {
+  const response = await apiClient.get(`/users/updating`);
+  return response;
+};

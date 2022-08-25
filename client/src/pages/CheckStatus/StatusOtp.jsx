@@ -10,6 +10,7 @@ import { getUserByAadhaar, sendOTP, getUser } from '../../services/apiservice'
 import SubmitButton from '../../components/SubmitButton/SubmitButton'
 import { toast, ToastContainer } from 'react-toastify'
 import PopUpModal from '../../components/Modal/Modal'
+import AudioAutoplay from '../../components/AudioAutoplay/AudioAutoplay'
 
 import styles from './StatusOtp.module.css'
 import Spinner from '../../components/Spinner/Spinner'
@@ -69,7 +70,7 @@ const StatusOtp = () => {
       }
     })
     if (isLoading) {
-      return <Spinner heading='STATUS' />
+      return <Spinner heading="STATUS" />
     }
 
     if (isError) {
@@ -86,7 +87,7 @@ const StatusOtp = () => {
     })
 
     if (isLoading) {
-      return <Spinner heading='STATUS' />
+      return <Spinner heading="STATUS" />
     }
 
     if (isError) {
@@ -98,7 +99,12 @@ const StatusOtp = () => {
     }
   }
 
-  const description = ['CLICK_ON_SEND_OTP', 'YOU_WILL_RECIEVE_AN_OTP_ON_YOUR_MOBILE_NUMBER', 'YOU_CAN_RESEND_THE_OTP_AFTER_30_SECONDS_IF_YOU_HAVENT_RECEIVED_IT_YET', 'CLICK_ON_VERIFY_OTP_TO_VERIFY_YOUR_MOBILE_NUMBER']
+  const description = [
+    'CLICK_ON_SEND_OTP',
+    'YOU_WILL_RECIEVE_AN_OTP_ON_YOUR_MOBILE_NUMBER',
+    'YOU_CAN_RESEND_THE_OTP_AFTER_30_SECONDS_IF_YOU_HAVENT_RECEIVED_IT_YET',
+    'CLICK_ON_VERIFY_OTP_TO_VERIFY_YOUR_MOBILE_NUMBER'
+  ]
 
   return (
     <>
@@ -108,13 +114,20 @@ const StatusOtp = () => {
         theme={'colored'}
       />
       <Header subheading={`${t('STATUS')}`} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/otp-verification`}
+      />
       <PopUpModal
         title="VERIFY_YOUR_MOBILE_NUMBER"
         image={`${process.env.PUBLIC_URL}/assets/images/otp.svg`}
         description={
           <>
             <ul>
-              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
+              {description.map((item) => (
+                <li className="list__item" key="id">
+                  {t(item)}
+                </li>
+              ))}
             </ul>
           </>
         }

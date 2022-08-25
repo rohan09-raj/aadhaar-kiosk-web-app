@@ -6,6 +6,7 @@ import styles from './EnrollmentStatus.module.css'
 import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { userContext } from '../../context/User'
+import AudioAutoplay from '../../components/AudioAutoplay/AudioAutoplay'
 
 const UpdateStatus = () => {
   const { t } = useTranslation()
@@ -20,6 +21,9 @@ const UpdateStatus = () => {
         <h3 className={styles.status__title}>{t('STATUS')}</h3>
         {userData?.isUpdating ? (
           <>
+            <AudioAutoplay
+              audio={`${process.env.PUBLIC_URL}/assets/audios/aadhaar-update-status-is-pending`}
+            />
             <img
               src={`${process.env.PUBLIC_URL}/assets/images/pending.svg`}
               alt=""
@@ -36,6 +40,9 @@ const UpdateStatus = () => {
           </>
         ) : (
           <>
+            <AudioAutoplay
+              audio={`${process.env.PUBLIC_URL}/assets/audios/aadhaar-update-status-is-approved`}
+            />
             <img
               src={`${process.env.PUBLIC_URL}/assets/images/approved.svg`}
               alt=""

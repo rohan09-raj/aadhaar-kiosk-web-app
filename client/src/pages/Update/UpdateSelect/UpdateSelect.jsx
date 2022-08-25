@@ -5,6 +5,7 @@ import Card from '../../../components/Card/Card'
 import Header from '../../../components/Header/Header'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import { userContext } from '../../../context/User'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 import styles from './UpdateSelect.module.css'
 
@@ -14,6 +15,9 @@ const UpdateSelect = () => {
   return (
     <>
       <Header subheading={t('UPDATE')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/choose-demographic-or-biometric`}
+      />
       <div className={styles.card__container}>
         <Link to="/update/demographic">
           <Card
