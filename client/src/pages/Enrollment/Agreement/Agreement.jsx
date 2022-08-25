@@ -11,6 +11,7 @@ import { useMutation } from 'react-query'
 import { ToastContainer, toast } from 'react-toastify'
 import PopUpModal from '../../../components/Modal/Modal'
 import 'react-toastify/dist/ReactToastify.css'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 const Agreement = ({ unverified, setUnverified }) => {
   const { t } = useTranslation()
@@ -46,7 +47,12 @@ const Agreement = ({ unverified, setUnverified }) => {
     }, 30000)
   }
 
-  const description = ['CLICK_ON_SEND_OTP', 'YOU_WILL_RECIEVE_AN_OTP_ON_YOUR_MOBILE_NUMBER', 'YOU_CAN_RESEND_THE_OTP_AFTER_30_SECONDS_IF_YOU_HAVENT_RECEIVED_IT_YET', 'CLICK_ON_VERIFY_OTP_TO_VERIFY_YOUR_MOBILE_NUMBER']
+  const description = [
+    'CLICK_ON_SEND_OTP',
+    'YOU_WILL_RECIEVE_AN_OTP_ON_YOUR_MOBILE_NUMBER',
+    'YOU_CAN_RESEND_THE_OTP_AFTER_30_SECONDS_IF_YOU_HAVENT_RECEIVED_IT_YET',
+    'CLICK_ON_VERIFY_OTP_TO_VERIFY_YOUR_MOBILE_NUMBER'
+  ]
 
   return (
     <>
@@ -56,13 +62,20 @@ const Agreement = ({ unverified, setUnverified }) => {
         theme={'colored'}
       />
       <Header subheading={t('ENROLLMENT')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/otp-verification`}
+      />
       <PopUpModal
         title="VERIFY_YOUR_MOBILE_NUMBER"
         image={`${process.env.PUBLIC_URL}/assets/images/agreement.svg`}
         description={
           <>
             <ul>
-              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
+              {description.map((item) => (
+                <li className="list__item" key="id">
+                  {t(item)}
+                </li>
+              ))}
             </ul>
           </>
         }

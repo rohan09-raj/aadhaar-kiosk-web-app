@@ -6,6 +6,7 @@ import { Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import { useNavigate } from 'react-router-dom'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 const FinalSlip = () => {
   const { t } = useTranslation()
@@ -13,6 +14,9 @@ const FinalSlip = () => {
   return (
     <>
       <Header subheading={t('UPDATE')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/update-message-notification`}
+      />
       <div className={styles.card__container}>
         <CardScanner
           image={`${process.env.PUBLIC_URL}/assets/images/slip.svg`}

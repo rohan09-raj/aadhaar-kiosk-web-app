@@ -10,6 +10,7 @@ import { userContext } from '../../context/User'
 
 import styles from './CheckStatus.module.css'
 import { useNavigate } from 'react-router-dom'
+import AudioAutoplay from '../../components/AudioAutoplay/AudioAutoplay'
 
 const CheckStatus = () => {
   const { t } = useTranslation()
@@ -28,6 +29,9 @@ const CheckStatus = () => {
         theme={'colored'}
       />
       <Header subheading={t('STATUS')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/check-status-main-screen`}
+      />
       <div className={styles.status}>
         <div className={styles.formone__radio}>
           <span className={styles.formone__status}>

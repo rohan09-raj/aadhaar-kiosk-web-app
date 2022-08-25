@@ -6,12 +6,16 @@ import { Button, Grid, Typography } from '@mui/material'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton'
 import { useTranslation } from 'react-i18next'
 import PopUpModal from '../../../components/Modal/Modal'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 const Fingerprint = () => {
   const { t } = useTranslation()
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/fingerprint`}
+      />
       <PopUpModal
         title="Scan your Fingerprints"
         image={`${process.env.PUBLIC_URL}/assets/images/fingerprint_scan.svg`}

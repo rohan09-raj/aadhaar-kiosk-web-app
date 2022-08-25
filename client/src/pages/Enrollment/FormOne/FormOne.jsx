@@ -46,7 +46,9 @@ const FormOne = () => {
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
-      <AudioAutoplay audio={`${process.env.PUBLIC_URL}/assets/audios/iris`} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/personal-details`}
+      />
       <PopUpModal
         title="FILL_YOUR_INFORMATION"
         image={`${process.env.PUBLIC_URL}/assets/images/id.svg`}

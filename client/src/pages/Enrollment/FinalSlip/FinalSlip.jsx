@@ -4,12 +4,16 @@ import CardScanner from '../../../components/Card/CardScanner'
 import styles from './FinalSlip.module.css'
 import { Grid, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 const FinalSlip = () => {
   const { t } = useTranslation()
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/enrollment-steps-completion`}
+      />
       <div className={styles.card__container}>
         <CardScanner
           image={`${process.env.PUBLIC_URL}/assets/images/slip.svg`}

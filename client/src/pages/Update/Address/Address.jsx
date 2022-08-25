@@ -8,6 +8,7 @@ import PopUpModal from '../../../components/Modal/Modal'
 import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
 import styles from './Address.module.css'
+import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
 
 const Address = () => {
   const { userData, setUserData } = userContext()
@@ -56,18 +57,29 @@ const Address = () => {
     setEditable2(!editable2)
   }
 
-  const description = ['UPDATE_THE_REQUIRED_DETAILS_IN_THE_RELEVANT_FIELDS_BY_CLICKING_THE_EDIT_BUTTON', 'IF_REQUIRED_SELECT_THE_STATE_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST', 'IF_REQUIRED_SELECT_THE_DISTRICT_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST_THIS_WONT_SHOW_ANY_OPTIONS_UNTIL_YOU_HAVE_SELECTED_THE_STATE']
+  const description = [
+    'UPDATE_THE_REQUIRED_DETAILS_IN_THE_RELEVANT_FIELDS_BY_CLICKING_THE_EDIT_BUTTON',
+    'IF_REQUIRED_SELECT_THE_STATE_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST',
+    'IF_REQUIRED_SELECT_THE_DISTRICT_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST_THIS_WONT_SHOW_ANY_OPTIONS_UNTIL_YOU_HAVE_SELECTED_THE_STATE'
+  ]
 
   return (
     <>
       <Header subheading={t('UPDATE')} />
+      <AudioAutoplay
+        audio={`${process.env.PUBLIC_URL}/assets/audios/address-update`}
+      />
       <PopUpModal
         title="FILL_YOUR_INFORMATION"
         image={`${process.env.PUBLIC_URL}/assets/images/address.svg`}
         description={
           <>
             <ul>
-              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
+              {description.map((item) => (
+                <li className="list__item" key="id">
+                  {t(item)}
+                </li>
+              ))}
             </ul>
           </>
         }
