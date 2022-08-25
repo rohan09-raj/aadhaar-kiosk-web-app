@@ -37,6 +37,25 @@ const PhotoCapture = () => {
     'YOU_WONT_BE_ABLE_TO_PROCEED_UNTIL_YOU_HAVE_CAPTURED_A_CLEAR_AND_CENTERED_PHOTO'
   ]
 
+  const svgIcon = () => (
+    <svg
+      width="100%"
+      height="100%"
+      className="svg"
+      viewBox="0 0 300 200"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink">
+      <defs>
+        <mask id="overlay-mask" x="0" y="0" width="100%" height="100%">
+          <rect x="0" y="0" width="100%" height="100%" fill="#fff" />
+          <circle cx="50%" cy="50%" r="70" />
+        </mask>
+      </defs>
+      <rect x="0" y="0" width="100%" height="100%" mask="url(#overlay-mask)" fillOpacity="0.7" />
+    </svg>
+  )
+
   return (
     <>
       <Header subheading={t('UPDATE')} />
@@ -58,23 +77,28 @@ const PhotoCapture = () => {
           </>
         }
       />
-      <div className={styles.card__container}>
-        {userData?.photo === '' ? (
-          <Webcam
-            audio={false}
-            height={300}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            width={500}
-            videoConstraints={{
-              height: 300,
-              width: 500,
-              facingMode: 'user'
-            }}
-          />
-        ) : (
-          <img id="img" src={userData?.photo} />
-        )}
+      <div className={styles.webcam__container}>
+        <div className={styles.card__container}>
+          {userData?.photo === '' ? (
+            <Webcam
+              audio={false}
+              height={300}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              width={500}
+              videoConstraints={{
+                height: 300,
+                width: 500,
+                facingMode: 'user'
+              }}
+            />
+          ) : (
+            <img id="img" src={userData?.photo} />
+          )}
+        </div>
+        <div className={styles.overlay__container}>
+          {svgIcon()}
+        </div>
       </div>
       <Grid container columnSpacing={10} justifyContent="center">
         <Grid item>
