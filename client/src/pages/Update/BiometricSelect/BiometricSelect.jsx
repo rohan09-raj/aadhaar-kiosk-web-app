@@ -8,21 +8,17 @@ import { useTranslation } from 'react-i18next'
 
 const BiometricSelect = ({ page, setPage }) => {
   const { t } = useTranslation()
+  const description = ['CLICK_ON_THE_EDIT_BUTTON_TO_UPDATE_THE_REQUIRED_BIOMETRICS', 'YOU_CAN_EDIT_YOUR_PHOTOGRAPH_/_FINGERPRINTS_/_IRIS_SCANS']
   return (
     <>
       <Header subheading={t('UPDATE')} />
       <PopUpModal
-        title="Select the option to be edited"
+        title="SELECT_THE_OPTION_TO_BE_EDITED"
         image={`${process.env.PUBLIC_URL}/assets/images/biometrics.svg`}
         description={
           <>
             <ul>
-              <li className="list__item">
-                Click on the edit button to update the required biometrics
-              </li>
-              <li className="list__item">
-                You can edit your Photograph/Fingerprints/Iris Scans
-              </li>
+              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
             </ul>
           </>
         }

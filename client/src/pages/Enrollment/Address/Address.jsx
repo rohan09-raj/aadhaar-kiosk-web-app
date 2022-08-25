@@ -45,25 +45,18 @@ const Address = () => {
     })
   }
 
+  const description = ['ENTER_YOUR_DETAILS_ACCORDING_TO_THE_RELEVANT_FIELDS', 'SELECT_THE_STATE_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST', 'SELECT_THE_DISTRICT_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST']
+
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
       <PopUpModal
-        title="Fill your information"
+        title="FILL_YOUR_INFORMATION"
         image={`${process.env.PUBLIC_URL}/assets/images/address.svg`}
         description={
           <>
             <ul>
-              <li className="list__item">
-                Enter your details according to the relevant fields
-              </li>
-              <li className="list__item">
-                State: Select the state you belong to. from the dropdown list
-              </li>
-              <li className="list__item">
-                District: Select the district you belong to. from the dropdown
-                list
-              </li>
+              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
             </ul>
           </>
         }

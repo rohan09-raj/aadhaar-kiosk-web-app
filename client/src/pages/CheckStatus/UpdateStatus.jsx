@@ -46,9 +46,6 @@ const UpdateStatus = () => {
             <p className={styles.status__content}>
               {t('YOUR_AADHAAR_UPDATE_STATUS_IS_APPROVED')}
             </p>
-            <p className={styles.status__content}>
-              {t('PRINT_YOUR_AADHAAR_CARD_FROM_WEBSITE')}
-            </p>
           </>
         )}
         <Button

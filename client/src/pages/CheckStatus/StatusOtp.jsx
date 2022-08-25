@@ -12,6 +12,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import PopUpModal from '../../components/Modal/Modal'
 
 import styles from './StatusOtp.module.css'
+import Spinner from '../../components/Spinner/Spinner'
 
 const StatusOtp = () => {
   const navigate = useNavigate()
@@ -68,7 +69,7 @@ const StatusOtp = () => {
       }
     })
     if (isLoading) {
-      return <div>{t('loading')}</div>
+      return <Spinner heading='STATUS' />
     }
 
     if (isError) {
@@ -85,7 +86,7 @@ const StatusOtp = () => {
     })
 
     if (isLoading) {
-      return <div>{t('loading')}</div>
+      return <Spinner heading='STATUS' />
     }
 
     if (isError) {
@@ -97,6 +98,8 @@ const StatusOtp = () => {
     }
   }
 
+  const description = ['CLICK_ON_SEND_OTP', 'YOU_WILL_RECIEVE_AN_OTP_ON_YOUR_MOBILE_NUMBER', 'YOU_CAN_RESEND_THE_OTP_AFTER_30_SECONDS_IF_YOU_HAVENT_RECEIVED_IT_YET', 'CLICK_ON_VERIFY_OTP_TO_VERIFY_YOUR_MOBILE_NUMBER']
+
   return (
     <>
       <ToastContainer
@@ -106,22 +109,12 @@ const StatusOtp = () => {
       />
       <Header subheading={`${t('STATUS')}`} />
       <PopUpModal
-        title="Verify your mobile number"
+        title="VERIFY_YOUR_MOBILE_NUMBER"
         image={`${process.env.PUBLIC_URL}/assets/images/otp.svg`}
         description={
           <>
             <ul>
-              <li className="list__item">Click on &quot;SEND OTP&quot;</li>
-              <li className="list__item">
-                You will recieve an OTP on your entered mobile number
-              </li>
-              <li className="list__item">
-                You can &quot;RESEND&quot; the OTP after 30 seconds, if you
-                haven&apos;t received it yet.
-              </li>
-              <li className="list__item">
-                Click on &quot;VERIFY OTP&quot; to verify your mobile number
-              </li>
+              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
             </ul>
           </>
         }

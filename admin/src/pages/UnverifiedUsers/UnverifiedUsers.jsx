@@ -10,13 +10,23 @@ import {
 import {useQuery, useMutation} from 'react-query';
 
 import styles from './UnverifiedUsers.module.css';
+import Spinner from '../../components/Spinner/Spinner';
 
 const UnverifiedUsers = () => {
-  const {data} = useQuery('unverified', getUnverifiedUsers);
+  const {data, isLoading, isError} = useQuery('unverified', getUnverifiedUsers);
   const deleteUse = useMutation((id) => deleteUser(id));
   const updateUse = useMutation((id) => updateUser(id, {verified: true}));
-
+  
   useEffect(() => {}, [data]);
+  
+  if (isLoading) {
+    return <Spinner heading='Admin' />
+  }
+
+  if (isError) {
+    return <div>Error</div>
+  }
+
 
   return (
     <div className={styles.unverified_users}>
