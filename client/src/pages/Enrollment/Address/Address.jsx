@@ -29,10 +29,11 @@ const Address = () => {
   const customStyles = {
     control: (base) => ({
       ...base,
-      width: '330px',
-      height: '60px',
+      width: '500px',
+      height: '80px',
       margin: '10px 0px',
       border: '3px solid',
+      fontSize: '1.5rem',
       borderRadius: '10px !important'
     }),
     input: (base) => ({

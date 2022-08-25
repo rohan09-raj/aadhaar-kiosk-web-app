@@ -76,7 +76,7 @@ const DocumentScanner = () => {
             {documents[doc] === '' ? (
               <Webcam
                 audio={false}
-                height={400}
+                height={500}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
                 width={600}
@@ -104,7 +104,7 @@ const DocumentScanner = () => {
             size="large"
             type="submit"
             variant="contained"
-            sx={{ margin: '0px 20px' }}
+            sx={{ margin: '0px 20px', fontSize: '1.5rem', padding: '10px 30px' }}
             onClick={(e) => {
               e.preventDefault()
               capture(doc)
@@ -117,7 +117,7 @@ const DocumentScanner = () => {
             size="large"
             type="submit"
             variant="contained"
-            sx={{ margin: '0px 20px' }}
+            sx={{ margin: '0px 20px', fontSize: '1.5rem', padding: '10px 30px' }}
             onClick={(e) => {
               e.preventDefault()
               doccu[doc] = ''
@@ -135,7 +135,7 @@ const DocumentScanner = () => {
         <br></br>
         <div>
           <div>
-            <Typography align="center">
+            <Typography align="center" sx={{ fontSize: '1.5rem' }}>
               {t('KINDLY_CLICK_THE_PICTURE_OF_YOUR_DOCUMENTS')}
             </Typography>
           </div>
@@ -156,7 +156,7 @@ const DocumentScanner = () => {
               <li className="list__item">
                 {t('CONSISTS_OF_3_STEPS')}
                 <ul>
-                  <li>{t('PROOF_OF_IDENTITY')} </li>
+                  <li className={styles.stepper__items}>{t('PROOF_OF_IDENTITY')} </li>
                   <li>{t(t('PROOF_OF_ADDRESS'))}</li>
                   <li>{t('PROOF_OF_DOB')} </li>
                 </ul>

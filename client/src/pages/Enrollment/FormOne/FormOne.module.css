@@ -46,6 +46,7 @@
 
 .formone__dob label {
   font-size: 1.75rem;
+  margin-bottom: 10px;
 }
 
 .formone__dob_input {
@@ -56,4 +57,8 @@
   border: 3px solid !important;
   border-radius: 10px;
   font-size: 1.5rem;
+}
+
+.label {
+  font-size: 1.75rem;
 }

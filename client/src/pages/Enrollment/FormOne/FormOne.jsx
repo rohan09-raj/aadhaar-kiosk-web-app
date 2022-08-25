@@ -78,7 +78,7 @@ const FormOne = () => {
               }}
               required
             />
-            <label htmlFor="indian">{t('INDIAN_RESIDENT')}</label>
+            <label htmlFor="indian" className={styles.label}>{t('INDIAN_RESIDENT')}</label>
           </span>
           <span className={styles.formone__resident}>
             <input
@@ -94,7 +94,7 @@ const FormOne = () => {
               }}
               required
             />
-            <label htmlFor="non-resident-indian">
+            <label className={styles.label} htmlFor="non-resident-indian">
               {t('NON_RESIDENTIAL_INDIAN')}
             </label>
           </span>
@@ -158,19 +158,30 @@ const FormOne = () => {
 
         <div className={styles.formone__dob}>
           <label htmlFor="dob">{t('DATE_OF_BIRTH')}</label>
-          <LocalizationProvider dateAdapter={AdapterMoment}>
-            <MobileDatePicker
-              inputFormat="MM/DD/yyyy"
-              value={userData.dob}
-              onChange={(e) => {
-                setUserData({
-                  ...userData,
-                  dob: e
-                })
-              }}
-              renderInput={(params) => <TextField sx={{ '& fieldset': { border: 'none' } }} className={styles.formone__dob_input} {...params} />}
-            />
-          </LocalizationProvider>
+          <div style={{ marginRight: '160px' }}>
+            <LocalizationProvider dateAdapter={AdapterMoment}>
+              <MobileDatePicker
+                inputFormat="MM/DD/yyyy"
+                value={userData.dob}
+                onChange={(e) => {
+                  setUserData({
+                    ...userData,
+                    dob: e
+                  })
+                }}
+                renderInput={(params) => <TextField
+                  placeholder="MM/DD/yyyy" sx={{
+                    '& fieldset': {
+                      width: '500px',
+                      height: '80px',
+                      border: '3px solid !important',
+                      borderRadius: '10px',
+                      fontSize: '1.5rem'
+                    }
+                  }} {...params} />}
+              />
+            </LocalizationProvider>
+          </div>
           {/* <input
             className={styles.formone__dob_input}
             type="date"

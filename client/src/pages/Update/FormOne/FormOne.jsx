@@ -7,6 +7,10 @@ import Gender from '../../../components/Gender/Gender'
 import { useTranslation } from 'react-i18next'
 import { userContext } from '../../../context/User'
 import PopUpModal from '../../../components/Modal/Modal'
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
+import { TextField } from '@mui/material'
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 
 const FormOne = () => {
   const { userData, setUserData } = userContext()
@@ -78,23 +82,36 @@ const FormOne = () => {
         />
 
         <div className={styles.formone__dob}>
-          <label htmlFor="dob">{t('DATE_OF_BIRTH')}</label>
+          <label className={styles.label} htmlFor="dob">{t('DATE_OF_BIRTH')}</label>
           <div className={styles.input__edit}>
-            <input
-              className={styles.formone__dob_input}
-              type="date"
-              id="dob"
-              name="dob"
-              value={userData?.dob}
-              readOnly={editable}
-              onChange={(e) => {
-                setUserData({
-                  ...userData,
-                  dob: e.target.value
-                })
-              }}
-              required
-            />
+          <div style={{ marginBlock: '20px' }}>
+          <div style={{ marginRight: '160px' }}>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+              <MobileDatePicker
+                inputFormat="MM/DD/yyyy"
+                value={userData.dob}
+                className={styles.dob}
+                disabled={editable}
+                onChange={(e) => {
+                  setUserData({
+                    ...userData,
+                    dob: e
+                  })
+                }}
+                renderInput={(params) => <TextField
+                  placeholder="MM/DD/YYYY" sx={{
+                    '& fieldset': {
+                      width: '500px',
+                      height: '80px',
+                      border: '3px solid !important',
+                      borderRadius: '10px',
+                      fontSize: '1.75rem !important'
+                    }
+                  }} {...params} />}
+              />
+            </LocalizationProvider>
+            </div>
+            </div>
             <EditButton onClick={handleEdit} enabled={!editable ? '1' : '0'} />
           </div>
         </div>

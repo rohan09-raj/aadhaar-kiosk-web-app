@@ -38,6 +38,7 @@ const IrisScan = () => {
             size="large"
             type="submit"
             variant="contained"
+            sx={{ fontSize: '1.5rem', padding: '10px 30px' }}
           >
             {t('SCAN')}
           </Button>
@@ -48,6 +49,7 @@ const IrisScan = () => {
             size="large"
             type="submit"
             variant="contained"
+            sx={{ fontSize: '1.5rem', padding: '10px 30px' }}
           >
             {t('RESET')}
           </Button>
@@ -56,7 +58,7 @@ const IrisScan = () => {
       <br></br>
       <div>
         <Grid container justifyContent="center">
-          <Typography align="center">
+          <Typography align="center" sx={{ fontSize: '1.5rem' }}>
             {t('PLEASE_PUT_YOUR_EYES_INSIDE_THE_IRIS_SCANNER')}
             <br />
             {t('WAIT_FOR_PROMPT_AND_BEEP_SOUND_TO_REMOVE_YOUR_EYES')}

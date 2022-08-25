@@ -46,7 +46,7 @@ const Agreement = ({ unverified, setUnverified }) => {
     }, 30000)
   }
 
- const description = ['CLICK_ON_SEND_OTP', 'YOU_WILL_RECIEVE_AN_OTP_ON_YOUR_MOBILE_NUMBER', 'YOU_CAN_RESEND_THE_OTP_AFTER_30_SECONDS_IF_YOU_HAVENT_RECEIVED_IT_YET', 'CLICK_ON_VERIFY_OTP_TO_VERIFY_YOUR_MOBILE_NUMBER']
+  const description = ['CLICK_ON_SEND_OTP', 'YOU_WILL_RECIEVE_AN_OTP_ON_YOUR_MOBILE_NUMBER', 'YOU_CAN_RESEND_THE_OTP_AFTER_30_SECONDS_IF_YOU_HAVENT_RECEIVED_IT_YET', 'CLICK_ON_VERIFY_OTP_TO_VERIFY_YOUR_MOBILE_NUMBER']
 
   return (
     <>
@@ -73,14 +73,14 @@ const Agreement = ({ unverified, setUnverified }) => {
         />
       </div>
       <div className={styles.card__elements}>
-        <Typography>{t('PLEASE_VERIFY_YOUR_IDENTITY')}</Typography>
+        <Typography sx={{ fontSize: '1.5rem' }}>{t('PLEASE_VERIFY_YOUR_IDENTITY')}</Typography>
         <Button
           color="primary"
           size="large"
           type="submit"
           variant="contained"
           disabled={disabled}
-          sx={{ marginTop: '1rem' }}
+          sx={{ marginTop: '1rem', fontSize: '1.5rem', padding: '10px 30px' }}
           onClick={() => {
             mutate()
             setDisabled(true)
