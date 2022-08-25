@@ -4,7 +4,7 @@ import styles from './Header.module.css'
 const Header = ({ subheading }) => {
   return (
     <header className={styles.header}>
-      <h1 className={styles.header__heading}>AADHAAR</h1>
+      <img src={`${process.env.PUBLIC_URL}/favicon.ico`} className={styles.header__image}/>
       <h3 className={styles.header__subheading}>{subheading}</h3>
     </header>
   )

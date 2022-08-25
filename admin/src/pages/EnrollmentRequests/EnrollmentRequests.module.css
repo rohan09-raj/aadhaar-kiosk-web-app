@@ -1,11 +1,18 @@
 .unverified_users {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 }
 
 .unverified_users__heading {
   text-align: center;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .unverified_users__accordion {

@@ -32,8 +32,8 @@ const EnrollmentRequests = () => {
     <div className={styles.unverified_users}>
       <Header subheading='Admin' />
       <BackButton onClick={() => navigate('/')} />
-      <h1 className={styles.unverified_users__heading}>Unverified Users</h1>
-      <div className='accordion'>
+      <h1 className={styles.unverified_users__heading}>Enrollment Requests</h1>
+      <div className={styles.accordion}>
         {data?.data.length !== 0 ? (
           data?.data.map((item) => (
             <div className={styles.unverified_users__accordion} key={item._id}>
