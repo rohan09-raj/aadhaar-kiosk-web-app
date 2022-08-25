@@ -5,7 +5,7 @@
 
 .accordion__title {
   display: flex;
-  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   cursor: pointer;
   background-color: #2c3e50;
@@ -21,6 +21,10 @@
 .accordion__title,
 .accordion__content {
   padding: 1rem;
+}
+
+.accordion__subheading {
+  font-size: 1.1rem;
 }
 
 .accordion__content {

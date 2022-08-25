@@ -28,3 +28,8 @@ export const updatingUsers = async () => {
   const response = await apiClient.get(`/users/updating`);
   return response;
 };
+
+export const sendMessage = async (payload) => {
+  const response = await apiClient.post('/message', payload);
+  return response;
+};

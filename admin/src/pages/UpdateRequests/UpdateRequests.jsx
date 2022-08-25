@@ -49,16 +49,18 @@ const UpdateRequests = () => {
           data?.data.map((item) => (
             <div className={styles.unverified_users__accordion} key={item._id}>
               <Accordion name={item.name} user={item} />
-              <Button
-                title='Accept'
-                color='green'
-                onClick={() => updateUse.mutate(item._id)}
-              />
-              <Button
-                title='Reject'
-                color='red'
-                onClick={() => deleteUse.mutate(item._id)}
-              />
+              <div>
+                <Button
+                  title='Accept'
+                  color='green'
+                  onClick={() => updateUse.mutate(item._id)}
+                />
+                <Button
+                  title='Reject'
+                  color='red'
+                  onClick={() => deleteUse.mutate(item._id)}
+                />
+              </div>
             </div>
           ))
         ) : (

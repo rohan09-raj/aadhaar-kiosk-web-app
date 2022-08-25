@@ -10,6 +10,7 @@ import {
 import {useQuery, useMutation} from 'react-query';
 import {useNavigate} from 'react-router-dom';
 import BackButton from '../../components/BackButton/BackButton';
+import {sendMessage} from '../../services/apiservice';
 
 import styles from './EnrollmentRequests.module.css';
 
@@ -26,6 +27,10 @@ const EnrollmentRequests = () => {
     onSuccess: () => {
       refetch();
     },
+  });
+
+  const setConfirm = useMutation((payload) => {
+    sendMessage(payload);
   });
 
   return (
@@ -46,7 +51,9 @@ const EnrollmentRequests = () => {
               <Button
                 title='Reject'
                 color='red'
-                onClick={() => deleteUse.mutate(item._id)}
+                onClick={() => {
+                  deleteUse.mutate(item._id);
+                }}
               />
             </div>
           ))
