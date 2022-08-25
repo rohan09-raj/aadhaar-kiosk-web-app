@@ -20,25 +20,18 @@ const PhotoCapture = () => {
     setUserData({ ...userData, photo: imageSrc })
   })
 
+ const description = ['ENSURE_THAT_YOUR_PHOTO_IS_CLEAR_AND_IN_FOCUS', 'ALSO_ENSURE_THAT_YOU_ARE_IN_THE_CENTER_OF_YOUR_PHOTO', 'YOU_WONT_BE_ABLE_TO_PROCEED_UNTIL_YOU_HAVE_CAPTURED_A_CLEAR_AND_CENTERED_PHOTO']
+
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
       <PopUpModal
-        title="Capture your photo"
+        title="CAPTURE_YOUR_PHOTO"
         image={`${process.env.PUBLIC_URL}/assets/images/photo.svg`}
         description={
           <>
             <ul>
-              <li className="list__item">
-                Ensure that your photo is clear and in focus
-              </li>
-              <li className="list__item">
-                Also, ensure that you are in the center of your photo
-              </li>
-              <li className="list__item">
-                You won&apos;t be able to proceed until you have captured a
-                clear and centered photo
-              </li>
+              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
             </ul>
           </>
         }

@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal, Box, Button } from '@mui/material'
 import styles from './Modal.module.css'
 import { Container } from '@mui/system'
+import { useTranslation } from 'react-i18next'
 
 const PopUpModal = ({ title, description, image }) => {
   const style = {
@@ -15,6 +16,7 @@ const PopUpModal = ({ title, description, image }) => {
     boxShadow: 24,
     p: 4
   }
+  const { t } = useTranslation()
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -36,7 +38,7 @@ const PopUpModal = ({ title, description, image }) => {
       >
         <Box sx={style}>
           <h1 id="modal-modal-title" className={styles.modal__title}>
-            {title}
+            {t(`${title}`)}
           </h1>
           <Container sx={{ display: 'flex', alignItems: 'center' }}>
             <img

@@ -13,6 +13,8 @@ import { useMutation } from 'react-query'
 import { ToastContainer, toast } from 'react-toastify'
 import PopUpModal from '../../../components/Modal/Modal'
 import 'react-toastify/dist/ReactToastify.css'
+import Error from '../../Error/Error'
+import Spinner from '../../../components/Spinner/Spinner'
 
 const Agreement = () => {
   const { t } = useTranslation()
@@ -32,6 +34,12 @@ const Agreement = () => {
           mobile: `+91${userData.mobile}`,
           id: userData._id
         })
+      },
+      onLoading: () => {
+        return <Spinner heading='UPDATE' />
+      },
+      onError: () => {
+        return <Error message={t('SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN')} />
       }
     }
   )
@@ -73,6 +81,8 @@ const Agreement = () => {
     }, 30000)
   }
 
+  const description = ['CLICK_ON_SEND_OTP', 'YOU_WILL_RECIEVE_AN_OTP_ON_YOUR_MOBILE_NUMBER', 'YOU_CAN_RESEND_THE_OTP_AFTER_30_SECONDS_IF_YOU_HAVENT_RECEIVED_IT_YET', 'CLICK_ON_VERIFY_OTP_TO_VERIFY_YOUR_MOBILE_NUMBER']
+
   return (
     <>
       <ToastContainer
@@ -82,22 +92,12 @@ const Agreement = () => {
       />
       <Header subheading={t('ENROLLMENT')} />
       <PopUpModal
-        title="Verify your mobile number"
+        title="VERIFY_YOUR_MOBILE_NUMBER"
         image={`${process.env.PUBLIC_URL}/assets/images/agreement.svg`}
         description={
           <>
             <ul>
-              <li className="list__item">Click on &quot;SEND OTP&quot;</li>
-              <li className="list__item">
-                You will recieve an OTP on your entered mobile number
-              </li>
-              <li className="list__item">
-                You can &quot;RESEND&quot; the OTP after 30 seconds, if you
-                haven&apos;t received it yet.
-              </li>
-              <li className="list__item">
-                Click on &quot;VERIFY OTP&quot; to verify your mobile number
-              </li>
+              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
             </ul>
           </>
         }

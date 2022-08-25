@@ -199,31 +199,30 @@ const DocumentScanner = () => {
   return (
     <>
       <Header subheading={t('UPDATE')} />
-      <PopUpModal
-        title="Scan your documents"
+      {steps.length !== 0 && (<PopUpModal
+        title="SCAN_YOUR_DOCUMENTS"
         image={`${process.env.PUBLIC_URL}/assets/images/document.svg`}
         description={
           <>
             <ul>
               <li className="list__item">
-                Consists of 3 steps :
+                {t('CONSISTS_OF_3_STEPS')}
                 <ul>
-                  <li>Proof of Identity: </li>
-                  <li>Proof of Address: </li>
-                  <li>Proof of Date of Birth: </li>
+                  <li>{t('PROOF_OF_IDENTITY')} </li>
+                  <li>{t(t('PROOF_OF_ADDRESS'))}</li>
+                  <li>{t('PROOF_OF_DOB')} </li>
                 </ul>
               </li>
               <li className="list__item">
-                Ensure that your documents are in the center of the frame
+                {t('ENSURE_THAT_YOUR_DOCUMENTS_ARE_IN_THE_CENTER_OF_THE_FRAME')}
               </li>
               <li className="list__item">
-                You won&apos;t be able to proceed until you have scanned all the
-                required documents
+                {t('YOU_WONT_BE_ABLE_TO_PROCEED_UNTIL_YOU_HAVE_SCANNED_ALL_THE_REQUIRED_DOCUMENTS')}
               </li>
             </ul>
           </>
         }
-      />
+      />)}
       <div className={styles.stepper__container}>
         <div className={styles.box}>
           <Stepper activeStep={activeStep} sx={{ width: '60%' }}>

@@ -82,7 +82,7 @@ const Biometric = () => {
           setUserData({ ...userData, photo: oriUserData.photo })
         } else if (
           predictions[0].class === 'person' &&
-          predictions[0].score > 0.8
+          predictions[0].score > 0.7
         ) {
           setPage(4)
         } else {

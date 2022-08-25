@@ -55,28 +55,18 @@ const Address = () => {
     setEditable2(!editable2)
   }
 
+  const description = ['UPDATE_THE_REQUIRED_DETAILS_IN_THE_RELEVANT_FIELDS_BY_CLICKING_THE_EDIT_BUTTON', 'IF_REQUIRED_SELECT_THE_STATE_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST', 'IF_REQUIRED_SELECT_THE_DISTRICT_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST_THIS_WONT_SHOW_ANY_OPTIONS_UNTIL_YOU_HAVE_SELECTED_THE_STATE']
+
   return (
     <>
       <Header subheading={t('UPDATE')} />
       <PopUpModal
-        title="Fill your information"
+        title="FILL_YOUR_INFORMATION"
         image={`${process.env.PUBLIC_URL}/assets/images/address.svg`}
         description={
           <>
             <ul>
-              <li className="list__item">
-                Update the required details in the relevant fields by clicking
-                the edit button
-              </li>
-              <li className="list__item">
-                If required, select the state you belong to. from the dropdown
-                list
-              </li>
-              <li className="list__item">
-                If required, select the district you belong to. from the
-                dropdown list. This won&apos;t show any options until you have
-                selected the state
-              </li>
+              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
             </ul>
           </>
         }

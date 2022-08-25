@@ -28,6 +28,7 @@ import BackButton from '../../components/BackButton/BackButton'
 import { initialUserData } from '../../constants/userData'
 import * as cocoSsd from '@tensorflow-models/coco-ssd'
 import * as tf from '@tensorflow/tfjs'
+import Spinner from '../../components/Spinner/Spinner'
 
 const Enrollment = () => {
   const { t } = useTranslation()
@@ -72,6 +73,9 @@ const Enrollment = () => {
         id: data?.data?.result?._id
       })
       setPage(page + 1)
+    },
+    onLoading: () => {
+      return <Spinner heading='ENROLLMENT' />
     },
     onError: (error) => {
       console.log(error)
@@ -152,7 +156,7 @@ const Enrollment = () => {
             toast.error(t('PLEASE_CAPTURE_PHOTOGRAPH'))
           } else if (
             predictions[0].class === 'person' &&
-            predictions[0].score > 0.8
+            predictions[0].score > 0.7
           ) {
             setPage(page + 1)
           } else {

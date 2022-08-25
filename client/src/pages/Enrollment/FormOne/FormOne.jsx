@@ -31,27 +31,18 @@ const FormOne = () => {
     }
   }, [userData.gender])
 
+  const description = ['SELECT_YOUR_RESIDENCY_BY_SELECTING_THE_APPROPRIATE_CHECKBOX', 'ENTER_YOUR_FULL_NAME_WITHOUT_ANY_TITLE_OR_SALUTATION', 'SELECT_YOUR_GENDER_BY_CLICKING_ON_THE_APPROPRIATE_CARD', 'SELECT_YOUR_DATE_OF_BIRTH_FROM_THE_PROVIDED_CALENDER']
+
   return (
     <>
       <Header subheading={t('ENROLLMENT')} />
       <PopUpModal
-        title="Fill your information"
+        title="FILL_YOUR_INFORMATION"
         image={`${process.env.PUBLIC_URL}/assets/images/id.svg`}
         description={
           <>
             <ul>
-              <li className="list__item">
-                Select your residency by selecting the appropriate checkbox
-              </li>
-              <li className="list__item">
-                Enter your full name without any title or salutation
-              </li>
-              <li className="list__item">
-                Select your gender by clicking on the appropriate card
-              </li>
-              <li className="list__item">
-                Select your date of birth from the provided calender
-              </li>
+              {description.map((item) => (<li className="list__item" key='id'>{t(item)}</li>))}
             </ul>
           </>
         }
