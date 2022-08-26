@@ -52,7 +52,7 @@
   "ENSURE_THAT_RECIEVED_A_CONFIRMATION_MESSAGE": "कृपया सुनिश्चित करें कि आपको जाने से पहले एक पुष्टिकरण संदेश प्राप्त हुआ है",
   "PLEASE_PUT_YOUR_FINGERS_ON_THE_FINGERPRINT_SCANNER": "कृपया अपनी उंगलियों को एक-एक करके फ़िंगरप्रिंट स्कैनर पर रखें",
   "WAIT_FOR_PROMPT_AND_BEEP_SOUND_TO_REMOVE_YOUR_FINGERS": "अपनी उंगलियों को हटाने के लिए संकेत और बीप ध्वनि की प्रतीक्षा करें",
-  "PLEASE_VERIFY_YOUR_IDENTITY": "कृपया अपने पंजीकृत मोबाइल नंबर xxxxxxxx15 पर ओटीपी प्राप्त करके अपनी पहचान सत्यापित करें",
+  "PLEASE_VERIFY_YOUR_IDENTITY": "कृपया अपने पंजीकृत मोबाइल नंबर पर ओटीपी प्राप्त करके अपनी पहचान सत्यापित करें",
   "SEND_OTP": "ओटीपी भेजें",
   "RESEND": "फिर से भेजें",
   "VERIFY_OTP": "ओटीपी की पुष्टि करें",
