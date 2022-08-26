@@ -1,4 +1,5 @@
 import UserDetails from '../models/users';
+import sendSMS from '../services/twilio';
 import generateAadhaar from '../utils/aadhaar';
 
 const createUser = async (req, res) => {
@@ -86,8 +87,6 @@ const getUnverifiedUsers = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const {id} = req.params;
-
-  console.log(id, req.body);
   try {
     const user = await UserDetails.findByIdAndUpdate(
       id,
@@ -99,6 +98,8 @@ const updateUser = async (req, res) => {
       await UserDetails.findByIdAndUpdate(id, {
         $set: {aadhaarNumber: generateAadhaar()},
       });
+
+      sendSMS(user,mobile, `Dear ${user.name}, your Aadhaar Number is ${user.aadhaarNumber} for the EID ${user._id}.`);
     }
 
     res.status(200).json({message: 'User Updated Successfully'});

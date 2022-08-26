@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Accordion from '../../components/Accordion/Accordion';
 import Header from '../../components/Header/Header';
-import {getVerifiedUsers} from '../../services/apiservice';
-import {useQuery} from 'react-query';
+import { getVerifiedUsers } from '../../services/apiservice';
+import { useQuery } from 'react-query';
 
 import styles from './VerifiedUsers.module.css';
 
 const VerifiedUsers = () => {
-  const {data} = useQuery('verified', getVerifiedUsers);
+  const { data } = useQuery('verified', getVerifiedUsers);
 
   const [inputText, setInputText] = useState("");
 
