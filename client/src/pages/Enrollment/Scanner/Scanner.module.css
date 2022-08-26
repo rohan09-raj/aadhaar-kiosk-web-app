@@ -1,0 +1,18 @@
+.card__container {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.webcam__container {
+  position: relative;
+}
+
+.overlay__container {
+  position: absolute ;
+  width: 100%;
+  top: 0 ;
+  right: 0 ;
+  bottom: 0 ;
+  left: 0;
+}

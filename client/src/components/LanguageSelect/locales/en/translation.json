@@ -143,5 +143,6 @@
   "APPROVED": "Approved",
   "YOUR_AADHAAR_UPDATE_STATUS_IS_APPROVED": "Your Aadhaar update status is approved",
   "ENTER_YOUR_EID_NUMBER": "Enter your EID number",
-  "PENDING": "Pending"
+  "PENDING": "Pending",
+  "SAVE_&_NEXT": "Save & Next"
 }

@@ -142,5 +142,6 @@
   "YOUR_AADHAAR_STATUS_IS_APPROVED": "आपका आधार नामांकन अनुरोध स्वीकृत हो गया है",
   "PENDING": "लंबित",
   "YOUR_AADHAAR_STATUS_IS_IN_PENDING_STATE": "आपका आधार नामांकन अनुरोध प्रक्रिया में है",
-  "PLEASE_HAVE_PATIENCE": "कृपया धैर्य रखें, और कम से कम 48 घंटे तक प्रतीक्षा करें"
+  "PLEASE_HAVE_PATIENCE": "कृपया धैर्य रखें, और कम से कम 48 घंटे तक प्रतीक्षा करें",
+  "SAVE_&_NEXT": "सहेजें और अगला"
 }
