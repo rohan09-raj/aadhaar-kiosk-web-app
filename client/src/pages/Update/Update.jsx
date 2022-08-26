@@ -46,6 +46,7 @@ const Update = () => {
               size="large"
               type="submit"
               variant="contained"
+              sx={{ margin: '20px 0px', fontSize: '1.5rem', padding: '10px 30px' }}
               onClick={() => {
                 if (!validAadhaar.test(aadhaarNumber)) {
                   toast.error(t('Please enter a valid aadhaar number'))
