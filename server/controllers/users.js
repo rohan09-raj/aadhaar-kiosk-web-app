@@ -99,7 +99,10 @@ const updateUser = async (req, res) => {
         $set: {aadhaarNumber: generateAadhaar()},
       });
 
-      sendSMS(user,mobile, `Dear ${user.name}, your Aadhaar Number is ${user.aadhaarNumber} for the EID ${user._id}.`);
+      sendSMS(
+        user.mobile,
+        `Dear ${user.name}, your Aadhaar Number is ${user.aadhaarNumber} for the EID ${user._id}.`
+      );
     }
 
     res.status(200).json({message: 'User Updated Successfully'});
@@ -124,7 +127,7 @@ const getUpdatingUsers = async (req, res) => {
   try {
     const updatingUsers = await UserDetails.find({
       isUpdating: true,
-      verified: true,
+      verified: false,
     });
     return res.status(200).json(updatingUsers);
   } catch (error) {

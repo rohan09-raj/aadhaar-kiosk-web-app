@@ -28,7 +28,12 @@ const Agreement = () => {
   const { userData } = userContext()
 
   const updateUse = useMutation(
-    () => updateUser(userData._id, { ...userData, isUpdating: true }),
+    () =>
+      updateUser(userData._id, {
+        ...userData,
+        isUpdating: true,
+        verified: false
+      }),
     {
       onSuccess: () => {
         setConfirm.mutate({
