@@ -71,6 +71,18 @@ const DocumentScanner = () => {
     })
   })
 
+  const language = localStorage.getItem('i18nextLng')
+
+  let audio
+const playAudio = () => {
+  if (language === 'en') {
+    audio = new Audio(`${process.env.PUBLIC_URL}/assets/audios/scan-documents-english.mp3`)
+  } else if (language === 'hi') {
+    audio = new Audio(`${process.env.PUBLIC_URL}/assets/audios/scan-documents-hindi.mp3`)
+  }
+  audio.play()
+}
+
   const handleNext = () => {
     if (
       activeStep === steps.length - 1 &&
@@ -81,18 +93,25 @@ const DocumentScanner = () => {
       setUserData({ ...userData, documents: documents })
     } else if (documents.POI !== '' && documents.POA !== '') {
       toast.error(t('SCAN_YOUR_DOCUMENT'))
+      playAudio()
     } else if (documents.POI !== '' && documents.DOB !== '') {
       toast.error(t('SCAN_YOUR_DOCUMENT'))
+      playAudio()
     } else if (documents.POA !== '' && documents.DOB !== '') {
       toast.error(t('SCAN_YOUR_DOCUMENT'))
+      playAudio()
     } else if (documents.POI !== '') {
       toast.error(t('SCAN_YOUR_DOCUMENT'))
+      playAudio()
     } else if (documents.POA !== '') {
       toast.error(t('SCAN_YOUR_DOCUMENT'))
+      playAudio()
     } else if (documents.DOB !== '') {
       toast.error(t('SCAN_YOUR_DOCUMENT'))
+      playAudio()
     } else {
       toast.error(t('SCAN_YOUR_DOCUMENT'))
+      playAudio()
     }
 
     if (

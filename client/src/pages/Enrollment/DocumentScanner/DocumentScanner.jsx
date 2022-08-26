@@ -21,6 +21,7 @@ const DocumentScanner = () => {
   ]
   const [documents, setDocuments] = useState({ POI: '', POA: '', DOB: '' })
   const [activeStep, setActiveStep] = React.useState(0)
+  const language = localStorage.getItem('i18nextLng')
 
   const [doccu] = useState({ POI: '', POA: '', DOB: '' })
 
@@ -49,6 +50,13 @@ const DocumentScanner = () => {
       (!documents.DOB && activeStep === 2)
     ) {
       toast.error(t('SCAN_YOUR_DOCUMENT'))
+      let audio
+      if (language === 'en') {
+        audio = new Audio(`${process.env.PUBLIC_URL}/assets/audios/scan-documents-english.mp3`)
+      } else if (language === 'hi') {
+        audio = new Audio(`${process.env.PUBLIC_URL}/assets/audios/scan-documents-hindi.mp3`)
+      }
+      audio.play()
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1)
     }
