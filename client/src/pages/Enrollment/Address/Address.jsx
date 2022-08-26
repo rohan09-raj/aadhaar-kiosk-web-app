@@ -1,57 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input/Input'
-import { State, City } from 'country-state-city'
-import Select from 'react-select'
 import { userContext } from '../../../context/User'
 import { useTranslation } from 'react-i18next'
 import PopUpModal from '../../../components/Modal/Modal'
 import AudioAutoplay from '../../../components/AudioAutoplay/AudioAutoplay'
+import Pincode from 'react-pincode'
 
 import styles from './Address.module.css'
 
 const Address = () => {
   const { t } = useTranslation()
+  const [pincodeData, setPincodeData] = useState('')
   const { userData, setUserData } = userContext()
-
-  const updatedStates = (countryId) =>
-    State.getStatesOfCountry(countryId).map((state) => ({
-      label: state.name,
-      value: state.id,
-      ...state
-    }))
-  const updatedCities = (countryID, stateId) =>
-    City.getCitiesOfState(countryID, stateId).map((city) => ({
-      label: city.name,
-      value: city.id,
-      ...city
-    }))
-
-  const customStyles = {
-    control: (base) => ({
-      ...base,
-      width: '500px',
-      height: '80px',
-      margin: '10px 0px',
-      border: '3px solid',
-      fontSize: '1.5rem',
-      borderRadius: '10px !important'
-    }),
-    input: (base) => ({
-      ...base,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '0px',
-      margin: '0px'
-    })
-  }
 
   const description = [
     'ENTER_YOUR_DETAILS_ACCORDING_TO_THE_RELEVANT_FIELDS',
     'SELECT_THE_STATE_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST',
     'SELECT_THE_DISTRICT_YOU_BELONG_TO_FROM_THE_DROPDOWN_LIST'
   ]
+  console.log(pincodeData)
 
   return (
     <>
@@ -108,25 +76,24 @@ const Address = () => {
             }}
             placeholder={t('ENTER_YOUR_VILLAGE_TOWN')}
           />
-          <div className={styles.input__container}>
-            <label htmlFor="state">{t('STATE')}</label>
-            <Select
-              id="state"
-              name="state"
-              options={updatedStates('IN')}
-              value={userData.address?.state}
-              onChange={(e) => {
-                setUserData({
-                  ...userData,
-                  address: {
-                    ...userData.address,
-                    state: e
+          <Input
+            id="state"
+            label={t('STATE')}
+            value={userData.address.state.name}
+            type="text"
+            onChange={(e) => {
+              setUserData({
+                ...userData,
+                address: {
+                  ...userData.address,
+                  state: {
+                    name: e.target.value
                   }
-                })
-              }}
-              styles={customStyles}
-            />
-          </div>
+                }
+              })
+            }}
+            placeholder={t('ENTER_YOUR_STATE')}
+          />
         </div>
         <div className={styles.address__container}>
           <Input
@@ -145,41 +112,72 @@ const Address = () => {
             }}
             placeholder={t('ENTER_YOUR_STREET_ROAD')}
           />
+          <div className={styles.input}>
+            <div className={styles.input__container}>
+              <label htmlFor="pincode">{t('PINCODE')}</label>
+              <Pincode
+                showCity={false}
+                showDistrict={false}
+                showState={false}
+                showArea={false}
+                invalidError=""
+                lengthError=""
+                onChange={(e) => {
+                  setUserData({
+                    ...userData,
+                    address: {
+                      ...userData.address,
+                      pincode: e.target.value
+                    }
+                  })
+                }}
+                pincodeInput={{
+                  width: '500px',
+                  height: '80px',
+                  margin: '10px 0px',
+                  padding: '18px 10px',
+                  border: '3px solid',
+                  borderRadius: '10px',
+                  fontSize: '1.5rem'
+                }}
+                getData={(data) => {
+                  setPincodeData(data)
+                  setUserData({
+                    ...userData,
+                    address: {
+                      ...userData.address,
+                      pincode: data.pincode,
+                      state: {
+                        name: data.stateName
+                      },
+                      district: {
+                        name: data.district
+                      },
+                      postOffice: data.areaName
+                    }
+                  })
+                }}
+              />
+            </div>
+          </div>
           <Input
-            id="postOffice"
-            label={t('POST_OFFICE')}
-            value={userData.address.postOffice}
+            id="district"
+            label={t('DISTRICT')}
+            value={userData.address.district.name}
             type="text"
             onChange={(e) => {
               setUserData({
                 ...userData,
                 address: {
                   ...userData.address,
-                  postOffice: e.target.value
+                  district: {
+                    name: e.target.value
+                  }
                 }
               })
             }}
-            placeholder={t('ENTER_YOUR_AREA_POST_OFFICE')}
+            placeholder={t('ENTER_YOUR_DISTRICT')}
           />
-          <div className={styles.input__container}>
-            <label htmlFor="city">{t('DISTRICT')}</label>
-            <Select
-              id="city"
-              name="city"
-              options={updatedCities('IN', userData.address?.state?.isoCode)}
-              value={userData.address?.district}
-              onChange={(e) => {
-                setUserData({
-                  ...userData,
-                  address: {
-                    ...userData.address,
-                    district: e
-                  }
-                })
-              }}
-              styles={customStyles}
-            />
-          </div>
         </div>
         <div className={styles.address__container}>
           <Input
@@ -198,21 +196,22 @@ const Address = () => {
             }}
             placeholder={t('ENTER_YOUR_AREA_LOCALITY')}
           />
+
           <Input
-            id="pincode"
-            label={t('PINCODE')}
-            value={userData.address.pincode}
+            id="postOffice"
+            label={t('POST_OFFICE')}
+            value={userData.address.postOffice}
             type="text"
             onChange={(e) => {
               setUserData({
                 ...userData,
                 address: {
                   ...userData.address,
-                  pincode: e.target.value
+                  postOffice: e.target.value
                 }
               })
             }}
-            placeholder={t('ENTER_YOUR_AREA_PINCODE')}
+            placeholder={t('ENTER_YOUR_AREA_POST_OFFICE')}
           />
           <Input
             id="landmark"
