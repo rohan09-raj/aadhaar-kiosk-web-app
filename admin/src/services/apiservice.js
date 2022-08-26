@@ -24,12 +24,12 @@ export const deleteUser = async (id) => {
   return response;
 };
 
-export const updatingUsers = async () => {
+export const getUpdatingUsers = async () => {
   const response = await apiClient.get(`/users/updating`);
   return response;
 };
 
 export const sendMessage = async (payload) => {
-  const response = await apiClient.post('/message', payload);
+  const response = await apiClient.post('/messages', payload);
   return response;
 };

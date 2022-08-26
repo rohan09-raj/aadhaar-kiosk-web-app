@@ -4,7 +4,7 @@ import Button from '../../components/Button/Button';
 import Header from '../../components/Header/Header';
 import {
   deleteUser,
-  getUnverifiedUsers,
+  getUpdatingUsers,
   updateUser,
 } from '../../services/apiservice';
 import {useQuery, useMutation} from 'react-query';
@@ -16,8 +16,8 @@ import Spinner from '../../components/Spinner/Spinner';
 const UpdateRequests = () => {
   const navigate = useNavigate();
   const {data, isLoading, isError, refetch} = useQuery(
-    'unverified',
-    getUnverifiedUsers
+    'updating',
+    getUpdatingUsers
   );
   const deleteUse = useMutation((id) => deleteUser(id), {
     onSuccess: () => {

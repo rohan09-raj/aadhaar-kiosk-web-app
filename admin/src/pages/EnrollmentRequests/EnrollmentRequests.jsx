@@ -11,17 +11,18 @@ import {useQuery, useMutation} from 'react-query';
 import {useNavigate} from 'react-router-dom';
 import BackButton from '../../components/BackButton/BackButton';
 import {sendMessage} from '../../services/apiservice';
+import Spinner from '../../components/Spinner/Spinner';
 
 import styles from './EnrollmentRequests.module.css';
+import MessageModal from '../../components/Modal/MessageModal';
 
 const EnrollmentRequests = () => {
   const navigate = useNavigate();
-  const {data, refetch} = useQuery('unverified', getUnverifiedUsers);
-  const deleteUse = useMutation((id) => deleteUser(id), {
-    onSuccess: () => {
-      refetch();
-    },
-  });
+  const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = React.useState('');
+  const {data, refetch, isLoading} = useQuery('unverified', getUnverifiedUsers);
+
+  const deleteUse = useMutation((payload) => deleteUser(payload));
 
   const updateUse = useMutation((id) => updateUser(id, {verified: true}), {
     onSuccess: () => {
@@ -32,6 +33,23 @@ const EnrollmentRequests = () => {
   const setConfirm = useMutation((payload) => {
     sendMessage(payload);
   });
+
+  const handleModalClick = (item) => {
+    deleteUse.mutate(item._id, {
+      onSuccess: () => {
+        setConfirm.mutate({
+          mobile: `+91${item.mobile}`,
+          message: message,
+        });
+        setOpen(false);
+        refetch();
+      },
+    });
+  };
+
+  if (isLoading) {
+    return <Spinner heading='Admin' />;
+  }
 
   return (
     <div className={styles.unverified_users}>
@@ -52,8 +70,15 @@ const EnrollmentRequests = () => {
                 title='Reject'
                 color='red'
                 onClick={() => {
-                  deleteUse.mutate(item._id);
+                  setOpen(true);
                 }}
+              />
+              <MessageModal
+                title='Reason for Reject'
+                open={open}
+                setOpen={setOpen}
+                onChange={(e) => setMessage(e.target.value)}
+                onClick={() => handleModalClick(item)}
               />
             </div>
           ))

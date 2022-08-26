@@ -26,4 +26,15 @@ const sendMessage = async (req, res) => {
   }
 };
 
-export default {sendOTP, sendMessage};
+const sendMessages = async (req, res) => {
+  const {mobile, message} = req.body;
+
+  try {
+    sendSMS(mobile, message);
+    res.status(200).json({message: 'Message sent successfully'});
+  } catch (error) {
+    res.status(404).json({message: error});
+  }
+};
+
+export default {sendOTP, sendMessage, sendMessages};

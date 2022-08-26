@@ -121,7 +121,10 @@ const deleteUser = async (req, res) => {
 
 const getUpdatingUsers = async (req, res) => {
   try {
-    const updatingUsers = await UserDetails.find({isUpdating: true});
+    const updatingUsers = await UserDetails.find({
+      isUpdating: true,
+      verified: true,
+    });
     return res.status(200).json(updatingUsers);
   } catch (error) {
     res.status(404).json({message: error.message});
