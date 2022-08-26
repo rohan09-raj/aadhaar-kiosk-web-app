@@ -120,7 +120,7 @@ const Otp = () => {
           type="submit"
           variant="contained"
           disabled={disabled}
-          sx={{ marginTop: '1rem' }}
+          sx={{ margin: '20px 0px', fontSize: '1.5rem', padding: '10px 30px' }}
           onClick={() => {
             mutateOTP.mutate()
             setDisabled(true)
@@ -145,6 +145,7 @@ const Otp = () => {
               size="large"
               type="submit"
               variant="contained"
+              sx={{ margin: '20px 0px', fontSize: '1.5rem', padding: '10px 30px' }}
               onClick={() => {
                 verifyOTP()
               }}
