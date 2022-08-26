@@ -7,7 +7,8 @@ import styles from './LanguageSelect.module.css'
 
 const languageMap = {
   en: { label: 'English', dir: 'ltr', active: true },
-  hi: { label: 'Hindi', dir: 'ltr', active: false }
+  hi: { label: 'Hindi', dir: 'ltr', active: false },
+  te: { label: 'Telugu', dir: 'ltr', active: false }
 }
 
 const LanguageSelect = () => {
