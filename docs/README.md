@@ -1,6 +1,6 @@
 ## Available Scripts
 
-In the project directory, you can run:
+In the project, you can run:
 
 ### `yarn`
 Install all the required dependencies from the `package.json`. Ensure that you have done this step, otherwise the app will have errors.
