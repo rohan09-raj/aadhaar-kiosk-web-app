@@ -1,8 +1,8 @@
 # Tech Stack for the Web App
-ReactJS– Frontend of Web App
-Node.js – Backend of Web App
-MongoDB – Database management system
-Windows/Linux – Operating System
+- ReactJS– Frontend of Web App
+- Node.js – Backend of Web App
+- MongoDB – Database management system
+- Windows/Linux – Operating System
 
 # Hardware Dependencies/Components for implementing the Kiosk
 - Touch screen Display
