@@ -1,4 +1,7 @@
-import {ONE_TEN_TIMES_ZERO, NINE_TEN_TIMES_ZERO} from '../constants/numbers';
+import {
+  ONE_TEN_TIMES_ZERO,
+  NINE_TEN_TIMES_ZERO,
+} from "../constants/numbers.js";
 
 // const generateCheckSumDigit = (randomNumberArray) => {
 //   const d = [
