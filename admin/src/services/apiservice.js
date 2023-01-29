@@ -1,16 +1,16 @@
-import axios from 'axios';
+import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: "https://aadhaar-kiosk-server.onrender.com",
 });
 
 export const getVerifiedUsers = async () => {
-  const response = await apiClient.get('/users/verified');
+  const response = await apiClient.get("/users/verified");
   return response;
 };
 
 export const getUnverifiedUsers = async () => {
-  const response = await apiClient.get('/users/unverified');
+  const response = await apiClient.get("/users/unverified");
   return response;
 };
 
@@ -30,6 +30,6 @@ export const getUpdatingUsers = async () => {
 };
 
 export const sendMessage = async (payload) => {
-  const response = await apiClient.post('/messages', payload);
+  const response = await apiClient.post("/messages", payload);
   return response;
 };
