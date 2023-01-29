@@ -1,3 +1,8 @@
+## Deployed Links
+- **User Dashboard :** https://aadhaar-kiosk.vercel.app/  
+- **Admin :** https://aadhaar-kiosk-admin.vercel.app/
+- **Server :** https://aadhaar-kiosk-server.onrender.com/health
+
 ## Available Scripts
 
 In the project, you can run:
