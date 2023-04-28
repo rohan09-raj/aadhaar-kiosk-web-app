@@ -95,13 +95,14 @@ const updateUser = async (req, res) => {
     );
 
     if (!user.aadhaarNumber) {
+      let aadhaarnum=generateAadhaar()
       await UserDetails.findByIdAndUpdate(id, {
-        $set: { aadhaarNumber: generateAadhaar() },
+        $set: { aadhaarNumber: aadhaarnum },
       });
-
+console.log(user)
       sendSMS(
-        user.mobile,
-        `Dear ${user.name}, your Aadhaar Number is ${user.aadhaarNumber} for the EID ${user._id}.`
+        `+91${user.mobile}`,
+        `Dear ${user.name}, your Aadhaar Number is ${aadhaarnum} for the EID ${user._id}.`
       );
     }
 
