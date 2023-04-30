@@ -1,0 +1,55 @@
+.formone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Barlow';
+  font-size: var(--font-medium-s);
+}
+
+.formone__radio {
+  display: flex;
+  align-items: center;
+}
+
+.formone__resident {
+  display: flex;
+  align-items: center;
+  margin: 15px;
+}
+
+.formone__resident input[type='radio'] {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.formone__dob {
+  display: flex;
+  flex-direction: column;
+}
+
+.formone__dob input[type='date']::-webkit-calendar-picker-indicator {
+  width: 30px;
+  height: 30px;
+  margin: 0;
+}
+
+.formone__dob_input {
+  width: 330px;
+  margin: 10px 0px;
+  padding: 11px 10px;
+  border: 3px solid;
+  border-radius: 10px;
+}
+
+.input__edit {
+  display: flex;
+  flex-direction: row;
+}
+
+.dob {
+  border : none;
+}
+
+.label {
+  font-size: 1.75rem;
+}

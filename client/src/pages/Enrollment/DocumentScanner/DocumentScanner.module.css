@@ -1,0 +1,54 @@
+.card__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.stepper__container {
+  display: flex;
+  justify-content: center;
+}
+
+.button__container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.button {
+  background: transparent;
+  border: none;
+}
+
+.image {
+  height: 50px;
+  width: 50px;
+}
+
+.image:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.image:active {
+  transform: scale(0.98);
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+stepper__items {
+  font-size: 1.5rem;
+}

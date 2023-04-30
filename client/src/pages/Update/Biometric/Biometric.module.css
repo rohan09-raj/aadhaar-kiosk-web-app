@@ -1,0 +1,28 @@
+.input {
+    display: flex;
+    justify-content: center;
+    font-family: 'Barlow';
+    font-size: var(--font-medium-s);
+    font-weight: bold;
+  }
+  
+  .input__container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input__edit{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .input__field {
+    width: 300px;
+    margin: 10px 0px;
+    padding: 18px 10px;
+    border: 3px solid;
+    border-radius: 10px;
+    font-size: 1rem;
+    text-align: center;
+  }
+  

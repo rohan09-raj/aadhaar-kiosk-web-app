@@ -1,0 +1,26 @@
+.address {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0px 0px;
+}
+
+.address__container {
+  margin: 0px 20px;
+}
+
+.input__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Barlow';
+  font-size: var(--font-medium-s);
+}
+
+.input__edit {
+  display: flex;
+  flex-direction: row;
+}
+
+.label {
+  font-size: 1.75rem;
+}

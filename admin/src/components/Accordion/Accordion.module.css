@@ -1,0 +1,64 @@
+.accordion {
+  width: 800px;
+  margin: 2rem auto;
+}
+
+.accordion__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
+}
+
+.accordion__title:hover {
+  background-color: #17212b;
+}
+
+.accordion__title,
+.accordion__content {
+  padding: 1rem;
+}
+
+.accordion__subheading {
+  font-size: 1.1rem;
+}
+
+.accordion__content {
+  display: flex;
+  justify-content: center;
+  background-color: #2c3e50;
+  border-radius: 10px;
+  margin: 10px 0px;
+}
+
+.accordion__demographic {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  background-color: #ecf0f1;
+  border-radius: 10px;
+  margin-right: 10px;
+  padding: 20px;
+}
+
+.accordion__biometric {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion__biometric_image {
+  border-radius: 6px;
+}
+
+.accordion__demographic div {
+  margin: 6px;
+}
+
+.accordion__demographic div span {
+  font-weight: 700;
+}

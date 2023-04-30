@@ -1,0 +1,22 @@
+.modal {
+  margin: 0px 15px;
+  position: absolute;
+  top: 100px;
+  right: 250px;
+}
+
+.modal__title {
+  text-align: center;
+  margin: 20px 0px 40px;
+  font-size: var(--font-medium);
+}
+
+.modal__image {
+  width: 50%;
+}
+
+.modal__content {
+  text-align: center;
+  width: 50%;
+  font-size: var(--font-medium-s);
+}

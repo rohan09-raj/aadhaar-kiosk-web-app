@@ -1,0 +1,21 @@
+@import '../../styles/GlobalVariables.css';
+
+.header {
+  font-family: 'Barlow', cursive;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+}
+
+.header__subheading {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.header__image {
+  width: 150px;
+  height: 150px;
+}

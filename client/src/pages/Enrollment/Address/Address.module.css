@@ -1,0 +1,21 @@
+.address {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0px 0px;
+}
+
+.address__container {
+  margin: 0px 20px;
+}
+
+.input__container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: 'Barlow';
+  font-size: var(--font-medium-s);
+}
+
+.input__container label {
+  font-size: 1.75rem;
+}

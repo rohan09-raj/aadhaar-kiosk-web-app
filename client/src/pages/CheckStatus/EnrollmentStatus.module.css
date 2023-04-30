@@ -1,0 +1,20 @@
+.status__container {
+  font-family: 'Barlow', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.status__title {
+  font-size: var(--font-medium);
+}
+
+.status {
+  font-size: var(--font-medium-lm);
+  margin-bottom: 20px;
+}
+
+.status__content {
+  font-size: var(--font-medium-sm);
+}

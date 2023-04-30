@@ -1,0 +1,26 @@
+.submit {
+  position: absolute;
+  top: 100px;
+  left: 150px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  transition: 0.2s all;
+  cursor: pointer;
+}
+
+.submit:active {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px var(--color-shadow);
+}
+
+.submit__image {
+  height: 75px;
+  width: 75px;
+}
+
+.submit__content {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
