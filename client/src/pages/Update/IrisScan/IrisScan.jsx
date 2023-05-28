@@ -27,10 +27,10 @@ const IrisScan = () => {
       />
       <div className={styles.card__container}>
         <CardBiometrics
-          image={`${process.env.PUBLIC_URL}/assets/images/iris.svg`}
+          image={`${process.env.PUBLIC_URL}/assets/images/iris_scan_dummy_left.png`}
         />
         <CardBiometrics
-          image={`${process.env.PUBLIC_URL}/assets/images/iris.svg`}
+          image={`${process.env.PUBLIC_URL}/assets/images/iris_scan_dummy_right.png`}
         />
       </div>
       <Grid container columnSpacing={10} justifyContent="center">

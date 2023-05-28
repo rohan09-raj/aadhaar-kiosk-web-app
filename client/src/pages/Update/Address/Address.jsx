@@ -81,95 +81,93 @@ const Address = () => {
             }}
             placeholder={t('ENTER_YOUR_VILLAGE_TOWN')}
           />
-          <div className={styles.input__edit}>
-            <UpdateInput
-              id="state"
-              label={t('STATE')}
-              value={userData.address.state.name}
-              type="text"
-              onChange={(e) => {
-                setUserData({
-                  ...userData,
-                  address: {
-                    ...userData.address,
-                    state: {
-                      name: e.target.value
-                    }
+          <UpdateInput
+            id="state"
+            label={t('STATE')}
+            value={userData.address.state.name}
+            type="text"
+            onChange={(e) => {
+              setUserData({
+                ...userData,
+                address: {
+                  ...userData.address,
+                  state: {
+                    name: e.target.value
                   }
-                })
-              }}
-              placeholder={t('ENTER_YOUR_STATE')}
-            />
-            <EditButton
-              onClick={handleEdit1}
-              enabled={!editable1 ? '1' : '0'}
-            />
-          </div>
-          <div className={styles.address__container}>
-            <UpdateInput
-              id="street"
-              label={t('STREET_ROAD')}
-              defaultValue={userData.address.street}
-              type="text"
-              onChange={(e) => {
-                setUserData({
-                  ...userData,
-                  address: {
-                    ...userData.address,
-                    street: e.target.value
-                  }
-                })
-              }}
-              placeholder={t('ENTER_YOUR_STREET_ROAD')}
-            />
-            <div className={styles.input}>
-              <div className={styles.input__container}>
-                <div className={styles.input__edit}>
-                  <label htmlFor="pincode">{t('PINCODE')}</label>
-                  <Pincode
-                    showCity={false}
-                    showDistrict={false}
-                    showState={false}
-                    showArea={false}
-                    invalidError=""
-                    lengthError=""
-                    onChange={(e) => {
-                      setUserData({
-                        ...userData,
-                        address: {
-                          ...userData.address,
-                          pincode: e.target.value
-                        }
-                      })
-                    }}
-                    pincodeInput={{
-                      width: '500px',
-                      height: '80px',
-                      margin: '10px 0px',
-                      padding: '18px 10px',
-                      border: '3px solid',
-                      borderRadius: '10px',
-                      fontSize: '1.5rem'
-                    }}
-                    getData={(data) => {
-                      setPincodeData(data)
-                      setUserData({
-                        ...userData,
-                        address: {
-                          ...userData.address,
-                          pincode: data.pincode,
-                          state: {
-                            name: data.stateName
-                          },
-                          district: {
-                            name: data.district
-                          },
-                          postOffice: data.areaName
-                        }
-                      })
-                    }}
-                  />
-                </div>
+                }
+              })
+            }}
+            placeholder={t('ENTER_YOUR_STATE')}
+          />
+        </div>
+        <div className={styles.address__container}>
+          <UpdateInput
+            id="street"
+            label={t('STREET_ROAD')}
+            defaultValue={userData.address.street}
+            type="text"
+            onChange={(e) => {
+              setUserData({
+                ...userData,
+                address: {
+                  ...userData.address,
+                  street: e.target.value
+                }
+              })
+            }}
+            placeholder={t('ENTER_YOUR_STREET_ROAD')}
+          />
+          <div className={styles.input}>
+            <div className={styles.input__container}>
+              <label htmlFor="pincode" className={styles.label}>{t('PINCODE')}</label>
+              <div className={styles.input__edit}>
+                <Pincode
+                  showCity={false}
+                  showDistrict={false}
+                  showState={false}
+                  showArea={false}
+                  invalidError=""
+                  lengthError=""
+                  onChange={(e) => {
+                    setUserData({
+                      ...userData,
+                      address: {
+                        ...userData.address,
+                        pincode: e.target.value
+                      }
+                    })
+                  }}
+                  pincodeInput={{
+                    width: '500px',
+                    height: '80px',
+                    margin: '10px 0px',
+                    padding: '18px 10px',
+                    border: '3px solid',
+                    borderRadius: '10px',
+                    fontSize: '1.5rem'
+                  }}
+                  getData={(data) => {
+                    setPincodeData(data)
+                    setUserData({
+                      ...userData,
+                      address: {
+                        ...userData.address,
+                        pincode: data.pincode,
+                        state: {
+                          name: data.stateName
+                        },
+                        district: {
+                          name: data.district
+                        },
+                        postOffice: data.areaName
+                      }
+                    })
+                  }}
+                />
+                <EditButton
+                  onClick={handleEdit1}
+                  enabled={!editable1 ? '1' : '0'}
+                />
               </div>
             </div>
           </div>
